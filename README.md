@@ -32,3 +32,7 @@ Based on bridging modules & courses students have taken so far, recommend future
   4. Web crawl UBC Timetable
   5. Notify if courses are offered as planned
   6. Add course reviews and recommend for bridging modules
+  
+  ### Ways to expland project
+  1. Link to RateMyProf
+  2. Expand beyond BCS students
