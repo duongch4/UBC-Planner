@@ -33,6 +33,7 @@ Based on bridging modules & courses students have taken so far, recommend future
   5. Notify if courses are offered as planned
   6. Add course reviews and recommend for bridging modules
   
-  ### Ways to expland project
+  ### Ways to expand project
   1. Link to RateMyProf
   2. Expand beyond BCS students
+  3. Program advisor/director (i.e. administrator) login
