@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AppStore from '../AppStore.js';
 import AppActions from '../AppActions.js';
+import './style.css';
 
 class Registration extends Component {
   constructor() {
@@ -32,57 +33,68 @@ class Registration extends Component {
     });
   }
 
-  _handleClickOpen = () => {
+  _handleClickOpen() {
   AppActions.handleClickOpen();
-  };
+  }
 
-  _handleClose = () => {
+  _handleClose() {
     AppActions.handleClose();;
-  };
+  }
 
 
   render() {
 
     return (
+
       <div id="Registration">
-      <TextField
-        id="username"
-        label="username"
-        floatingLabelText="Username"
-        margin="normal"
-      />
-      <TextField
-        id="password"
-        label="password"
-        margin="normal"
-      />
+      <div class="form-box">
+        <div class="head">Hello user</div>
+          <form id="registration-form">
+            <div class="form-group">
+            <TextField
+              id="email"
+              label="email"
+              floatingLabelText="Username"
+              margin="normal"
+            />
+            </div>
 
-      <div>
-       <Button variant="contained"
-       color="primary"
-       disableRipple
-       onClick={this._handleClickOpen}>CREATE ACCOUNT</Button>
+            <div class="form-group">
+            <TextField
+              id="password"
+              label="password"
+              margin="normal"
+            />
+            </div>
 
+            <div class="form-group">
+             <Button variant="contained"
+             color="primary"
+             disableRipple
+             onClick={this._handleClickOpen}>CREATE ACCOUNT</Button>
+             </div>
+            </form>
+          </div>
+
+      <Dialog
+        open={this.state.open}
+        onClose={this._handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Your account has been created. A confirmation email has been sent.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this._handleClose} color="primary" autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
      </div>
 
-     <Dialog
-       open={this.state.open}
-       onClose={this._handleClose}
-       aria-labelledby="alert-dialog-title"
-       aria-describedby="alert-dialog-description"
-     >
-       <DialogContent>
-         <DialogContentText id="alert-dialog-description">
-           Your account has been successfully created. An email has been sent to you with instructions on how to activate it.
-         </DialogContentText>
-       </DialogContent>
-       <DialogActions>
-         <Button onClick={this._handleClose} color="primary" autoFocus>
-           OK
-         </Button>
-       </DialogActions>
-     </Dialog>
-     </div>
     );
   }
 }

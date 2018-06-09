@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body {
+  background:#f4f4f4 ;
+  font-family: 'Montserrat', sans-serif;
+}
+.form-box{
+  background: #fff;
+  margin: 60px auto;
+  height: 400px;
+  width: 420px;
+  max-width: 500px;
+  box-shadow: 0 3px 6px 0px rgba(0,0,0,0.16), 0 3px 6px 0px rgba(0,0,0,0.23);
+}
+form#registration-form {
+  overflow: hidden;
+  position: relative;
+  padding: 0px;
+}
+.head {
+  color: #403B33;
+  font-size: 34px;
+  font-family: 'Montserrat';
+  font-weight: normal;
+  padding: 40px 0;
+  margin-top: 10px;
+  background: #F0F1F3;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+primary: {
+  color: black;
+}
