@@ -1,0 +1,29 @@
+.Signup-page-container {
+    padding-top: 7%;
+    text-align: center;
+}
+
+.Signup-form-container {
+    max-width: 300px;
+    margin: auto;
+}
+
+.Signup-form-container label {
+    float: left;
+}
+
+#Signup-button {
+    background-color: #002145;
+    display: block;
+    color: white
+}
+
+#Signup-button:hover {
+    background-color: #004fa7;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.Signup-error-message {
+    float: right;
+    color: #ae5856;
+}
