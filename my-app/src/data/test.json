@@ -3,6 +3,75 @@
     "email": "michelle.huh@hotmail.com",
     "password": "1",
     "name": "Michelle Gayoon Huh",
-    "sid": 67123456
+    "sid": 67123456,
+    "bm": "Adult Education",
+    "cohort": 2017,
+    "coop":
+    [
+      {
+        "company": "SAP",
+        "session": "2018W",
+        "term": 1,
+        "isCompleted": false
+      },
+      {
+        "company": "SAP",
+        "session": "2018W",
+        "term": 2,
+        "isCompleted": false
+      }
+    ],
+    "courses": {
+      "CPSC110": {
+        "id": "CPSC110",
+        "isGradApproved": 1,
+        "creditFor": "CPSC110",
+        "section": "101",
+        "credit": 4,
+        "grade": 99,
+        "session": "2017W",
+        "term": 1
+      },
+      "CPSC121": {
+        "id": "CPSC121",
+        "isGradApproved": 1,
+        "creditFor": "CPSC121",
+        "section": "101",
+        "credit": 4,
+        "grade": 90,
+        "year": "2017W",
+        "term": 1
+      },
+      "CPSC210": {
+        "id": "CPSC210",
+        "isGradApproved": 1,
+        "creditFor": "CPSC210",
+        "section": "202",
+        "credit": 4,
+        "grade": 94,
+        "year": "2017W",
+        "term": 2
+      },
+      "CPSC213": {
+        "id": "CPSC213",
+        "isGradApproved": 1,
+        "creditFor": "CPSC213",
+        "section": "911",
+        "credit": 4,
+        "grade": 0,
+        "year": "2018S",
+        "term": 1
+      },
+      "STAT200": {
+        "id": "STAT200",
+        "isGradApproved": 1,
+        "creditFor": "STAT203",
+        "section": "103",
+        "credit": 3,
+        "grade": 90,
+        "year": "2017W",
+        "term": 2
+      }
+    }
   }
 }

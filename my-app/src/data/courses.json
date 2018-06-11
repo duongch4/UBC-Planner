@@ -14,7 +14,7 @@
       "or": [
         "CPSC107",
         "CPSC110",
-        "CPSC 260"
+        "CPSC260"
       ]
     }
   },
@@ -79,11 +79,47 @@
             "EECE320",
             {
               "or": [
-                "CPSC 210",
-                "EECE 210",
+                "CPSC210",
+                "EECE210",
                 "EECE309"
               ]
             }
+          ]
+        }
+      ]
+    }
+  },
+  "CPSC313": {
+    "id": "CPSC313",
+    "name": "Computer Hardware and Operating Systems",
+    "description": "Instruction sets, pipelining, code optimization, caching, virtual memory management, dynamically linked libraries, exception processing, execution time of programs.",
+    "credits": 4,
+    "pr": {
+      "or": [
+        {
+          "and": [
+            "CPSC213",
+            "CPSC221"
+          ]
+        }, {
+          "and": [
+            "CPSC210", "CPSC213", "CPSC260", "EECE320"
+          ]
+        }
+      ]
+    }
+  },
+  "CPSC320": {
+    "id": "CPSC320",
+    "name": "Intermediate Algorithm Design and Analysis",
+    "description": "Systematic study of basic concepts and techniques in the design and analysis of algorithms, illustrated from various problem areas. Topics include: models of computation; choice of data structures; graph-theoretic, algebraic, and text processing algorithms.",
+    "credits": 4,
+    "pr": {
+      "or": [
+        "CPSC221",
+        {
+          "and": [
+            "CPSC260", "EECE 320"
           ]
         }
       ]

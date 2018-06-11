@@ -7,9 +7,5 @@ export default {
             actionType: ON_QUERY,
             data: data
         })
-    },
-
-    reset: () => {
-
     }
 }

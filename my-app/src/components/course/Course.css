@@ -10,3 +10,16 @@
 .search .ui.icon.input {
     width: 300px;
 }
+
+.course.search {
+    margin-top: 50px;
+}
+
+.course.search .ui.card {
+    width: 100%;
+    height: 100%;
+}
+
+.course.search .item {
+    padding: 1px 0 1px 0;
+}

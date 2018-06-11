@@ -9,15 +9,13 @@ const source = Object.keys(orig).map((id)=>{return {title: id, description: orig
 
 export default class CourseSearch extends Component {
 
-    componentDidMount = () => CourseSearchStore.addChangeListener(this.resetComponent);
-    componentWillUnmount = () => CourseSearchStore.removeChangeListener(this.resetComponent);
-    componentWillMount = () => this.resetComponent()
-
     resetComponent = () => this.setState({ isLoading: false, results: [], value: ''})
+    componentDidMount = () => CourseSearchStore.addChangeListener(this.resetComponent)
+    componentWillUnmount = () => CourseSearchStore.removeChangeListener(this.resetComponent)
+    componentWillMount = () => this.resetComponent()
 
     handleResultSelect = (e, { result }) => {
         this.setState({ value: result.title })
-        console.log(result);
         CourseSearchAction.query({
             query: result.title,
             results:[result.title]
@@ -32,15 +30,15 @@ export default class CourseSearch extends Component {
 
             const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
             const isMatch = result => re.test(result.title)
-
             this.setState({
                 isLoading: false,
                 results: _.filter(source, isMatch),
             })
-        }, 300)
+        }, 0)
     }
 
     onSubmit = () => {
+        console.log("submitted", this.state.value);
         CourseSearchAction.query({
             query: this.state.value,
             results: this.state.results.map((course) => {return course.title})
@@ -51,19 +49,21 @@ export default class CourseSearch extends Component {
         const { isLoading, value, results } = this.state
 
         return (
+            <div class="course search">
             <Form onSubmit={ this.onSubmit }>
                 <Search
                     loading={isLoading}
                     onResultSelect={this.handleResultSelect}
-                    onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
+                    onSearchChange={_.debounce(this.handleSearchChange, 0, { leading: true })}
                     results={results}
                     value={value}
-                    placeholder={'CPSC110'}
+                    placeholder={'CPSC...'}
                     minCharacters={1}
                     showNoResults={false}
                     {...this.props}
                 />
             </Form>
+            </div>
         )
     }
 }
