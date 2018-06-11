@@ -38,7 +38,7 @@ class LoginApi {
 
     lostPassword = ({ email }) => {
         return Promise.resolve({
-            message: "A password reset email was sent."
+            message: "Password reset email was sent."
         });
     }
 }
