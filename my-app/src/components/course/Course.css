@@ -1,4 +1,12 @@
 .ui.search>.results {
-    left: calc(50% - 126px) !important;
-    /*left: 50%*/
+    left: calc(50% - 10em) !important;
+    width: 20em !important;
+}
+
+.ui.search>.results .content {
+    text-align: left;
+}
+
+.search .ui.icon.input {
+    width: 300px;
 }

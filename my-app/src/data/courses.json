@@ -1,43 +1,92 @@
-[{
+{
+  "CPSC110": {
     "id": "CPSC110",
     "name": "Computation, Programs, and Programming",
     "description": "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modeling, and interacting with the world.",
     "credits": 4
   },
-  {
+  "CPSC210": {
     "id": "CPSC210",
     "name": "Software Construction",
     "description": "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
     "credits": 4,
-    "pr": {"or": ["CPSC107", "CPSC110", "CPSC 260"]}
+    "pr": {
+      "or": [
+        "CPSC107",
+        "CPSC110",
+        "CPSC 260"
+      ]
+    }
   },
-  {
+  "CPSC121": {
     "id": "CPSC121",
     "name": "Models of Computation",
     "description": "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
     "credits": 4,
-    "cr": {"or":["CPSC107", "CPSC110"]}
+    "cr": {
+      "or": [
+        "CPSC107",
+        "CPSC110"
+      ]
+    }
   },
-  {
+  "CPSC213": {
     "id": "CPSC213",
     "name": "Introduction to Computer Systems",
     "description": "Software architecture, operating systems, and I/O architectures. Relationships between application software, operating systems, and computing hardware; critical sections, deadlock avoidance, and performance; principles and operation of disks and networks.",
     "credits": 4,
-    "pr": {"or": ["CPSC121", "CPSC210"]}
+    "pr": {
+      "or": [
+        "CPSC121",
+        "CPSC210"
+      ]
+    }
   },
-  {
+  "CPSC221": {
     "id": "CPSC221",
     "name": "Basic Algorithms and Data Structures",
     "description": "Design and analysis of basic algorithms and data structures; algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
     "credits": 4,
-    "pr": {"and": [{ "or": ["CPSC210", "EECE210", "CPEN221"]}, {"or": ["CPSC121", "MATH220"]}]}
+    "pr": {
+      "and": [
+        {
+          "or": [
+            "CPSC210",
+            "EECE210",
+            "CPEN221"
+          ]
+        },
+        {
+          "or": [
+            "CPSC121",
+            "MATH220"
+          ]
+        }
+      ]
+    }
   },
-  {
+  "CPSC304": {
     "id": "CPSC304",
     "name": "Introduction to Relational Databases",
     "description": "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
     "credits": 4,
-    "pr": {"or": [
-      "CPSC221", {"and":["CPSC260", "EECE320", {"or": ["CPSC 210", "EECE 210", "EECE309"]}]}]}
+    "pr": {
+      "or": [
+        "CPSC221",
+        {
+          "and": [
+            "CPSC260",
+            "EECE320",
+            {
+              "or": [
+                "CPSC 210",
+                "EECE 210",
+                "EECE309"
+              ]
+            }
+          ]
+        }
+      ]
+    }
   }
-]
+}

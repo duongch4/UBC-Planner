@@ -1,18 +1,28 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Search, Grid, Header } from 'semantic-ui-react';
+import { Form, Search, Grid, Header } from 'semantic-ui-react';
+import CourseSearchAction from '../../actions/CourseSearchActions'
+import CourseSearchStore from "../../stores/CourseSearchStore";
 
-var source  = require("../../data/courses").map((course)=>{return {title: course.id, description: course.name}});
+const orig  = require("../../data/courses");
+const source = Object.keys(orig).map((id)=>{return {title: id, description: orig[id].name}});
 
 export default class CourseSearch extends Component {
 
-    componentWillMount = () => {
-        this.resetComponent()
+    componentDidMount = () => CourseSearchStore.addChangeListener(this.resetComponent);
+    componentWillUnmount = () => CourseSearchStore.removeChangeListener(this.resetComponent);
+    componentWillMount = () => this.resetComponent()
+
+    resetComponent = () => this.setState({ isLoading: false, results: [], value: ''})
+
+    handleResultSelect = (e, { result }) => {
+        this.setState({ value: result.title })
+        console.log(result);
+        CourseSearchAction.query({
+            query: result.title,
+            results:[result.title]
+        })
     }
-
-    resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
-
-    handleResultSelect = (e, { result }) => this.setState({ value: result.title })
 
     handleSearchChange = (e, { value }) => {
         this.setState({ isLoading: true, value })
@@ -30,41 +40,30 @@ export default class CourseSearch extends Component {
         }, 300)
     }
 
+    onSubmit = () => {
+        CourseSearchAction.query({
+            query: this.state.value,
+            results: this.state.results.map((course) => {return course.title})
+        })
+    }
+
     render() {
         const { isLoading, value, results } = this.state
 
         return (
-
-
-            <Search
-                loading={isLoading}
-                onResultSelect={this.handleResultSelect}
-                onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-                results={results}
-                value={value}
-                placeholder={'CPSC110'}
-                {...this.props}
-                autofocus="true"
-            />
-            //
-            // <Grid>
-            //     <Grid.Column width={8}>
-            //         <Search
-            //             loading={isLoading}
-            //             onResultSelect={this.handleResultSelect}
-            //             onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-            //             results={results}
-            //             value={value}
-            //             {...this.props}
-            //         />
-            //     </Grid.Column>
-            //     {/*<Grid.Column width={8}>*/}
-            //         {/*<Header>State</Header>*/}
-            //         {/*<pre>{JSON.stringify(this.state, null, 2)}</pre>*/}
-            //         {/*<Header>Options</Header>*/}
-            //         {/*<pre>{JSON.stringify(source, null, 2)}</pre>*/}
-            //     {/*</Grid.Column>*/}
-            // </Grid>
+            <Form onSubmit={ this.onSubmit }>
+                <Search
+                    loading={isLoading}
+                    onResultSelect={this.handleResultSelect}
+                    onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
+                    results={results}
+                    value={value}
+                    placeholder={'CPSC110'}
+                    minCharacters={1}
+                    showNoResults={false}
+                    {...this.props}
+                />
+            </Form>
         )
     }
 }
