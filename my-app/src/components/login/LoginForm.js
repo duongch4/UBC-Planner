@@ -72,7 +72,9 @@ class LoginForm extends React.Component {
                             name='email'
                             placeholder='username@ugrad.cs.ubc.ca'
                             value = { data.email }
-                            onChange = { this.onFieldTextChange } />
+                            onChange = { this.onFieldTextChange }
+                            autofocus="true"
+                        />
                     </Form.Field>
 
                     <Form.Field error = {!!error.password}>
