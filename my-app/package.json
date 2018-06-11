@@ -12,7 +12,8 @@
     "semantic-ui-css": "^2.3.1",
     "semantic-ui-react": "^0.80.2",
     "validator": "^10.2.0",
-    "jwt-decode": "^1.1.0"
+    "jwt-decode": "^1.1.0",
+    "lodash": "4.17.3"
   },
   "scripts": {
     "start": "react-scripts start",
