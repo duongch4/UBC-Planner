@@ -5,6 +5,22 @@
     z-index: 1;
 }
 
+
+.ui.pointing.secondary.menu img {
+    visibility: hidden;
+    max-height: 25px;
+    margin: 8px 10px 0 20px;
+}
+
 .ui.pointing.secondary.menu.inverted.custom {
     background-color: #002145;
+}
+
+
+.ui.pointing.secondary.menu.inverted.custom img {
+    visibility: visible;
+}
+
+.ui.secondary.inverted.pointing.menu.custom .active.item.dropdown {
+    border: none;
 }
