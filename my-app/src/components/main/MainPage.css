@@ -1,5 +1,10 @@
-#MainMenu {
+.ui.pointing.secondary.menu {
     position: sticky;
     top:0;
     background-color: white;
+    z-index: 1;
+}
+
+.ui.pointing.secondary.menu.inverted.custom {
+    background-color: #002145;
 }
