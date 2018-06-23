@@ -1,8 +1,7 @@
-import './Course.css';
-import React from "react";
-import CourseSearch from "./CourseSearch";
+import './Course.css'
+import React from "react"
+import CourseSearch from "./CourseSearch"
 import CourseSearchResults from "./CourseSearchResults"
-import {Segment} from 'semantic-ui-react'
 
 class CoursePage extends React.Component {
     render() {
@@ -11,8 +10,8 @@ class CoursePage extends React.Component {
                 <CourseSearch/>
                 <CourseSearchResults/>
             </div>
-        );
+        )
     }
 }
 
-export default CoursePage;
+export default CoursePage

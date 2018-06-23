@@ -1,9 +1,11 @@
 import React from "react";
 import Validator from "validator";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {doLogin} from "../../api/LoginApi";
 import LoginErrorMessage from './LoginErrorMessage';
-import LoginApi from '../../api/LoginApi';
-import LoginActions from "../../actions/LoginActions";
+// import LoginApi from '../../api/LoginApi';
+// import LoginActions from "../../actions/LoginActions";
 import { Form, Button, Message } from "semantic-ui-react";
 
 class LoginForm extends React.Component {
@@ -23,22 +25,30 @@ class LoginForm extends React.Component {
         this.setState({error: error});
         this.setState({authError: ""});
 
+        const {doLogin} = this.props;
+        const {data} = this.state;
+
         if (Object.keys(error).length === 0 && error.constructor === Object) {
-            LoginApi.doLogin(this.state.data)
-                .then((data) => {
-                    LoginActions.login(data.jwt);
-                })
-                .catch(function (e) {
-                    this.setState({ authError : e && e.error && e.error.message });
-                }.bind(this));
+            console.log(data);
+            doLogin(data).catch(function (e) {
+                console.log("errrrrr", e);
+                        this.setState({ authError : e && e.error && e.error.message });
+                    }.bind(this));
+            // LoginApi.doLogin(this.state.data)
+            //     .then((data) => {
+            //         LoginActions.login(data.jwt);
+            //     })
+            //     .catch(function (e) {
+            //         this.setState({ authError : e && e.error && e.error.message });
+            //     }.bind(this));
         }
     };
 
     // _onLoginSuccess = () => this.props.submit();
 
-    // componentDidMount = () => LoginStore.addChangeListener(this._onLoginSuccess);
+    // componentDidMount = () => StudentStore.addChangeListener(this._onLoginSuccess);
     //
-    // componentWillUnmount = () => LoginStore.removeChangeListener(this._onLoginSuccess);
+    // componentWillUnmount = () => StudentStore.removeChangeListener(this._onLoginSuccess);
 
     validate = data => {
         const error = {};
@@ -102,11 +112,12 @@ class LoginForm extends React.Component {
 
 LoginForm.propTypes = {
     password: PropTypes.func.isRequired,
-    signup: PropTypes.func.isRequired
+    signup: PropTypes.func.isRequired,
+    doLogin: PropTypes.func
 };
 
 LoginForm.defaultProps = {
     authError: ""
 };
 
-export default LoginForm;
+export default connect ( null, {doLogin} ) (LoginForm);

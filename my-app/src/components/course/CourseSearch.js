@@ -1,25 +1,22 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
-import { Form, Search, Grid, Header } from 'semantic-ui-react';
-import CourseSearchAction from '../../actions/CourseSearchActions'
-import CourseSearchStore from "../../stores/CourseSearchStore";
+import {connect} from "react-redux";
+import _ from 'lodash';
+import { Form, Search } from 'semantic-ui-react';
+import {doSearch, doAutocomplete} from "../../api/CourseSearchApi";
+import {reset, courseSearchSuccess, courseAutocompleteSelect} from "../../actions/CourseSearchActions";
 
-const orig  = require("../../data/courses");
-const source = Object.keys(orig).map((id)=>{return {title: id, description: orig[id].name}});
+class CourseSearch extends Component {
 
-export default class CourseSearch extends Component {
+    resetComponent = () => {
+        reset();
+        this.setState({ isLoading: false, result: [], value: ''})
+    }
 
-    resetComponent = () => this.setState({ isLoading: false, results: [], value: ''})
-    componentDidMount = () => CourseSearchStore.addChangeListener(this.resetComponent)
-    componentWillUnmount = () => CourseSearchStore.removeChangeListener(this.resetComponent)
-    componentWillMount = () => this.resetComponent()
+    componentWillMount = () => this.resetComponent();
 
     handleResultSelect = (e, { result }) => {
-        this.setState({ value: result.title })
-        CourseSearchAction.query({
-            query: result.title,
-            results:[result.title]
-        })
+        this.setState({ value: '' })
+        this.props.courseAutocompleteSelect( result.title )
     }
 
     handleSearchChange = (e, { value }) => {
@@ -27,43 +24,45 @@ export default class CourseSearch extends Component {
 
         setTimeout(() => {
             if (this.state.value.length < 1) return this.resetComponent()
-
-            const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-            const isMatch = result => re.test(result.title)
-            this.setState({
-                isLoading: false,
-                results: _.filter(source, isMatch),
-            })
+            this.props.doAutocomplete(this.state.value);
+            this.setState({ isLoading: false, value })
         }, 0)
     }
 
     onSubmit = () => {
         console.log("submitted", this.state.value);
-        CourseSearchAction.query({
-            query: this.state.value,
-            results: this.state.results.map((course) => {return course.title})
-        })
+        this.props.doSearch(this.state.value);
+        this.setState({value: ''});
     }
 
     render() {
-        const { isLoading, value, results } = this.state
+        const { isLoading, value, results } = this.state;
+        const { autocomplete } = this.props;
 
         return (
             <div class="course search">
             <Form onSubmit={ this.onSubmit }>
-                <Search
-                    loading={isLoading}
-                    onResultSelect={this.handleResultSelect}
-                    onSearchChange={_.debounce(this.handleSearchChange, 0, { leading: true })}
-                    results={results}
-                    value={value}
-                    placeholder={'CPSC...'}
-                    minCharacters={1}
-                    showNoResults={false}
-                    {...this.props}
+                <Search loading={isLoading}
+                        onResultSelect={this.handleResultSelect}
+                        onSearchChange={_.debounce(this.handleSearchChange, 0, { leading: true })}
+                        results={autocomplete}
+                        value={value}
+                        placeholder={'CPSC...'}
+                        minCharacters={1}
+                        showNoResults={false}
+                        {...this.props}
                 />
             </Form>
             </div>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    autocomplete: state.courseSearch.autocomplete
+});
+
+export default connect (
+    mapStateToProps,
+    {doSearch, doAutocomplete, courseAutocompleteSelect}
+    ) (CourseSearch)

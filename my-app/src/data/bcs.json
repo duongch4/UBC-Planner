@@ -1,0 +1,86 @@
+[
+  {
+    "id": "PADE",
+    "name": "Pre admission english"
+  },
+  {
+    "id": "ENGL 1XX",
+    "name": "ENGL 1XX"
+  },
+  {
+    "id": "CPSC 110",
+    "name": "CPSC 110"
+  },
+  {
+    "id": "CPSC 121",
+    "name": "CPSC 121"
+  },
+  {
+    "id": "MATH 180",
+    "name": "MATH 180"
+  },
+  {
+    "id": "STAT 203",
+    "name": "STAT 203"
+  },
+  {
+    "id": "Communication",
+    "name": "Communication"
+  },
+  {
+    "id": "CPSC 210",
+    "name": "CPSC 210"
+  },
+  {
+    "id": "CPSC 221",
+    "name": "CPSC 221"
+  },
+  {
+    "id": "CPSC 213",
+    "name": "CPSC 213"
+  },
+  {
+    "id": "CPSC 310",
+    "name": "CPSC 310"
+  },
+  {
+    "id": "CPSC 320",
+    "name": "CPSC 320"
+  },
+  {
+    "id": "CPSC 313",
+    "name": "CPSC 313"
+  },
+  {
+    "id": "CPSC 3X1",
+    "name": "CPSC 3XX"
+  },
+  {
+    "id": "CPSC 3X2",
+    "name": "CPSC 3XX"
+  },
+  {
+    "id": "CPSC 4X1",
+    "name": "CPSC 4XX"
+  },
+  {
+    "id": "CPSC 4X2",
+    "name": "CPSC 4XX"
+  },
+  {
+    "id": "BM1",
+    "name": "Bridging Module"
+  },
+  {
+    "id": "BM2",
+    "name": "Bridging Module"
+  },
+  {
+    "id": "BM3",
+    "name": "Bridging Module"
+  },
+  {
+    "id": "BM4",
+    "name": "Bridging Module"
+  }
+]

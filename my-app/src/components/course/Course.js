@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Card, Icon, Label, List } from 'semantic-ui-react'
-import LoginStore from "../../stores/LoginStore";
-import CourseSearchStore from "../../stores/CourseSearchStore";
-import CourseSearchActions from "../../actions/CourseSearchActions";
+import {connect} from 'react-redux';
+import { Card, List} from 'semantic-ui-react'
+import CourseBookmark from './CourseBookmark'
+import CourseLabel from './CourseLabel'
 
 class Course extends React.Component {
 
@@ -12,64 +12,58 @@ class Course extends React.Component {
         this.state = course;
     }
 
-    _onChange = () => {
+    componentWillReceiveProps = nextProps => {
+        console.log("nextProps",nextProps);
+        const { course } = nextProps;
         this.setState({
-            id: this.props.id,
-            name: this.props.name,
-            description: this.props.description,
-            cr: this.props.cr,
-            pr: this.props.pr
+            id: course.id,
+            name: course.name,
+            description: course.description,
+            cr: course.cr,
+            pr: course.pr,
         });
-    }
-    componentDidMount = () => CourseSearchStore.addChangeListener(this._onChange);
-    componentWillUnmount = () => CourseSearchStore.removeChangeListener(this._onChange);
+    };
 
     createPrerequisites = () => {
         let { pr } = this.state;
-        return <List >{this.createLabels(pr)}</List>;
+        return ((!!pr)? <List >{this.createLabels(pr)}</List> : '');
     }
 
-    onLabelClick=(e, o)=>{
-        console.log(e, o);
-        CourseSearchActions.query({
-            query: o.children,
-            results: [o.children]
-        })
-    }
 
     createLabels = (item) => {
+        console.log("create");
         if (typeof item === 'string') {
-
-            let isTaken = this.checkIfTaken(item);
-            return (<Label as='a'
-                           size={'mini'}
-                           color={ isTaken? 'olive':''}
-                           onClick={(e,o)=>{this.onLabelClick(e, o)}}>
-                {item}
-                </Label>)
+            return (<CourseLabel courseId={ item } />)
         } else if (item && item.or)
-            return (<List.Item>
-                    &nbsp; one of: [ {item.or.map(function(el) { return this.createLabels(el); }.bind(this)) } ]
-                </List.Item>
+            return (<span>
+                    &nbsp; one of: [ {item.or.map(function(el) {
+                        return this.createLabels(el); }.bind(this)) } ]
+                </span>
             )
         else if (item && item.and)
-            return (<List.Item>
+            return (
+                <span>
                     &nbsp; all of: [ {item.and.map(function(el) { return this.createLabels(el); }.bind(this)) } ]
-                </List.Item>
+                </span>
             )
     }
 
     checkIfTaken = (id) => {
-        let course = LoginStore.user.courses
-        course = course[id]
-
-        return course && !!course.grade;
+        const { courses } = this.props;
+        if (!courses) return 'grey';
+        const course = courses[id];
+        if (!course) return 'grey';
+        if (!!course.grade) return 'green';
+        return 'olive';
     }
 
     render() {
-        const { id, name, description, credits } = this.state
+        const { id, name, description, credits } = this.props.course;
+        const { courses } = this.props;
+        const color = this.checkIfTaken(id);
         return <Card color={'blue'}>
             <Card.Content>
+                <CourseBookmark {...this.props} color = {color}/>
                 <Card.Header>{name}</Card.Header>
                 <Card.Meta>{id}</Card.Meta>
                 <Card.Description>{description}</Card.Description>
@@ -82,8 +76,12 @@ class Course extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+    courses: state.student.courses
+})
+
 Course.propTypes = {
     course: PropTypes.object.isRequired
 };
 
-export default Course;
+export default connect (mapStateToProps) (Course)

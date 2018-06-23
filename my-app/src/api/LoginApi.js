@@ -1,23 +1,32 @@
+import {loginSuccess, logoutSuccess, updateStudentInfoSuccess} from "../actions/LoginActions";
 var users  = require("../data/test");
 
-class LoginApi {
-    doLogin = loginData => {
-        if (
-            users.hasOwnProperty( loginData.email ) &&
-            users[loginData.email].password === loginData.password
-        ) {
-            return Promise.resolve({
-                exists: true,
-                jwt: users[loginData.email] // returns user information object
-            });
-        }
-        return Promise.reject({
-            exists: false,
-            error: { message: "User does not exist. Please try again." }
+export const doLogin = credentials => dispatch => new Promise((resolve, reject)=> {
+    console.log("credentails ", credentials);
+    const student = users[credentials.email];
+    if (!!student) resolve(student);
+    else reject({
+        exists: false,
+        error: { message: "User does not exist. Please try again." }
+    });
+}, Promise.resolve, Promise.reject)
+    .then(data => dispatch(loginSuccess(data)));
+
+export const doLogout = () => dispatch =>
+    dispatch(logoutSuccess());
+
+export const lostPassword = ({ email }) => {
+        return Promise.resolve({
+            message: "Password reset email was sent."
         });
     };
 
-    doSignup = ({ email, password, name, sid }) => {
+export const updateStudentInfo = info => dispatch => new Promise((resolve, reject)=> {
+    resolve(info);
+}, Promise.resolve, Promise.reject)
+    .then(data => dispatch(updateStudentInfoSuccess(data)));
+
+export const doSignup = ({ email, password, name, sid, bm, cohort}) => {
         if (users.hasOwnProperty( email )) {
             return Promise.reject({
                 exists: false,
@@ -25,22 +34,41 @@ class LoginApi {
             });
         }
         users[email] = {
-            email: email,
-            password: password,
-            name: name,
-            sid: sid
+            info: {
+                email: email,
+                password: password,
+                name: name,
+                sid: sid,
+                cohort: cohort,
+                bm: bm
+            },
+            courses: {},
+            remarks: {
+                "PADE": "",
+                "ENGL 1XX": "",
+                "CPSC 110": "",
+                "CPSC 121": "",
+                "MATH 180": "",
+                "STAT 203": "",
+                "Communication": "",
+                "CPSC 210": "",
+                "CPSC 221": "",
+                "CPSC 213": "",
+                "CPSC 310": "",
+                "CPSC 320": "",
+                "CPSC 313": "",
+                "CPSC 3X1": "",
+                "CPSC 3X2": "",
+                "CPSC 4X1": "",
+                "CPSC 4X2": "",
+                "BM1": "",
+                "BM2": "",
+                "BM3": "",
+                "BM4": ""
+            }
         };
 
         return Promise.resolve({
             message: "Success! Redirecting to the login page."
         });
     };
-
-    lostPassword = ({ email }) => {
-        return Promise.resolve({
-            message: "Password reset email was sent."
-        });
-    }
-}
-
-export default new LoginApi();

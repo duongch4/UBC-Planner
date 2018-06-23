@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { withRouter } from 'react-router-dom'
-import logo from '../../images/ubc-footer-logo-white.png';
+import logo from '../../images/ubc-full-logo-white.png';
 
 const MainHeader = withRouter(({ history }) => (
     <header className="App-header">

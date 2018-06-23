@@ -1,204 +1,86 @@
 import React from 'react'
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
 import { Table, Icon } from 'semantic-ui-react'
+import WorksheetCourseRemark from "./WorksheetCourseRemark";
+import './Worksheet.css'
 
-const Worksheet = () => (
-    <Table celled selectable className = 'Worksheet-table'>
-        <Table.Header>
-            <Table.Row>
-                <Table.HeaderCell></Table.HeaderCell>
-                <Table.HeaderCell>Courses</Table.HeaderCell>
-                <Table.HeaderCell>Completed/Exempted</Table.HeaderCell>
-                <Table.HeaderCell>Explanation</Table.HeaderCell>
-            </Table.Row>
-        </Table.Header>
+class Worksheet extends React.Component
+{
 
-        <Table.Body>
-            <Table.Row>
-                <Table.Cell textAlign='center'>
-                </Table.Cell>
-                <Table.Cell>Pre-admission
-                   1st Year English</Table.Cell>
-                <Table.Cell>Exempted</Table.Cell>
-                <Table.Cell>Approved first-year ENGL course
-                    required prior to admission.</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-                <Table.Cell textAlign='center'>
-                </Table.Cell>
-                <Table.Cell>ENGL 1xx</Table.Cell>
-                <Table.Cell >Exempted</Table.Cell>
-                <Table.Cell>Another first-year ENGL course</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-                <Table.Cell textAlign='center'>
-                    <Icon color='green' name='checkmark' size='large' />
-                </Table.Cell>
-                <Table.Cell>CPSC 110</Table.Cell>
-                <Table.Cell positive>Completed</Table.Cell>
-                <Table.Cell>Or 85% or more in CPSC 111, or a
-                    pass for both CPSC 111 and 211</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-                <Table.Cell textAlign='center'>
-                    <Icon color='green' name='checkmark' size='large' />
-                </Table.Cell>
-                <Table.Cell>CPSC 121</Table.Cell>
-                <Table.Cell positive>Completed</Table.Cell>
-                <Table.Cell>Another first-year ENGL course</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-                <Table.Cell textAlign='center'>
-                    <Icon color='green' name='checkmark' size='large' />
-                </Table.Cell>
-                <Table.Cell>MATH 180</Table.Cell>
-                <Table.Cell positive>MATH 221</Table.Cell>
-                <Table.Cell>Or MATH 184, 100, 102, …</Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell textAlign='center'>
-                    <Icon color='green' name='checkmark' size='large' />
-                </Table.Cell>
-                <Table.Cell>STAT 203</Table.Cell>
-                <Table.Cell positive> STAT 200</Table.Cell>
-                <Table.Cell>Or STAT 200 or STAT 241</Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell textAlign='center'>
-                    <Icon color='green' name='checkmark' size='large' />
-                </Table.Cell>
-                <Table.Cell>Communication</Table.Cell>
-                <Table.Cell positive>COMM 457</Table.Cell>
-                <Table.Cell>ENGL 301, SCIE 300, or approved
-                    alternative.</Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell textAlign='center'>
-                    <Icon color='green' name='checkmark' size='large' />
-                </Table.Cell>
-                <Table.Cell>CPSC 210</Table.Cell>
-                <Table.Cell positive>Completed</Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell textAlign='center'>
-                    <Icon color='green' name='checkmark' size='large' />
-                </Table.Cell>
-                <Table.Cell>CPSC 221</Table.Cell>
-                <Table.Cell positive>Completed</Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell textAlign='center'>
-                    <Icon color='green' name='checkmark' size='large' />
-                </Table.Cell>
-                <Table.Cell>CPSC 213</Table.Cell>
-                <Table.Cell positive>Completed</Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>CPSC 310</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>CPSC 320</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>CPSC 313</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>CPSC 3XX</Table.Cell>
-                <Table.Cell warning>CPSC 304</Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>CPSC 3xx</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>CPSC 4xx</Table.Cell>
-                <Table.Cell warning>CPSC 490</Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>CPSC 4xx</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>BM</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>BM</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>BM</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>BM</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-            <Table.Row >
-                <Table.Cell></Table.Cell>
-                <Table.Cell>BM</Table.Cell>
-                <Table.Cell warning></Table.Cell>
-                <Table.Cell></Table.Cell>
-            </Table.Row>
-        </Table.Body>
-    </Table>
-);
+    state = {
+        inEditMode: null
+    }
 
-export default Worksheet
+    handleRemarksEdit = cell => {
+        if (!!this.state.inEditMode && this.state.inEditMode!=cell) this.state.inEditMode.onSubmit();
+        console.log(this.state.inEditMode);
+        this.state.inEditMode = cell;
+        console.log(cell);
+    };
+
+    createWorksheetCells = (requirements, courses, remarks) => {
+        const courseNames = Object.keys(courses);
+        return requirements.map((requirement) => {
+            const matchingCourseId = courseNames.find(name =>((courses[name].id === requirement.id) | (courses[name].creditFor === requirement.id)));
+            const hasCompleted = matchingCourseId && courses[matchingCourseId].grade;
+            const course = matchingCourseId && courses[matchingCourseId];
+
+            return(
+                <Table.Row
+                           positive={!!hasCompleted}
+                >
+                    <Table.Cell textAlign='center'>
+                        {!!hasCompleted && <Icon color='green' name='checkmark' size='large' />}
+                        {!!matchingCourseId && course.year}
+                    </Table.Cell>
+                    <Table.Cell>{requirement.name}</Table.Cell>
+                    <Table.Cell>{matchingCourseId && course.id}</Table.Cell>
+                    <Table.Cell className={"remark-cell"}>
+                        <WorksheetCourseRemark
+                            onClick     ={this.handleRemarksEdit.bind(this)}
+                            isEditMode  ={false}
+                            courseId    ={requirement.id}
+                            remarks     ={remarks[requirement.id]} />
+                    </Table.Cell>
+                </Table.Row>)
+            });
+    };
+
+    render = () => {
+        const { requirements, courses, remarks } = this.props;
+        return (
+            <Table celled selectable className='Worksheet-table'>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Status</Table.HeaderCell>
+                        <Table.HeaderCell>Requirements</Table.HeaderCell>
+                        <Table.HeaderCell>Courses</Table.HeaderCell>
+                        <Table.HeaderCell>Remarks</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                    {this.createWorksheetCells(requirements, courses, remarks)}
+                </Table.Body>
+            </Table>
+        );
+    }
+}
+
+const mapStateToProps = state => ({
+    requirements: state.bcs.requirements,
+    courses: state.student.courses,
+    remarks: state.student.remarks
+});
+
+Worksheet.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired
+    }).isRequired
+    // , getProfiles: PropTypes.func.isRequired
+    // , setProfile: PropTypes.func.isRequired
+};
+
+export default connect(
+    mapStateToProps
+)(Worksheet);

@@ -1,17 +1,18 @@
 import './MainPage.css';
 import React from 'react'
 import PropTypes from "prop-types";
-import LoginActions from "../../actions/LoginActions";
-import LoginStore from "../../stores/LoginStore";
+import { connect } from "react-redux";
+import { getRequirements } from "../../api/BCSApi";
+import {doLogout} from "../../api/LoginApi";
 import WorksheetPage from "../worksheet/WorksheetPage";
+import CoursePage from "../course/CoursePage";
+import PlannerPage from "../planner/PlannerPage";
 import { Menu, Container, Dropdown, Sticky } from 'semantic-ui-react'
 
-
-export default class MainPage extends React.Component {
+class MainPage extends React.Component {
 
     constructor () {
         super();
-
         this.MainMenu = React.createRef();
     }
 
@@ -19,7 +20,7 @@ export default class MainPage extends React.Component {
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
-    logout = () => LoginActions.logout();
+    logout = () => this.props.doLogout();
 
 
     getOffset = (element) => {
@@ -47,31 +48,40 @@ export default class MainPage extends React.Component {
     componentDidMount = () => {
         window.addEventListener('scroll', this.handleScroll);
     };
-
     componentWillUnmount = () => {
         window.removeEventListener('scroll', this.handleScroll);
     };
 
+    componentWillMount = () => {
+        const {getRequirements} = this.props;
+        getRequirements();
+    }
+
     render() {
         const { activeItem } = this.state;
-        let name = LoginStore.user && LoginStore.user.name;
+        const { name } = this.props.student;
+
+        console.log(name);
 
         return (
             <div>
                 <Menu pointing secondary  id='MainMenu'>
-                    <span ref={this.MainMenu}></span>
+                    <span ref={this.MainMenu}>
+                        {/*<img src={logo}/>*/}
+                    </span>
                     <Menu.Item
                         name='worksheet'
                         active={activeItem === 'worksheet'}
-                        onClick={this.handleItemClick} />
-                    <Menu.Item
-                        name='courses'
-                        active={activeItem === 'courses'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item
-                        name='timetable'
-                        active={activeItem === 'timetable'}
+                        name='planner'
+                        active={activeItem === 'planner'}
+                        onClick={this.handleItemClick}
+                    />
+                    <Menu.Item
+                        name='courses'
+                        active={activeItem === 'courses'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Menu position='right'>
@@ -87,6 +97,8 @@ export default class MainPage extends React.Component {
                 </Menu>
                 <Container>
                     {activeItem === 'worksheet' && <WorksheetPage/>}
+                    {activeItem === 'courses' && <CoursePage/>}
+                    {activeItem === 'planner' && <PlannerPage/>}
                 </Container>
 
             </div>
@@ -94,8 +106,19 @@ export default class MainPage extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+    student: state.student.info
+});
+
 MainPage.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired
     }).isRequired,
+    student: PropTypes.Object,
+    getRequirements: PropTypes.func.isRequired
 };
+
+export default connect(
+    mapStateToProps,
+    {getRequirements, doLogout}
+)(MainPage);

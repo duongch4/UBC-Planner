@@ -1,0 +1,49 @@
+.submit-remarks-button{
+    float: right;
+}
+
+.remark-div {
+    white-space:pre-line;
+    min-width: 300px;
+    content:"\200B";
+    min-height: 20px;
+}
+.remark-div:hover {
+    cursor: pointer;
+}
+
+.remarks-textarea {
+    background-color: rgba(255,255,255,0.5) !important;
+}
+
+.submit-remarks-button {
+    margin-top: 3px !important;
+}
+
+.student-info .input {
+    /*max-height: 30px;*/
+}
+
+.student-info {
+    font-size: 1.14285714rem;
+    color: rgba(0,0,0,.6);
+    line-height: 1.2em;
+}
+
+.student-info-container {
+    text-align:left;
+    margin-top: -12px;
+    margin-bottom: 15px;
+}
+
+
+.student-info-container.edit {
+    text-align:left;
+    margin-top: -28px;
+    margin-bottom: 10px;
+}
+
+.student-info-container .ui.form {
+    display: inline-block;
+    font-color: rgba(0,0,0,.6);
+}

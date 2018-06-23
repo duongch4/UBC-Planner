@@ -1,7 +1,7 @@
 import React from "react";
 import Validator from "validator";
 import PropTypes from "prop-types";
-import LoginApi from '../../api/LoginApi';
+import {doSignup} from '../../api/LoginApi';
 import SignupErrorMessage from './SignupErrorMessage';
 import { Form, Button, Message } from "semantic-ui-react";
 
@@ -13,7 +13,9 @@ class SignupForm extends React.Component {
             password: "",
             name: "",
             sid: "",
-            isAgreed: false
+            isAgreed: false,
+            cohort: (new Date()).getFullYear(),
+            bm: null
         },
         loading: false,
         error: {},
@@ -28,7 +30,7 @@ class SignupForm extends React.Component {
 
         console.log(error);
         if (Object.keys(error).length === 0 && error.constructor === Object) {
-            LoginApi.doSignup(this.state.data)
+            doSignup(this.state.data)
                 .then((data) => {
                     this.setState({ registrationSuccess : data && data.message });
                     setTimeout(() => {
@@ -63,6 +65,11 @@ class SignupForm extends React.Component {
 
         if (!data.name) error.name = "Can not be blank";
         if (!data.sid) error.sid = "Can not be blank";
+
+        if (!data.bm) error.bm = "Can not be blank";
+        if (!data.cohort) error.cohort = "Can not be blank";
+
+
 
         return error;
     };
@@ -119,6 +126,28 @@ class SignupForm extends React.Component {
                             type='number'
                             name='sid'
                             value={ data.sid }
+                            onChange={this.onFieldTextChange}/>
+                    </Form.Field>
+
+                    <Form.Field error={!!error.bm}>
+                        <label htmlFor='bm'>Bridging Module</label>
+                        {error.bm && <SignupErrorMessage text={ error.bm } />}
+                        <input
+                            type='text'
+                            name='bm'
+                            placeholder='TBD'
+                            value={data.bm}
+                            onChange={this.onFieldTextChange}/>
+                    </Form.Field>
+
+                    <Form.Field error={!!error.cohort}>
+                        <label htmlFor='cohort'>Cohort</label>
+                        {error.cohort && <SignupErrorMessage text={ error.cohort } />}
+                        <input
+                            type='number'
+                            name='cohort'
+                            placeholder='Cohort'
+                            value={data.cohort}
                             onChange={this.onFieldTextChange}/>
                     </Form.Field>
 

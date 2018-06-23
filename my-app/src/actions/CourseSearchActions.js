@@ -1,11 +1,24 @@
-import AppDispatcher from '../dispatcher/AppDispatcher'
-import { ON_QUERY, ON_RESET } from "../constants/CourseSearchConstants";
+import {
+    ON_AUTOCOMPLETE_SELECT, ON_AUTOCOMPLETE_SUCCESS, ON_QUERY, ON_QUERY_SUCCESS,
+    ON_RESET
+} from "../constants/CourseSearchConstants";
 
-export default {
-    query: (data) => {
-        AppDispatcher.dispatch({
-            actionType: ON_QUERY,
-            data: data
-        })
-    }
-}
+
+export const courseAutocompleteSuccess = result => ({
+    type: ON_AUTOCOMPLETE_SUCCESS,
+        result
+    });
+
+export const courseAutocompleteSelect = id => ({
+    type: ON_AUTOCOMPLETE_SELECT,
+    id
+});
+
+export const courseSearchSuccess = result => ({
+    type: ON_QUERY_SUCCESS,
+    result
+});
+
+export const reset = () => ({
+    type: "",
+});
