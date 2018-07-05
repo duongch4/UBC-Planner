@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import LoginActions from "../../actions/LoginActions";
 import LoginStore from "../../stores/LoginStore";
 import Worksheet from "../worksheet/Worksheet";
+import Auth from '../../modules/Auth';
 import { Menu, Container, Dropdown } from 'semantic-ui-react'
 
 
@@ -14,6 +15,26 @@ class MainPage extends React.Component {
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
     logout = () => LoginActions.logout();
+    
+      /**
+   * This method will be executed after initial rendering.
+   */
+  componentDidMount() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('get', '/api/dashboard');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // set the authorization HTTP header
+    xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+        //this.setState({
+        //  secretData: xhr.response.message
+        //});
+      }
+    });
+    xhr.send();
+  }
 
     render() {
         const { activeItem } = this.state;
