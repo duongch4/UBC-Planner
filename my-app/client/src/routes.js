@@ -10,13 +10,13 @@ const routes = {
   component: Base,
   childRoutes: [
 
-    {
+    {//NEEDS TO BE REPLACED
       path: '/',
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
           callback(null, MainPage);
         } else {
-          callback(null, Loginage);
+          callback(null, LoginPage);
         }
       }
     },
@@ -30,6 +30,7 @@ const routes = {
       path: '/signup',
       component: SignUpPage
     },
+   
 
     {
       path: '/logout',

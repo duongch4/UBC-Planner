@@ -15,7 +15,7 @@ const LoginForm = ({
   user
 }) => (
 	<div>
-	<Form action="/" onSubmit = {this.onSubmit}>
+	<Form action="/" onSubmit = {onSubmit}>
 		{successMessage && <p className="success-message">{successMessage}</p>}
 		{errors.summary && <p className="error-message">{errors.summary}</p>}
 		
@@ -25,9 +25,9 @@ const LoginForm = ({
           type = 'text'
           name="email"
           placeholder = 'username@ugrad.cs.ubc.ca'
-          errorText={errors.email}
-          onChange={onChange}
-          value={user.email}
+          errorText={ errors.email }
+          onChange={ onChange }
+          value={ user.email }
         />
       </Form.Field>
 
@@ -41,7 +41,7 @@ const LoginForm = ({
               value = { user.password }
               onChange = { onChange } />
          </Form.Field>
-        <Button id = 'Login-button' fluid> Login </Button>
+        <Button type = 'submit' id = 'Login-button' fluid> Login </Button>
     </Form>
     <Link to ={'/signup'}>Forgot your password?</Link>
     &nbsp;&nbsp;&nbsp;&nbsp;

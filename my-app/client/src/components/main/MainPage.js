@@ -42,6 +42,8 @@ class MainPage extends React.Component {
 
         return (
             <div>
+                    <p> Test paragraph </p>
+
                 <Menu pointing secondary  id='MainMenu'>
                     <Menu.Item
                         name='worksheet'

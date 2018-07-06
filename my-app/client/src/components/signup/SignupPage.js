@@ -34,7 +34,7 @@ class SignupPage extends React.Component {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
     
-    this.props.history.push("/"); //Michelle's implementation
+    //this.props.history.push("/"); //Michelle's implementation
 
 
     // create a string for an HTTP body message
@@ -61,7 +61,8 @@ class SignupPage extends React.Component {
         localStorage.setItem('successMessage', xhr.response.message);
 
         // make a redirect
-        this.context.router.replace('/login');
+        //this.context.router.replace('/login');
+        this.context.router.history.push('/');
       } else {
         // failure
 

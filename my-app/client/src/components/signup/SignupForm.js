@@ -1,5 +1,5 @@
 import React from "react";
-import Validator from "validator";
+//import Validator from "validator";
 import PropTypes from "prop-types";
 import LoginApi from '../../api/LoginApi';
 import SignupErrorMessage from './SignupErrorMessage';
@@ -13,24 +13,25 @@ const SignUpForm = ({
   user,
 }) => (
 	<div>
-	<Form action="/" onSubmit={this.onSubmit}>
+	<Form action="/" onSubmit={onSubmit}>
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
       
-      <Form.Field error>
-      <label htmlFor='name'>Name</label>
+      <Form.Field>
+      <label htmlFor = 'name'>Email</label>
       <input
          type='text'
          name='name'
          placeholder='Your Name'
-         value={user.name}
-         onChange={onChange}/>
+         errorText = { errors.name }
+         value={ user.name }
+         onChange={ onChange }/>
       </Form.Field>
 
       
        <Form.Field>
-       <label htmlFor='email'>Email</label>
+       <label htmlFor = 'email'>Email</label>
       <input
              type='text'
              name='email'
@@ -41,16 +42,17 @@ const SignUpForm = ({
          </Form.Field>
 
         <Form.Field>
-        <label htmlFor='password'>Password</label>
+        <label htmlFor = 'password'>Password</label>
         <input
                type='password'
                name='password'
                placeholder='Password'
+               errorText = {errors.password }
                value={user.password}
               onChange={onChange}/>
         </Form.Field>
 
-     <Button className='Signup-button' id='Signup-button' fluid> Submit </Button>
+     <Button type='submit' className='Signup-button' id='Signup-button' fluid> Submit </Button>
      </Form>
      </div>
 );

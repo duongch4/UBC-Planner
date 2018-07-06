@@ -5,8 +5,6 @@ import LoginForm from "./LoginForm";
 import GeneralHeader from "../header/GeneralHeader";
 import Auth from '../../modules/Auth';
 
-
-
 class LoginPage extends React.Component {
 
   /**
@@ -70,7 +68,9 @@ class LoginPage extends React.Component {
 
 
         // change the current URL to /
-        this.context.router.replace('/');
+        //this.context.router.replace('/');
+        this.context.router.history.push('/');
+        //this.props.history.push('/');
       } else {
         // failure
 
@@ -133,7 +133,7 @@ LoginPage.contextTypes = {
 
 //Michelle's implementation
 LoginPage.propTypes = {
-    history: PropTypes.shape({
+   history: PropTypes.shape({
         push: PropTypes.func.isRequired
     }).isRequired,
 };
