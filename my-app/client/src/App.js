@@ -10,11 +10,6 @@ import DashboardPage from "./components/main/DashboardPage";
 import MainPage from "./components/main/MainPage";
 import Auth from './modules/Auth.js';
 
-// let jwt = localStorage.getItem('jwt');
-// if (jwt) {
-//     LoginActions.login(jwt);
-// }
-
 class ProtectedRoute extends Component {
   render() {
     const { component: Component, ...props } = this.props
