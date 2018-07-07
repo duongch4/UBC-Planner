@@ -13,44 +13,38 @@ const SignUpForm = ({
   user,
 }) => (
 	<div>
-	<Form action="/" onSubmit={onSubmit}>
+	<Form error action="/" onSubmit={onSubmit}>
 
-      {errors.summary && <p className="error-message">{errors.summary}</p>}
+       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
       
-      <Form.Field>
-      <label htmlFor = 'name'>Email</label>
-      <input
+      <Form.Input fluid
+		 label='Name'
          type='text'
          name='name'
          placeholder='Your Name'
-         errorText = { errors.name }
          value={ user.name }
          onChange={ onChange }/>
-      </Form.Field>
+         <Message error content = {errors.name} />
 
-      
-       <Form.Field>
-       <label htmlFor = 'email'>Email</label>
-      <input
-             type='text'
-             name='email'
-             placeholder='username@ugrad.cs.ubc.ca'
-             errorText={errors.email}
-             value={user.email}
-             onChange={onChange} />
-         </Form.Field>
+       <Form.Input fluid
+		 label='Email'
+         type='text'
+         name='email'
+         placeholder='username@ugrad.cs.ubc.ca'
+         value={user.email}
+         onChange={onChange} />
+         <Message error content = {errors.email} />
 
-        <Form.Field>
-        <label htmlFor = 'password'>Password</label>
-        <input
-               type='password'
-               name='password'
-               placeholder='Password'
-               errorText = {errors.password }
-               value={user.password}
-              onChange={onChange}/>
-        </Form.Field>
+        <Form.Input fluid
+         label='Password'
+         type='password'
+         name='password'
+         placeholder='Password'
+         value={user.password}
+         onChange={onChange}/>
+         <Message error content = {errors.password } />
+
 
      <Button type='submit' className='Signup-button' id='Signup-button' fluid> Submit </Button>
      </Form>

@@ -1,8 +1,9 @@
-import Base from '../components/Base.jsx';
-import MainPage from '.../components/main/MainPage.js';
-import LoginPage from '../components/login/LoginPage.js';
-import SignUpPage from '../components/signup/SignuPage.js';
-import Auth from '../modules/Auth.js';
+import Base from './components/Base.jsx';
+import MainPage from './components/main/MainPage.js';
+import LoginPage from './components/login/LoginPage.js';
+import SignUpPage from './components/signup/SignupPage.js';
+import Auth from './modules/Auth.js';
+import DashboardPage from './components/main/DashboardPage.js';
 
 
 const routes = {
@@ -21,6 +22,11 @@ const routes = {
       }
     },
 
+	{
+		path: '/dashboard',
+		component: DashboardPage
+	},
+	
     {
       path: '/login',
       component: LoginPage

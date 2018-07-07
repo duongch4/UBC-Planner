@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import SignUpForm from "./SignupForm";
 import GeneralHeader from "../header/GeneralHeader";
 
+
 class SignupPage extends React.Component {
 	  /**
    * Class constructor.
@@ -17,7 +18,7 @@ class SignupPage extends React.Component {
       user: {
         email: '',
         name: '',
-        password: ''
+        password: '',
       }
     };
 
@@ -92,6 +93,7 @@ class SignupPage extends React.Component {
     });
   }
 
+    
   /**
    * Render the component.
    */

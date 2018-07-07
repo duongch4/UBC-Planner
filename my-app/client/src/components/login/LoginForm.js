@@ -15,35 +15,31 @@ const LoginForm = ({
   user
 }) => (
 	<div>
-	<Form action="/" onSubmit = {onSubmit}>
+	<Form error action="/" onSubmit = {onSubmit}>
 		{successMessage && <p className="success-message">{successMessage}</p>}
 		{errors.summary && <p className="error-message">{errors.summary}</p>}
 		
-		<Form.Field>
-		<label htmlFor = 'email'>Email</label>
-        <input
+		<Form.Input fluid
+		  label = 'Email'
           type = 'text'
           name="email"
           placeholder = 'username@ugrad.cs.ubc.ca'
-          errorText={ errors.email }
           onChange={ onChange }
-          value={ user.email }
-        />
-      </Form.Field>
+          value={ user.email } />
+          <Message error content = {errors.email} />
 
-      <Form.Field>
-      <label htmlFor = 'password'>Password</label>
-      <input
+      <Form.Input fluid
+			  label = 'Password'
               type = 'password'
               name = 'password'
               placeholder = 'Password'
-              errorText={errors.password}
               value = { user.password }
               onChange = { onChange } />
-         </Form.Field>
+              <Message error content = {errors.password} />
+              
         <Button type = 'submit' id = 'Login-button' fluid> Login </Button>
     </Form>
-    <Link to ={'/signup'}>Forgot your password?</Link>
+    <Link to ={'/forgotpassword'}>Forgot your password?</Link>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <Link to ={'/signup'}>Create a new account</Link>
   </div>

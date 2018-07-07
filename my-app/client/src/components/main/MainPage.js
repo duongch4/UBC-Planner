@@ -5,7 +5,8 @@ import LoginActions from "../../actions/LoginActions";
 import LoginStore from "../../stores/LoginStore";
 import Worksheet from "../worksheet/Worksheet";
 import Auth from '../../modules/Auth';
-import { Menu, Container, Dropdown } from 'semantic-ui-react'
+import { Menu, Container, Dropdown } from 'semantic-ui-react';
+import { Link, NavLink } from 'react-router-dom';
 
 
 class MainPage extends React.Component {
@@ -14,11 +15,11 @@ class MainPage extends React.Component {
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
-    logout = () => LoginActions.logout();
+    //logout = () => LoginActions.logout();
     
       /**
    * This method will be executed after initial rendering.
-   */
+   
   componentDidMount() {
     const xhr = new XMLHttpRequest();
     xhr.open('get', '/api/dashboard');
@@ -35,14 +36,13 @@ class MainPage extends React.Component {
     });
     xhr.send();
   }
-
+*/
     render() {
         const { activeItem } = this.state;
         let name = LoginStore.user && LoginStore.user.name;
 
         return (
             <div>
-                    <p> Test paragraph </p>
 
                 <Menu pointing secondary  id='MainMenu'>
                     <Menu.Item
@@ -63,9 +63,7 @@ class MainPage extends React.Component {
                         <Dropdown item text={name}>
                             <Dropdown.Menu>
                                 <Dropdown.Item>Account</Dropdown.Item>
-                                <Dropdown.Item
-                                    active={activeItem === 'logout'}
-                                    onClick={this.logout}>Logout</Dropdown.Item>
+                                    <Dropdown.Item as= {Link} to= "/login">Logout</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </Menu.Menu>
