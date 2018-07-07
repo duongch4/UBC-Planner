@@ -1,5 +1,4 @@
 import Base from './components/Base.jsx';
-import MainPage from './components/main/MainPage.js';
 import LoginPage from './components/login/LoginPage.js';
 import SignUpPage from './components/signup/SignupPage.js';
 import Auth from './modules/Auth.js';
@@ -15,17 +14,12 @@ const routes = {
       path: '/',
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
-          callback(null, MainPage);
+          callback(null, DashboardPage);
         } else {
           callback(null, LoginPage);
         }
       }
     },
-
-	{
-		path: '/dashboard',
-		component: DashboardPage
-	},
 	
     {
       path: '/login',

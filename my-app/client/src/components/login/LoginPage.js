@@ -69,7 +69,7 @@ class LoginPage extends React.Component {
 
         // change the current URL to /
         //this.context.router.replace('/');  //Original
-        this.context.router.history.push('/mainpage');
+        this.context.router.history.push('/dashboard');
         //this.props.history.push('/'); //Tried; did not work
       } else {
         // failure
