@@ -3,6 +3,8 @@ import {courseSearchSuccess, courseAutocompleteSuccess} from "../actions/CourseS
 
 var data  = require("../data/courses");
 var courseNames = Object.keys(data);
+//var data  = require("../data/courseSearchList.json");
+//var courseNames = data.depts.dept.map(each => each.$.key);
 
 export const doAutocomplete = query => dispatch => new Promise((resolve, reject)=> {
 

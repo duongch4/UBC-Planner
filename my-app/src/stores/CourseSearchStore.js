@@ -2,6 +2,7 @@ import { ON_QUERY, ON_RESET } from '../constants/CourseSearchConstants'
 import BaseStore from './BaseStore'
 
 const source  = require("../data/courses");
+//const source  = require("../data/courseSearchList");
 
 class CourseSearchStore extends BaseStore {
 
