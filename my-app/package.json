@@ -6,6 +6,7 @@
     "jwt-decode": "^1.1.0",
     "lodash": "4.17.3",
     "react": "^16.4.0",
+    "react-beautiful-dnd": "^8.0.3",
     "react-dom": "^16.4.0",
     "react-native-xml2js": "^1.0.3",
     "react-redux": "^5.0.7",

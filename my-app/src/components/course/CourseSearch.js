@@ -173,6 +173,7 @@ class CourseSearch extends Component {
           .then ((response) => response.text())
           .then ((responseText) => {
               parseString(responseText, (err, result) => {
+                console.log(result)
                   print = result.courses.course.map(course => {
                   if (!course.$.hasOwnProperty("prereqs")) {
                     return {
