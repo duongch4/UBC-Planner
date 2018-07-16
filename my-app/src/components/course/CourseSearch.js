@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import _ from 'lodash';
 import { Form, Search } from 'semantic-ui-react';
-import {doSearch, doAutocomplete} from "../../api/CourseSearchApi";
+import {doSearch, doAutocomplete, doAutocompleteSelect} from "../../api/CourseSearchApi";
 import {reset, courseSearchSuccess, courseAutocompleteSelect} from "../../actions/CourseSearchActions";
 
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -203,8 +203,8 @@ class CourseSearch extends Component {
 
     componentWillMount = () => {
       this.resetComponent();
-      this.getSearchList();
-      this.getSampleCourseList();
+  //    this.getSearchList();
+//      this.getSampleCourseList();
     }
 
     // fetch API subject codes and names: for autofill
@@ -220,7 +220,7 @@ class CourseSearch extends Component {
 
     handleResultSelect = (e, { result }) => {
         this.setState({ value: '' })
-        this.props.courseAutocompleteSelect( result.title )
+        this.props.doAutocompleteSelect( result.title );
     }
 
     handleSearchChange = (e, { value }) => {
@@ -228,7 +228,9 @@ class CourseSearch extends Component {
 
         setTimeout(() => {
             if (this.state.value.length < 1) return this.resetComponent()
-            this.props.doAutocomplete(this.state.value);
+            // check length
+            this.props.doAutocomplete(this.state.value); // 1
+            // 2
             this.setState({ isLoading: false, value })
         }, 0)
     }
@@ -268,5 +270,5 @@ const mapStateToProps = state => ({
 
 export default connect (
     mapStateToProps,
-    {doSearch, doAutocomplete, courseAutocompleteSelect}
+    {doSearch, doAutocomplete, courseAutocompleteSelect, doAutocompleteSelect}
     ) (CourseSearch)

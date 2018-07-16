@@ -9,9 +9,9 @@ export const courseAutocompleteSuccess = result => ({
         result
     });
 
-export const courseAutocompleteSelect = id => ({
+export const courseAutocompleteSelect = result => ({
     type: ON_AUTOCOMPLETE_SELECT,
-    id
+    result
 });
 
 export const courseSearchSuccess = result => ({
