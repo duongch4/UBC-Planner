@@ -1,14 +1,13 @@
 import _ from 'lodash';
-import {courseSearchSuccess, courseAutocompleteSelect, courseAutocompleteSuccess} from "../actions/CourseSearchActions";
+import {courseSearchSuccess, courseAutocompleteSelect, courseAutocompleteSuccess, courseAutocompleteFail} from "../actions/CourseSearchActions";
 var data  = require("../data/courseSearchList.json");
+const parseString = require('react-native-xml2js').parseString;
+
 var courseNames = data.depts.dept;
-var async = require('async');
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const baseURL = 'https://courses.students.ubc.ca/cs/servlets/SRVCourseSchedule?';
 var date = new Date().getFullYear();
 const url = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=2&dept=';
-const parseString = require('react-native-xml2js').parseString;
-
 
 export const doAutocomplete = query => dispatch => new Promise((resolve, reject)=> {
 
@@ -17,10 +16,12 @@ export const doAutocomplete = query => dispatch => new Promise((resolve, reject)
     const re = new RegExp(_.escapeRegExp(query.toUpperCase()), 'i')
     const isMatch = courseId => re.test(courseId.$.key)
     const filteredNames = _.filter(courseNames, isMatch)
-    console.log(filteredNames); // filtered dept names
+    console.log("filtered names: ", filteredNames); // filtered dept names
 
     if (filteredNames && filteredNames.length) resolve(filteredNames.map(name=>name.$));
-    else reject({
+    else
+        dispatch(courseAutocompleteFail());
+        reject({
         exists: false,
         error: { message: "Course does not exist." }
     });
@@ -55,10 +56,7 @@ export const doAutocompleteSelect = dept => dispatch => {
                 "pr": preProcess(course.$.prereqs)
               }
             }
-
             })
-            console.log(courses);
-
           });
           return courses;
       })
@@ -149,7 +147,6 @@ const parsePr = (str) => {
     };
     return and;
   }
-
 
   // create "or" array for "either ... or" condition
   if (/[Ee]ither\s\(a\)\s*/.test(str)) {

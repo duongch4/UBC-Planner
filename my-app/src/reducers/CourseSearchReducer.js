@@ -1,5 +1,5 @@
 // import {PROGRAM_REQUIREMENTS_LOADED} from "../constants/BCSConstnats";
-import { ON_AUTOCOMPLETE_SUCCESS, ON_AUTOCOMPLETE_SELECT, ON_QUERY_SUCCESS } from "../constants/CourseSearchConstants";
+import { ON_AUTOCOMPLETE_SUCCESS, ON_AUTOCOMPLETE_SELECT, ON_QUERY_SUCCESS, ON_AUTOCOMPLETE_FAIL } from "../constants/CourseSearchConstants";
 import { LOG_OUT } from "../constants/LoginConstants";
 
 
@@ -13,6 +13,10 @@ const initialState = {
 
 const CourseSearchReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ON_AUTOCOMPLETE_FAIL:
+      var autocomplete: [];
+      var autocomplete_orig: [];
+        return { ...state, autocomplete, autocomplete_orig };
     case ON_AUTOCOMPLETE_SUCCESS:
       var { result } = action;
       console.log("RESULT", result);
@@ -24,8 +28,7 @@ const CourseSearchReducer = (state = initialState, action) => {
     case ON_AUTOCOMPLETE_SELECT:
       var { result } = action;
       const { autocomplete_orig, history } = state;
-    //  history.push(result);
-    //  var result = autocomplete_orig.filter(course => (course.id === id));
+    //  history.push(dept);
       return { ...state, result, history };
     case ON_QUERY_SUCCESS:
       {
@@ -33,10 +36,6 @@ const CourseSearchReducer = (state = initialState, action) => {
         var { history } = Object.assign({}, state); //ignore
         history.push(query);
         var autocomplete = [];
-        //result already parsed on autocomplete success for department
-        // find if has code ie) 1* or 110
-        // if 1* -> filter result
-        // if 110 -> fetch page and parse
         return { ...state, query, result, history, autocomplete };
       }
     case LOG_OUT:
