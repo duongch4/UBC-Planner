@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import _ from 'lodash';
 import { Form, Search } from 'semantic-ui-react';
-import {doSearch, doAutocomplete, doAutocompleteSelect} from "../../api/CourseSearchApi";
+import {doSearch, doAutocompleteCourse, doAutocompleteDepartment, doAutocompleteSelect, doLoadDepartment, doUnloadDepartment} from "../../api/CourseSearchApi";
 import {reset, courseSearchSuccess, courseAutocompleteSelect} from "../../actions/CourseSearchActions";
 
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const baseURL = proxyUrl + 'https://courses.students.ubc.ca/cs/servlets/SRVCourseSchedule?';
+const baseURL = 'https://courses.students.ubc.ca/cs/servlets/SRVCourseSchedule?';
+const url = proxyUrl + baseURL + '&sessyr=' + new Date().getFullYear() + '&sesscd=W&req=0&output=3';
 const parseString = require('react-native-xml2js').parseString;
-var print;
 
 class CourseSearch extends Component {
 
@@ -21,7 +21,7 @@ class CourseSearch extends Component {
       let init = {
          method: 'GET'
       };
-      fetch (baseURL + '&sessyr=' + new Date().getFullYear() + '&sesscd=W&req=0&output=3', init)
+      fetch (url, init)
         .then ((response) => response.text())
         .then ((responseText) => {
             parseString(responseText, function (err, result) {
@@ -47,11 +47,20 @@ class CourseSearch extends Component {
         this.setState({ isLoading: true, value })
 
         setTimeout(() => {
-            if (this.state.value.length < 1) return this.resetComponent()
-            // check length
-            this.props.doAutocomplete(this.state.value); // 1
-            // 2
-            this.setState({ isLoading: false, value })
+            if (this.state.value.length < 1) {
+              return this.resetComponent()
+            } else if (this.state.value.length < 5) {
+              this.props.doAutocompleteDepartment(this.state.value);
+              this.props.doUnloadDepartment();
+              this.setState({ isLoading: false, value })
+            } else if (this.state.value.length == 5) {
+              this.props.doLoadDepartment(this.state.value);
+              this.props.doAutocompleteCourse(this.state.value)
+              this.setState({ isLoading: false, value })
+            } else {
+              this.props.doAutocompleteCourse(this.state.value)
+              this.setState({ isLoading: false, value })
+            }
         }, 0)
     }
 
@@ -90,5 +99,5 @@ const mapStateToProps = state => ({
 
 export default connect (
     mapStateToProps,
-    {doSearch, doAutocomplete, courseAutocompleteSelect, doAutocompleteSelect}
+    {doSearch, doAutocompleteDepartment, doAutocompleteCourse, courseAutocompleteSelect, doAutocompleteSelect, doLoadDepartment, doUnloadDepartment}
     ) (CourseSearch)
