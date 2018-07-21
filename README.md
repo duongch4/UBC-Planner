@@ -1,5 +1,6 @@
 
-#PLEASE READ!!!!!
+
+# Ian, please read!!
 
 For this assignment, much work was done creating a Mongoose schema that fit the draft JSON we had designed. This included nesting schemas, single nested subodcuments, etc. We also tried to find ways to load default values (a bit tricker with nested schemas and subdocuments) so that the LocalPassportStrategy would be minimized. We still need to test if this works for courses and coop which are arrays of other objects.
 
