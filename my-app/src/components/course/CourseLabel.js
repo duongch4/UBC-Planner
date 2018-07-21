@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { Label } from 'semantic-ui-react'
-import {doSearch} from "../../api/CourseSearchApi";
+import {doCourseSelect} from "../../api/CourseSearchApi";
 
 class CourseLabel extends React.Component {
 
@@ -30,7 +30,7 @@ class CourseLabel extends React.Component {
 
     onLabelClick=(e, o)=>{
         console.log(o.children);
-        this.props.doSearch(o.children);
+        this.props.doCourseSelect(o.children);
     }
 
     render() {
@@ -56,5 +56,5 @@ CourseLabel.PropTypes = {
 
 export default connect (
     mapStateToProps,
-    {doSearch}
+    {doCourseSelect}
 ) (CourseLabel)

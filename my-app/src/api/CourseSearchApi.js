@@ -86,6 +86,18 @@ export const doAutocompleteCourse = query => (dispatch, getState) => {
     }
   }
 
+export const doCourseSelect = query => (dispatch, getState) => {
+    var fullUrl, dept, key = "";
+      if (/\s+/.test(query)) {
+        dept = query.split(/\s+/)[0];
+        key = query.split(/\s+/)[1];
+        }
+        fullUrl = oneCourseUrl + dept + '&course=' + key + '&output=3';
+        getCourses(fullUrl, dept).then((data) => {
+          if (data !== undefined) dispatch(courseAutocompleteSelect(data))})
+      }
+
+
 
 export const doAutocompleteSelect = query => (dispatch, getState) => {
   var fullUrl, dept, key = "";
@@ -101,7 +113,8 @@ export const doAutocompleteSelect = query => (dispatch, getState) => {
         fullUrl = deptUrl + dept + '&output=3'
         console.log(fullUrl)
     }
-    getCourses(fullUrl, dept).then((data) => {dispatch(courseAutocompleteSelect(data))})
+    getCourses(fullUrl, dept).then((data) => {
+      if (data !== undefined) dispatch(courseAutocompleteSelect(data))})
 }
 
 export const doSearch = query => (dispatch, getState) => {
@@ -125,9 +138,11 @@ export const doSearch = query => (dispatch, getState) => {
       }, Promise.resolve, Promise.reject)
       .then (data => {dispatch(courseSearchSuccess(data))})
     } else {
-      var dept = autocomplete_orig[0];
-      if (dept !== undefined) {
-        getCourses(deptUrl + dept.key + '&output=3', dept.key).then((data) => {dispatch(courseSearchSuccess(data))})}
+      if (autocomplete_orig[0] !== undefined) {
+        var dept = autocomplete_orig[0].key;
+        getCourses(deptUrl + dept + '&output=3', dept).then((data) => {
+          if (data !== undefined) dispatch(courseAutocompleteSelect(data))})
+        }
       }
   } else dispatch(courseSearchFail())
 }
