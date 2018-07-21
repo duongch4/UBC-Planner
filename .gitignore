@@ -31,3 +31,5 @@ client/.idea/misc.xml
 client/.idea/modules.xml
 client/.idea/my-app.iml
 client/.idea/workspace.xml
+.idea/vcs.xml
+my-app/.idea/workspace.xml
