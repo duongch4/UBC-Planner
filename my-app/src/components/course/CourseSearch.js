@@ -54,6 +54,7 @@ class CourseSearch extends Component {
               this.props.doUnloadDepartment();
               this.setState({ isLoading: false, value })
             } else if (this.state.value.length == 5) {
+          //    this.props.doAutocompleteDepartment(this.state.value);
               this.props.doLoadDepartment(this.state.value);
               this.props.doAutocompleteCourse(this.state.value)
               this.setState({ isLoading: false, value })
