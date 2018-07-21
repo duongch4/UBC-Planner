@@ -2,3 +2,7 @@
     display: inline-block;
     margin: auto;
 }
+
+.General-header content {
+    text-align: center;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Validator from 'validator';
-import LoginApi from '../../api/LoginApi';
+import {lostPassword} from '../../api/LoginApi';
 import LoginErrorMessage from '../login/LoginErrorMessage';
 import { Form, Button, Message } from "semantic-ui-react";
 
@@ -22,7 +22,7 @@ class ForgotPasswordForm extends React.Component {
         this.setState({ message: "" });
 
         if (Object.keys(error).length === 0 && error.constructor === Object) {
-            LoginApi.lostPassword(this.state.data)
+            lostPassword(this.state.data)
                 .then((data) => {
                     this.setState({ message: data.message});
                 })

@@ -1,23 +1,15 @@
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { LOG_IN, LOG_OUT } from '../constants/LoginConstants';
+import { LOG_IN, LOG_OUT, UPDATE_INFO_SUCCESS } from '../constants/LoginConstants';
 
-export default {
-    login: (user) => {
-        AppDispatcher.dispatch({
-            actionType: LOG_IN,
-            jwt: user.email, // TODO token
-            user: user
-        });
+export const loginSuccess = student => ({
+    type: LOG_IN,
+    student
+});
 
-        localStorage.setItem('jwt', user);
-    },
+export const logoutSuccess = () => ({
+    type: LOG_OUT
+});
 
-    logout: () => {
-        // makes an API call here as well
-        // dispatch action playload for login
-        localStorage.removeItem('jwt');
-        AppDispatcher.dispatch({
-            actionType: LOG_OUT
-        });
-    }
-};
+export const updateStudentInfoSuccess = student => ({
+   type: UPDATE_INFO_SUCCESS,
+    student
+});

@@ -1,0 +1,211 @@
+{
+  "CPSC 110": {
+    "id": "CPSC 110",
+    "name": "Computation, Programs, and Programming",
+    "description": "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modeling, and interacting with the world.",
+    "credits": 4
+  },
+  "CPSC 210": {
+    "id": "CPSC 210",
+    "name": "Software Construction",
+    "description": "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
+    "credits": 4,
+    "pr": {
+      "or": [
+        "CPSC 107",
+        "CPSC 110",
+        "CPSC 260"
+      ]
+    }
+  },
+  "CPSC 121": {
+    "id": "CPSC 121",
+    "name": "Models of Computation",
+    "description": "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
+    "credits": 4,
+    "cr": {
+      "or": [
+        "CPSC 107",
+        "CPSC 110"
+      ]
+    }
+  },
+  "CPSC 213": {
+    "id": "CPSC 213",
+    "name": "Introduction to Computer Systems",
+    "description": "Software architecture, operating systems, and I/O architectures. Relationships between application software, operating systems, and computing hardware; critical sections, deadlock avoidance, and performance; principles and operation of disks and networks.",
+    "credits": 4,
+    "pr": {
+      "and": [
+        "CPSC 121",
+        "CPSC 210"
+      ]
+    }
+  },
+  "CPSC 221": {
+    "id": "CPSC 221",
+    "name": "Basic Algorithms and Data Structures",
+    "description": "Design and analysis of basic algorithms and data structures; algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
+    "credits": 4,
+    "pr": {
+      "and": [{
+        "or": [
+          "CPSC 210",
+          "EECE 210",
+          "CPEN 221"
+        ]
+      },
+        {
+          "or": [
+            "CPSC 121",
+            "MATH 220"
+          ]
+        }
+      ]
+    }
+  },
+  "CPSC 304": {
+    "id": "CPSC 304",
+    "name": "Introduction to Relational Databases",
+    "description": "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
+    "credits": 4,
+    "pr": {
+      "or": [
+        "CPSC 221",
+        {
+          "and": [
+            "CPSC 260",
+            "EECE 320",
+            {
+              "or": [
+                "CPSC 210",
+                "EECE 210",
+                "EECE 309"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "CPSC 313": {
+    "id": "CPSC 313",
+    "name": "Computer Hardware and Operating Systems",
+    "description": "Instruction sets, pipelining, code optimization, caching, virtual memory management, dynamically linked libraries, exception processing, execution time of programs.",
+    "credits": 4,
+    "pr": {
+      "or": [{
+        "and": [
+          "CPSC 213",
+          "CPSC 221"
+        ]
+      }, {
+        "and": [
+          "CPSC 210", "CPSC 213", "CPSC 260", "EECE 320"
+        ]
+      }]
+    }
+  },
+  "CPSC 314": {
+    "id": "CPSC 314",
+    "name": "Computer Graphics",
+    "description": "Human vision and colour; geometric transformations; algorithms for 2-D and 3-D graphics; hardware and system architectures; shading and lighting; animation.",
+    "credits": 3,
+    "pr": {
+      "and": [{
+        "or": ["MATH 200", "MATH 217", "MATH 226", "MATH 253"]
+      },
+        {
+          "or": ["MATH 152", "MATH 221", "MATH 223"]
+        },
+        {
+          "or": ["CPSC 221",
+            {
+              "and": ["CPSC 260", "EECE 320"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "CPSC 317": {
+    "id": "CPSC 317",
+    "name": "Internet Computing",
+    "description": "Computer networking, basic communication protocols, network infrastructure and routing. Common application-level protocols and principles associated with developing distributed applications.",
+    "credits": 3,
+    "pr": {
+      "and": ["CPSC 213", "CPSC 221"
+      ]
+    }
+  },
+  "CPSC 319": {
+    "id": "CPSC 319",
+    "name": "Software Engineering Project",
+    "description": "The design, implementation, and test of a large software system, using a team approach.",
+    "credits": 3,
+    "pr": {
+      "and": ["CPSC 213", "CPSC 221"]
+    }
+  },
+  "CPSC 320": {
+    "id": "CPSC 320",
+    "name": "Intermediate Algorithm Design and Analysis",
+    "description": "Systematic study of basic concepts and techniques in the design and analysis of algorithms, illustrated from various problem areas. Topics include: models of computation; choice of data structures; graph-theoretic, algebraic, and text processing algorithms.",
+    "credits": 4,
+    "pr": {
+      "or": ["CPSC 221", {
+        "and": ["CPSC 260", "EECE 320"]
+      }]
+    }
+  },
+  "CPSC 340": {
+    "id": "CPSC 340",
+    "name": "Machine Learning and Data Mining",
+    "description": "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning; applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
+    "credits": 3,
+    "pr": {
+      "and": [{
+        "or": ["MATH 152", "MATH 221", "MATH 223"]
+      }, {
+        "or": ["MATH 200", "MATH 217", "MATH 226", "MATH 253", "MATH 263"]
+      }, {
+        "or": ["STAT 200", "STAT 203", "STAT 241", "STAT 251", "COMM 291", "ECON 325", "ECON 327", "PSYC 218", "PSYC 278", "PSYC 366", "MATH 302", "STAT 302", "MATH 318", "BIOL 300"]
+      }, {
+        "or": ["CPSC 221",
+          {
+            "and": ["CPSC 260", "EECE 320", {
+              "or": ["CPSC 210", "EECE 210", "EECE 309"]
+            }]
+          }
+        ]
+      }]
+    }
+  },
+  "CPSC 322": {
+    "id": "CPSC 322",
+    "name": "Introduction to Artificial Intelligence",
+    "description": "Problem-solving and planning; state/action models and graph searching. Natural language understanding Computational vision. Applications of artificial intelligence.",
+    "credits": 4,
+    "pr": {
+      "or": [
+        "CPSC 221",
+        {
+          "and": [
+            "CPSC 260", "EECE 320", {
+              "or": ["CPSC 210", "EECE 210", "EECE 309"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "CPSC 344": {
+    "id": "CPSC 344",
+    "name": "Introduction to Human Computer Interaction Methods",
+    "description": "Basic tools and techniques, teaching a systematic approach to interface design, task analysis, analytic and empirical evaluation methods.",
+    "credits": 3,
+    "pr": {
+      "or": ["CPSC 210", "EECE 210", "EECE 309", "CPEN 221"]
+    }
+  }
+}

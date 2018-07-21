@@ -1,0 +1,49 @@
+.ui.search>.results {
+    left: calc(50% - 10em) !important;
+    width: 20em !important;
+}
+
+.ui.search>.results .content {
+    text-align: left;
+}
+
+.search .ui.icon.input {
+    width: 300px;
+}
+
+.course.search {
+    margin-top: 50px;
+}
+
+.course.search .ui.card {
+    width: 100%;
+    height: 100%;
+}
+
+.course.search .item {
+    padding: 1px 0 1px 0;
+}
+
+.course.search .bookmark {
+    float: right;
+    border: none;
+    box-shadow: none;
+    transform: translate(10px,-18px);
+}
+
+.course.search .grey .bookmark:hover {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    color: olive;
+}
+
+.course.search .bookmark.button,
+.course.search .bookmark.ui.basic.button:hover,
+.course.search .bookmark.ui.basic.button:active,
+.course.search .bookmark.ui.basic.button:focus {
+    background-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border:none;
+}

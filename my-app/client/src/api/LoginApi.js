@@ -1,46 +1,33 @@
+import {loginSuccess, logoutSuccess, updateStudentInfoSuccess} from "../actions/LoginActions";
+import axios from 'axios';
 var users  = require("../data/test");
 
-class LoginApi {
-    doLogin = loginData => {
-        if (
-            users.hasOwnProperty( loginData.email ) &&
-            users[loginData.email].password === loginData.password
-        ) {
-            return Promise.resolve({
-                exists: true,
-                jwt: users[loginData.email] // returns user information object
-            });
+export const doLogin = credentials => dispatch =>
+axios.post("/auth/login", credentials)
+    .then(res => {
+        if (res) {
+            // res.data.user.token = res.data.token;
+            localStorage.setItem('token', res.data.token);
         }
-        return Promise.reject({
-            exists: false,
-            error: { message: "User does not exist. Please try again." }
+        dispatch(loginSuccess(res.data.user));
+    });
+// .catch(error=>console.log(error));
+
+export const doLogout = () => dispatch =>
+    dispatch(logoutSuccess());
+
+export const lostPassword = ({ email }) => {
+        return Promise.resolve({
+            message: "Password reset email was sent."
         });
     };
 
-    doSignup = ({ email, password, name, sid }) => {
-        if (users.hasOwnProperty( email )) {
-            return Promise.reject({
-                exists: false,
-                error: { message: "Email already exists. Please try again." }
-            });
-        }
-        users[email] = {
-            email: email,
-            password: password,
-            name: name,
-            sid: sid
-        };
+export const updateStudentInfo = info => dispatch =>
+axios.post("/api/info_update", {info:info},  {
+    headers: {'Authorization': "bearer " + localStorage.getItem('token')}
+}).then(res => { console.log(res);});
 
-        return Promise.resolve({
-            message: "Success! Redirecting to the login page."
-        });
-    };
-
-    lostPassword = ({ email }) => {
-        return Promise.resolve({
-            message: "A password reset email was sent."
-        });
-    }
-}
-
-export default new LoginApi();
+export const doSignup = userData =>
+axios.post("/auth/signup", userData)
+    .then(res => {
+});

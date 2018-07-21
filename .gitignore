@@ -1,1 +1,4 @@
-/node_modules
+my-app/node_modules/*
+my-app/client/node_modules/*
+my-app/.idea/*
+my-app/client/.idea/*

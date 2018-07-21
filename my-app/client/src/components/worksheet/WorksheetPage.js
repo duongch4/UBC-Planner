@@ -1,53 +1,68 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Table } from 'semantic-ui-react'
+import { connect } from "react-redux";
+import {Header} from "semantic-ui-react"
+import Worksheet from "./Worksheet";
+import WorksheetProgress from "./WorksheetProgress";
+import WorksheetInfo from "./WorksheetInfo";
 
-class Worksheet extends React.Component {
+
+class WorksheetPage extends React.Component {
+
+    state = {
+        inEditMode: null
+    }
+
+    handleInfoEdit = item => {
+        if (!!this.state.inEditMode && this.state.inEditMode!=item) this.state.inEditMode.onSubmit();
+        console.log(this.state.inEditMode);
+        this.state.inEditMode = item;
+        console.log(item);
+    };
+
     render () {
+        const {name, bm, cohort, sid, email} = this.props.student;
         return (
-            <Table celled selectable>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Name</Table.HeaderCell>
-                        <Table.HeaderCell>Status</Table.HeaderCell>
-                        <Table.HeaderCell>Notes</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                    <Table.Row>
-                        <Table.Cell>John</Table.Cell>
-                        <Table.Cell>No Action</Table.Cell>
-                        <Table.Cell>None</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Jamie</Table.Cell>
-                        <Table.Cell>Approved</Table.Cell>
-                        <Table.Cell>Requires call</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Jill</Table.Cell>
-                        <Table.Cell>Denied</Table.Cell>
-                        <Table.Cell>None</Table.Cell>
-                    </Table.Row>
-                    <Table.Row warning>
-                        <Table.Cell>John</Table.Cell>
-                        <Table.Cell>No Action</Table.Cell>
-                        <Table.Cell>None</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Jamie</Table.Cell>
-                        <Table.Cell positive>Approved</Table.Cell>
-                        <Table.Cell warning>Requires call</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Jill</Table.Cell>
-                        <Table.Cell negative>Denied</Table.Cell>
-                        <Table.Cell>None</Table.Cell>
-                    </Table.Row>
-                </Table.Body>
-            </Table>);
+            <div>
+                <Header className="worksheet-student-name" as='h1' icon textAlign={'left'}>
+                        {name}
+                </Header>
+                <div class = "student-info-container">
+                    <WorksheetInfo
+                        isEditMode = {false}
+                        onClick = {this.handleInfoEdit.bind(this)}
+                        fieldName = {'sid'}
+                        fieldValue = {sid}
+                        fieldType = {'number'}
+                        email = {email}
+                    />&nbsp;|&nbsp;
+                    <WorksheetInfo
+                        isEditMode = {false}
+                        onClick = {this.handleInfoEdit.bind(this)}
+                        fieldName = {'bm'}
+                        fieldValue = {bm}
+                        fieldType = {'string'}
+                        email = {email}
+                    />&nbsp;|&nbsp;
+                    <WorksheetInfo
+                        isEditMode = {false}
+                        onClick = {this.handleInfoEdit.bind(this)}
+                        fieldName = {'cohort'}
+                        fieldValue = {cohort}
+                        fieldType = {'number'}
+                        email = {email}
+                    />
+                </div>
+                <WorksheetProgress />
+                <Worksheet {...this.props}/>
+            </div>
+        );
     }
 }
 
-export default Worksheet;
+const mapStateToProps = state => ({
+    student: state.student.info
+});
+
+export default connect(
+    mapStateToProps
+)(WorksheetPage);

@@ -3,13 +3,17 @@ const bcrypt = require('bcryptjs');
 
 // define the User model schema
 const UserSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    index: { unique: true }
+  info: {
+    email: String,
+    password: String,
+    name: String,
+    sid: Number,
+    bm: String,
+    cohort: Number
   },
-  password: String,
-  name: String
-});
+  courses: Object,
+  remarks: Object
+}, { collection: 'students' });
 
 
 /**
@@ -19,7 +23,15 @@ const UserSchema = new mongoose.Schema({
  * @returns {object} callback
  */
 UserSchema.methods.comparePassword = function comparePassword(password, callback) {
-  bcrypt.compare(password, this.password, callback);
+  console.log('compare password', password, this.info.password);
+  // console.log('compare password');
+  // return bcrypt.compare(password.toString(), this.info.password.toString(), callback);
+    if (password === this.info.password) {
+        callback(null, true);
+    } else {
+        callback('Incorrect password', false);
+    }
+
 };
 
 
@@ -28,6 +40,8 @@ UserSchema.methods.comparePassword = function comparePassword(password, callback
  */
 UserSchema.pre('save', function saveHook(next) {
   const user = this;
+  console.log(this.info);
+  console.log(this.info.password);
 
   // proceed further only if the password is modified or the user is new
   if (!user.isModified('password')) return next();
@@ -40,7 +54,7 @@ UserSchema.pre('save', function saveHook(next) {
       if (hashError) { return next(hashError); }
 
       // replace a password string with hash value
-      user.password = hash;
+      user.info.password = hash;
 
       return next();
     });

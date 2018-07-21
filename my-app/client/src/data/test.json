@@ -1,8 +1,419 @@
 {
   "michelle.huh@hotmail.com": {
-    "email": "michelle.huh@hotmail.com",
-    "password": "1",
-    "name": "Michelle Gayoon Huh",
-    "sid": 67123456
+    "info": {
+      "email": "michelle.huh@hotmail.com",
+      "password": "1",
+      "name": "Michelle Gayoon Huh",
+      "sid": 67123456,
+      "bm": "Computer Science Education",
+      "cohort": 2017
+    },
+    "coop": [
+      {
+        "company": "SAP",
+        "session": "2018W",
+        "term": 1,
+        "isCompleted": false
+      },
+      {
+        "company": "SAP",
+        "session": "2018W",
+        "term": 2,
+        "isCompleted": false
+      }
+    ],
+    "courses": {
+      "CPSC 110": {
+        "id": "CPSC 110",
+        "isGradApproved": 1,
+        "creditFor": "CPSC 110",
+        "section": "101",
+        "credit": 4,
+        "grade": 99,
+        "year": "2017W",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 121": {
+        "id": "CPSC 121",
+        "isGradApproved": 1,
+        "creditFor": "CPSC 121",
+        "section": "101",
+        "credit": 4,
+        "grade": 90,
+        "year": "2017W",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 210": {
+        "id": "CPSC 210",
+        "isGradApproved": 1,
+        "creditFor": "CPSC 210",
+        "section": "202",
+        "credit": 4,
+        "grade": 94,
+        "year": "2017W",
+        "term": 2,
+        "remarks": ""
+      },
+      "CPSC 221": {
+        "id": "CPSC 221",
+        "isGradApproved": 1,
+        "creditFor": "CPSC 221",
+        "section": "202",
+        "credit": 4,
+        "grade": 85,
+        "year": "2017W",
+        "term": 2,
+        "remarks": ""
+      },
+      "MATH 221": {
+        "id": "MATH 221",
+        "isGradApproved": 1,
+        "creditFor": "MATH 180",
+        "section": "202",
+        "credit": 4,
+        "grade": 85,
+        "year": "2017W",
+        "term": 2,
+        "remarks": "Replacement"
+      },
+      "STAT 200": {
+        "id": "STAT 200",
+        "isGradApproved": 1,
+        "creditFor": "STAT 203",
+        "section": "103",
+        "credit": 3,
+        "grade": 90,
+        "year": "2017W",
+        "term": 2,
+        "remarks": ""
+      },
+      "COMM 457": {
+        "id": "COMM 457",
+        "isGradApproved": 0,
+        "creditFor": "BM1",
+        "section": "201",
+        "credit": 3,
+        "grade": 82,
+        "year": "2017W",
+        "term": 2,
+        "remarks": ""
+      },
+      "DHYG 462": {
+        "id": "DHYG 462",
+        "isGradApproved": 2,
+        "creditFor": "ENGL3",
+        "section": "002",
+        "credit": 3,
+        "grade": 89,
+        "year": "2010W",
+        "term": 2,
+        "remarks": ""
+      },
+      "CPSC 213": {
+        "id": "CPSC 213",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 213",
+        "section": "002",
+        "credit": 4,
+        "grade": null,
+        "year": "2018S",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 304": {
+        "id": "CPSC 304",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 3X1",
+        "section": "002",
+        "credit": 4,
+        "grade": null,
+        "year": "2018S",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 490": {
+        "id": "CPSC 490",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 4X1",
+        "section": "002",
+        "credit": 4,
+        "grade": null,
+        "year": "2018S",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 313": {
+        "id": "CPSC 313",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 313",
+        "section": "002",
+        "credit": 4,
+        "grade": null,
+        "year": "2018S",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 320": {
+        "id": "CPSC 320",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 320",
+        "section": "002",
+        "credit": 4,
+        "grade": null,
+        "year": "2018S",
+        "term": 1,
+        "remarks": ""
+      }
+    },
+    "remarks": {
+      "PADE": "",
+      "ENGL 1XX": "",
+      "CPSC 110": "challenged",
+      "CPSC 121": "",
+      "MATH 180": "",
+      "STAT 203": "",
+      "Communication": "",
+      "CPSC 210": "",
+      "CPSC 221": "",
+      "CPSC 213": "",
+      "CPSC 310": "",
+      "CPSC 320": "Might take it later..",
+      "CPSC 313": "",
+      "CPSC 3X1": "",
+      "CPSC 3X2": "",
+      "CPSC 4X1": "",
+      "CPSC 4X2": "",
+      "BM1": "",
+      "BM2": "",
+      "BM3": "",
+      "BM4": ""
+    }
+  },
+  "y6s1b@ugrad.cs.ubc.ca": {
+    "info": {
+      "email": "y6s1b@ugrad.cs.ubc.ca",
+      "password": "1",
+      "name": "Jane Doe",
+      "sid": 12345678,
+      "bm": "Machine Learning",
+      "cohort": 2016
+    },
+    "coop": [
+      {
+        "company": "SAP",
+        "session": "2018W",
+        "term": 1,
+        "isCompleted": false
+      },
+      {
+        "company": "SAP",
+        "session": "2018W",
+        "term": 2,
+        "isCompleted": false
+      }
+    ],
+    "courses": {
+      "CPSC 110": {
+        "id": "CPSC 110",
+        "isGradApproved": 1,
+        "creditFor": "CPSC 110",
+        "section": "101",
+        "credit": 4,
+        "grade": 99,
+        "year": "2016W",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 121": {
+        "id": "CPSC 121",
+        "isGradApproved": 1,
+        "creditFor": "CPSC 121",
+        "section": "101",
+        "credit": 4,
+        "grade": 90,
+        "year": "2016W",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 210": {
+        "id": "CPSC 210",
+        "isGradApproved": 1,
+        "creditFor": "CPSC 210",
+        "section": "202",
+        "credit": 4,
+        "grade": 94,
+        "year": "2016W",
+        "term": 2,
+        "remarks": ""
+      },
+      "CPSC 221": {
+        "id": "CPSC 221",
+        "isGradApproved": 1,
+        "creditFor": "CPSC 221",
+        "section": "202",
+        "credit": 4,
+        "grade": 85,
+        "year": "2016S",
+        "term": 1,
+        "remarks": ""
+      },
+      "MATH 221": {
+        "id": "MATH 221",
+        "isGradApproved": 1,
+        "creditFor": "MATH 180",
+        "section": "202",
+        "credit": 4,
+        "grade": 85,
+        "year": "2016W",
+        "term": 2,
+        "remarks": "Replacement"
+      },
+      "STAT 200": {
+        "id": "STAT 200",
+        "isGradApproved": 1,
+        "creditFor": "STAT 203",
+        "section": "103",
+        "credit": 3,
+        "grade": 90,
+        "year": "2016W",
+        "term": 2,
+        "remarks": ""
+      },
+      "STATE 302": {
+        "id": "STATE 302",
+        "isGradApproved": 0,
+        "creditFor": "BM1",
+        "section": "201",
+        "credit": 3,
+        "grade": 82,
+        "year": "2016W",
+        "term": 2,
+        "remarks": ""
+      },
+      "STAT 306": {
+        "id": "STAT 306",
+        "isGradApproved": 2,
+        "creditFor": "BM2",
+        "section": "002",
+        "credit": 3,
+        "grade": 89,
+        "year": "2017W",
+        "term": 2,
+        "remarks": ""
+      },
+      "CPSC 213": {
+        "id": "CPSC 213",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 213",
+        "section": "002",
+        "credit": 4,
+        "grade": 90,
+        "year": "2017S",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 304": {
+        "id": "CPSC 304",
+        "isGradApproved": 2,
+        "creditFor": "BM3",
+        "section": "002",
+        "credit": 4,
+        "grade": 90,
+        "year": "2017S",
+        "term": 2,
+        "remarks": ""
+      },
+      "CPSC 490": {
+        "id": "CPSC 490",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 4X1",
+        "section": "002",
+        "credit": 4,
+        "grade": null,
+        "year": "2018S",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 313": {
+        "id": "CPSC 313",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 313",
+        "section": "002",
+        "credit": 4,
+        "grade": 90,
+        "year": "2017W",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 320": {
+        "id": "CPSC 320",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 320",
+        "section": "002",
+        "credit": 4,
+        "grade": 90,
+        "year": "2018S",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 340": {
+        "id": "CPSC 340",
+        "isGradApproved": 2,
+        "creditFor": "BM1",
+        "section": "002",
+        "credit": 4,
+        "grade": 90,
+        "year": "2017S",
+        "term": 1,
+        "remarks": ""
+      },
+      "CPSC 322": {
+        "id": "CPSC 322",
+        "isGradApproved": 2,
+        "creditFor": "CPSC 3X1",
+        "section": "002",
+        "credit": 4,
+        "grade": 90,
+        "year": "2017S",
+        "term": 2,
+        "remarks": ""
+      },
+      "ENGL 100": {
+        "id": "ENGL 100",
+        "isGradApproved": 2,
+        "creditFor": "ENGL 1XX",
+        "section": "002",
+        "credit": 4,
+        "grade": 90,
+        "year": "2017S",
+        "term": 2,
+        "remarks": ""
+      }
+    },
+    "remarks": {
+      "PADE": "",
+      "ENGL 1XX": "",
+      "CPSC 110": "",
+      "CPSC 121": "",
+      "MATH 180": "",
+      "STAT 203": "",
+      "Communication": "",
+      "CPSC 210": "",
+      "CPSC 221": "",
+      "CPSC 213": "",
+      "CPSC 310": "",
+      "CPSC 320": "",
+      "CPSC 313": "",
+      "CPSC 3X1": "",
+      "CPSC 3X2": "",
+      "CPSC 4X1": "",
+      "CPSC 4X2": "",
+      "BM1": "",
+      "BM2": "",
+      "BM3": "",
+      "BM4": ""
+    }
   }
 }

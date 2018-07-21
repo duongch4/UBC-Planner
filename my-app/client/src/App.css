@@ -1,3 +1,7 @@
+body {
+  height: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -5,12 +9,16 @@
 .App-logo {
   float: left;
   height: 60px;
+  width: 100%;
   margin-left: 100px;
   transform: translate(0%, 25%);
+  background: url(./images/ubc-full-logo-white.png) no-repeat;
+  background-size: 27%;
 }
 
 .App-logo:hover {
   cursor: pointer;
+  content: '\t';
 }
 
 .App-header {
@@ -18,4 +26,57 @@
   height: 125px;
   padding: 20px;
   color: white;
+}
+
+.content {
+  text-align: left;
+}
+
+.index {
+  background-color: #e6e6e647;
+  min-height: calc(100vh - 125px);
+}
+
+@media print {
+
+  /*body {transform: scale(.8);}*/
+
+  #MainMenu {
+    display: none;
+  }
+
+  .App-logo {
+    /*background: url(../../images/ubc-full-logo-navy.png) no-repeat;*/
+    /*background-size: 100%;*/
+    content: url(./images/ubc-full-logo-navy.png);
+    /*float: left;*/
+    height: 50px;
+    width: 320px;
+    margin-left: -5%;
+    transform: scale(.8);
+    /*transform: translate(0%, 25%);*/
+  }
+
+  .App-header {
+    /*margin: 0px;*/
+    height: 70px;
+  }
+
+  h1 {
+    /*transform: scale(.6);*/
+    margin: 0;
+    padding: 0;
+  }
+
+  .worksheet-student-name,
+  .student-info-container {
+    text-align: center !important;
+    transform: scale(.75);
+    margin: 0;
+    padding: 0;
+  }
+  .Worksheet-table {
+    font-size:.7em !important;
+    margin: 0;
+  }
 }
