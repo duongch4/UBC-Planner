@@ -49,14 +49,14 @@ class CourseSearch extends Component {
         setTimeout(() => {
             if (this.state.value.length < 1) {
               return this.resetComponent()
-            } else if (this.state.value.length < 5) {
+            } else if (this.state.value.length < 4) {
               this.props.doAutocompleteDepartment(this.state.value);
               this.props.doUnloadDepartment();
               this.setState({ isLoading: false, value })
-            } else if (this.state.value.length == 5) {
-          //    this.props.doAutocompleteDepartment(this.state.value);
+            } else if (this.state.value.length == 4) {
+              this.props.doAutocompleteDepartment(this.state.value);
               this.props.doLoadDepartment(this.state.value);
-              this.props.doAutocompleteCourse(this.state.value)
+          //    this.props.doAutocompleteCourse(this.state.value)
               this.setState({ isLoading: false, value })
             } else {
               this.props.doAutocompleteCourse(this.state.value)
