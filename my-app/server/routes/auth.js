@@ -31,12 +31,6 @@ function validateSignupForm(payload) {
     errors.name = 'Please provide your name.';
   }
 
-
-  if (!payload || typeof payload.sid !== 'number' || payload.name.trim().length === 0) {
-    isFormValid = false;
-    errors.sid = 'Please provide your Student Number.';
-  }
-  
   if (!isFormValid) {
     message = 'Check the form for errors.';
   }
