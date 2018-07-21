@@ -141,7 +141,7 @@ export const doSearch = query => (dispatch, getState) => {
       if (autocomplete_orig[0] !== undefined) {
         var dept = autocomplete_orig[0].key;
         getCourses(deptUrl + dept + '&output=3', dept).then((data) => {
-          if (data !== undefined) dispatch(courseAutocompleteSelect(data))})
+          if (data !== undefined) dispatch(courseSearchSuccess(data))})
         }
       }
   } else dispatch(courseSearchFail())
