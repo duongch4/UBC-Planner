@@ -4,10 +4,13 @@ import _ from 'lodash';
 import { Form, Search } from 'semantic-ui-react';
 import {doSearch, doAutocompleteCourse, doAutocompleteDepartment, doAutocompleteSelect, doLoadDepartment, doUnloadDepartment} from "../../api/CourseSearchApi";
 import {reset, courseSearchSuccess, courseAutocompleteSelect} from "../../actions/CourseSearchActions";
+const cheerio = require('cheerio');
+const request = require('request');
 
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const baseURL = 'https://courses.students.ubc.ca/cs/servlets/SRVCourseSchedule?';
-const url = proxyUrl + baseURL + '&sessyr=' + new Date().getFullYear() + '&sesscd=W&req=0&output=3';
+const baseUrl = 'https://courses.students.ubc.ca/cs/servlets/SRVCourseSchedule?';
+const deptUrl = proxyUrl + baseUrl + '&sessyr=' + new Date().getFullYear() + '&sesscd=W&req=0&output=3';
+const creditExclusionUrl = proxyUrl + "http://www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414"
 const parseString = require('react-native-xml2js').parseString;
 
 class CourseSearch extends Component {
@@ -18,10 +21,7 @@ class CourseSearch extends Component {
     }
 
     getSearchList = () => {
-      let init = {
-         method: 'GET'
-      };
-      fetch (url, init)
+      fetch (deptUrl, { method: 'GET' })
         .then ((response) => response.text())
         .then ((responseText) => {
             parseString(responseText, function (err, result) {
@@ -33,9 +33,68 @@ class CourseSearch extends Component {
         })
     }
 
+    getCreditExclusionList = () => {
+      var array = [];
+      request(creditExclusionUrl, (error, response, html) => {
+        if (!error) {
+          var $ = cheerio.load(html);
+          $(".double li").each(function() {
+            var courses = $(this).text();
+            array.push(courses);
+          })
+          this.createJsonArray(array).then((data) => {
+            return this.modifyExemptionArray(data);
+          })
+          .then((data) => console.log(JSON.stringify(data)))
+    }
+  });
+}
+
+createJsonArray = (array) => new Promise((resolve, reject)=> {
+  var result = array.map((courses) => {
+    var exemptions = [];
+    var code, deptName = "";
+    var json = {};
+    if (/,\s+/.test(courses)) {
+      courses = courses.split(/,\s+/);
+      code = courses[0];
+      deptName = code.split(/\s+/)[0];
+      exemptions = courses.splice(1);
+    }
+    json[code] = exemptions;
+    return json;
+  })
+  resolve(result);
+  }, Promise.resolve, Promise.reject)
+
+
+modifyExemptionArray = (array) => new Promise((resolve, reject)=> {
+  var result = array.map((json) => {
+    var code = Object.keys(json)[0];
+    var curr = code.split(/\s+/)[0];
+    var exemptions = Object.values(json)[0];
+    for (var i = 0; i < exemptions.length; i++) {
+      var exemption = exemptions[i];
+      exemption = exemption.replace(/\s*\n\s*/, "");
+      if (/[A-Z]{2,4}\s+\d/.test(exemption)) {
+        curr = exemption.split(/\s+/)[0];
+        exemptions[i] = exemption;
+      } else {
+        exemptions[i] = curr + " " + exemption;
+      }
+    }
+  var json = {};
+  json[code] = exemptions;
+  return json;
+});
+  resolve(result);
+  }, Promise.resolve, Promise.reject)
+
     componentWillMount = () => {
       this.resetComponent();
-  //    this.getSearchList(); //output is in courseSearchList.json -> save as state??
+      // to update department list: save printed results in courseSearchList.json
+  //    this.getSearchList();
+      this.getCreditExclusionList();
     }
 
     handleResultSelect = (e, { result }) => {

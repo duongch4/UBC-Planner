@@ -12,6 +12,7 @@ var date = new Date().getFullYear();
 const deptUrl = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=2&dept=';
 const oneCourseUrl = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=3&dept=';
 
+
 export const doAutocompleteDepartment = query => dispatch => {
     filterDepts(query)
       .then(data => { dispatch(courseAutocompleteDeptSuccess(data)); },
