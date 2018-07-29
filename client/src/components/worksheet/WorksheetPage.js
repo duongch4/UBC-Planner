@@ -14,13 +14,18 @@ class WorksheetPage extends React.Component {
 
     state = {
         inEditMode: null,
-        message: 'pdf file'
+        name: 'user',
+        message: 'pdf file',
+        email: 'angeli_corpin@hotmail.com'
     }
 
     async handleEmail () {
-      const { message } = this.state
+      const { name, email, message } = this.state
+      console.log("handleEmail")
       const form = await axios.post('/email/worksheet', {
-        message
+        name,
+        message,
+        email
       })
     }
 
