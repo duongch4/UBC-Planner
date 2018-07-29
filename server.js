@@ -31,8 +31,10 @@ app.use('/api', authCheckMiddleware);
 // routes
 const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
+const emailRoutes = require('./server/routes/email');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/email', emailRoutes);
 app.use(cors());
 
 

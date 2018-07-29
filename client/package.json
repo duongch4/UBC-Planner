@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "html2canvas": "^1.0.0-alpha.12",
+    "jspdf": "^1.4.1",
     "jwt-decode": "^1.1.0",
     "lodash": "4.17.3",
     "react": "^16.4.0",

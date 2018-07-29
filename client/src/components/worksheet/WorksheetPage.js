@@ -4,12 +4,40 @@ import {Header} from "semantic-ui-react"
 import Worksheet from "./Worksheet";
 import WorksheetProgress from "./WorksheetProgress";
 import WorksheetInfo from "./WorksheetInfo";
+import { Button } from 'semantic-ui-react';
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
+import axios from 'axios'
 
 
 class WorksheetPage extends React.Component {
 
     state = {
-        inEditMode: null
+        inEditMode: null,
+        message: 'pdf file'
+    }
+
+    async handleEmail () {
+      const { message } = this.state
+      const form = await axios.post('/email/worksheet', {
+        message
+      })
+    }
+
+    handleSaveExcel = () => {
+
+    }
+
+    handleSavePdf = () => {
+      const input = document.getElementById('divToPrint');
+          html2canvas(input)
+            .then((canvas) => {
+              const imgData = canvas.toDataURL('image/png');
+              const pdf = new jsPDF();
+              pdf.addImage(imgData, 'JPEG', 0, 0);
+              pdf.save("ubc-planner-worksheet.pdf");
+              console.log("pdf save")
+            });
     }
 
     handleInfoEdit = item => {
@@ -20,10 +48,10 @@ class WorksheetPage extends React.Component {
     };
 
     render () {
-        const {name, bm, cohort, sid, email} = this.props.student;
+        const {name, bm, cohort, sid} = this.props.student;
         return (
-            <div>
-                <Header className="worksheet-student-name" as='h1' icon textAlign={'left'}>
+            <div id='divToPrint'>
+                <Header as='h1' icon textAlign={'left'}>
                         {name}
                 </Header>
                 <div class = "student-info-container">
@@ -33,7 +61,6 @@ class WorksheetPage extends React.Component {
                         fieldName = {'sid'}
                         fieldValue = {sid}
                         fieldType = {'number'}
-                        email = {email}
                     />&nbsp;|&nbsp;
                     <WorksheetInfo
                         isEditMode = {false}
@@ -41,7 +68,6 @@ class WorksheetPage extends React.Component {
                         fieldName = {'bm'}
                         fieldValue = {bm}
                         fieldType = {'string'}
-                        email = {email}
                     />&nbsp;|&nbsp;
                     <WorksheetInfo
                         isEditMode = {false}
@@ -49,12 +75,18 @@ class WorksheetPage extends React.Component {
                         fieldName = {'cohort'}
                         fieldValue = {cohort}
                         fieldType = {'number'}
-                        email = {email}
                     />
                 </div>
                 <WorksheetProgress />
                 <Worksheet {...this.props}/>
+
+                <div class="ui small basic icon buttons">
+                  <button class="ui button" onClick= {this.handleEmail.bind(this)}><i class="mail icon"></i></button>
+                  <button class="ui button" onClick= {this.handleEmail.bind(this)}><i class="save icon"></i></button>
+                  <button class="ui button" onClick= {this.handleSavePdf.bind(this)}><i class="download icon"></i></button>
+                </div>
             </div>
+
         );
     }
 }
