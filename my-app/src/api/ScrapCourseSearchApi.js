@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import {courseSearchSuccess, courseAutocompleteSelect, courseAutocompleteDeptSuccess, courseAutocompleteFail, courseSearchFail,
-  courseAutocompleteCourseSuccess, loadDepartment, unloadDepartment} from "../actions/CourseSearchActions";
+import {courseSearchSuccess, courseAutocompleteSelect, courseAutocompleteDeptSuccess, courseAutocompleteDeptFail, courseSearchFail,
+  courseAutocompleteCourseSuccess, courseAutocompleteCourseFail, loadDepartment, unloadDepartment} from "../actions/CourseSearchActions";
 var data  = require("../data/courseSearchList.json");
 var async = require('async');
 const parseString = require('react-native-xml2js').parseString;
+
 var courseNames = data.depts.dept;
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const baseURL = 'https://courses.students.ubc.ca/cs/servlets/SRVCourseSchedule?';
@@ -11,28 +12,18 @@ var date = new Date().getFullYear();
 const deptUrl = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=2&dept=';
 const oneCourseUrl = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=3&dept=';
 
-export const doCourseSelect = query => (dispatch, getState) => {
-    var fullUrl, dept, key = "";
-      if (/\s+/.test(query)) {
-        dept = query.split(/\s+/)[0];
-        key = query.split(/\s+/)[1];
-        }
-        fullUrl = oneCourseUrl + dept + '&course=' + key + '&output=3';
-        getCourses(fullUrl, dept).then((data) => {
-          if (data !== undefined) dispatch(courseAutocompleteSelect(data))})
-      }
 
 export const doAutocompleteDepartment = query => dispatch => {
     filterDepts(query)
       .then(data => { dispatch(courseAutocompleteDeptSuccess(data)); },
-      reject => { dispatch(courseAutocompleteFail()); });
+      reject => { dispatch(courseAutocompleteDeptFail()); });
     }
 
 export const doLoadDepartment = query => (dispatch, getState) => {
   const {loadedDeptName} = getState().courseSearch;
   const {autocomplete_orig} = getState().courseSearch;
 
-  if (autocomplete_orig !== undefined && autocomplete_orig !== null && autocomplete_orig[0] !== undefined && loadedDeptName === "") {
+  if (autocomplete_orig !== undefined && autocomplete_orig[0] !== undefined && loadedDeptName === "") {
     var dept = autocomplete_orig[0].key;
     getParsedDepartment(deptUrl + dept + '&output=3')
         .then((data) => dispatch(loadDepartment(data, dept)))
@@ -47,38 +38,55 @@ export const doUnloadDepartment = query => (dispatch, getState) => {
 
 export const doAutocompleteCourse = query => (dispatch, getState) => {
   const {loadedDeptName} = getState().courseSearch;
-  const {loadedDept} = getState().courseSearch;
-  console.log("query", query)
+  const {autocomplete_orig} = getState().courseSearch;
   var dept, key, deptName = "";
   if (/\s+/.test(query)) {
     dept = query.split(/\s+/)[0];
     key = query.split(/\s+/)[1];
   }
   var courses = null;
-  if (loadedDeptName === "") dispatch(courseAutocompleteFail())
-  else {
-    const {loadedDept} = getState().courseSearch;
-    filterCourses (key, loadedDept)
+  if (dept.length < 4 && loadedDeptName === dept.toUpperCase()) {
+    // ie) BA
+    dispatch(courseAutocompleteDeptFail());
+  } else {
+      // filter and parse from the loadedDept state
+      const {loadedDept} = getState().courseSearch;
+      if (loadedDeptName !== "" && loadedDept !== undefined) {
+        courses = loadedDept;
+      }
+    }
+    filterCourses (key, courses)
       .then(data => {
         const {loadedDeptName} = getState().courseSearch;
         dispatch(courseAutocompleteCourseSuccess(data, loadedDeptName));
       },
-      reject => { dispatch(courseAutocompleteFail()); });
+      reject => { dispatch(courseAutocompleteDeptFail()); });
     }
-  }
+
+
+export const doCourseSelect = query => (dispatch, getState) => {
+    var fullUrl, dept, key = "";
+      if (/\s+/.test(query)) {
+        dept = query.split(/\s+/)[0];
+        key = query.split(/\s+/)[1];
+        }
+        fullUrl = oneCourseUrl + dept + '&course=' + key + '&output=3';
+        getCourses(fullUrl, dept).then((data) => {
+          if (data !== undefined) dispatch(courseAutocompleteSelect(data))})
+      }
 
 export const doAutocompleteSelect = query => (dispatch, getState) => {
   var fullUrl, dept, key = "";
   const {isCourseCodeLoaded} = getState().courseSearch;
   if (isCourseCodeLoaded) {
     if (/\s+/.test(query)) {
-      // get url for searching by course code
+      // url for searching by course code
       dept = query.split(/\s+/)[0];
       key = query.split(/\s+/)[1];
       }
       fullUrl = oneCourseUrl + dept + '&course=' + key + '&output=3';
     } else {
-      // get url for searching by department
+      // url for searching by department
         dept = query.replace(" ", "");
         fullUrl = deptUrl + dept + '&output=3'
     }
@@ -91,10 +99,10 @@ export const doSearch = query => (dispatch, getState) => {
   const {loadedDeptName} = getState().courseSearch;
   const {autocomplete_orig} = getState().courseSearch;
 
-  if (!query || query === '' || autocomplete_orig === undefined || autocomplete_orig === null) { dispatch(courseSearchFail()) }
+  if (query === '' || autocomplete_orig === undefined || autocomplete_orig === null) { dispatch(courseSearchFail()) }
   else {
+    // load courses in autocomplete_orig
     if (isCourseCodeLoaded) {
-      // load courses in autocomplete_orig
       new Promise((resolve, reject)=> {
         var courses = autocomplete_orig.map(course => {
           return {
@@ -108,31 +116,29 @@ export const doSearch = query => (dispatch, getState) => {
         resolve (courses);
       }, Promise.resolve, Promise.reject)
       .then (data => {dispatch(courseSearchSuccess(data))})
+    // use query to refilter departments and load courses for the first department
     } else {
-      // use query to refilter departments and load courses for the first department (not filtered by course key)
       filterDepts(query)
         .then(depts => {
-          if (depts[0] === undefined) dispatch(courseSearchFail())
-          else {
+          if (depts[0] !== undefined) {
             var dept = depts[0].key;
             getCourses(deptUrl + dept + '&output=3', dept).then((data) => {
-              if (data !== undefined) {
-              dispatch(courseSearchSuccess(data))}})
+              if (data !== undefined) dispatch(courseSearchSuccess(data))})
+          } else {
+            dispatch(courseSearchFail())
           }
         })
       }
   }
 }
 
-/**
- * filters courseNames whose department name matches query and returns array of JSON objects with key, title, faccode, faculty
- * @ param query is the user search input
- */
 const filterDepts = query => new Promise((resolve, reject)=> {
+
     if (/\s+/.test(query)) {
       query = query.split(/\s+/)[0];
     }
-    if (!query || query === '') resolve([])
+
+    if (!query || query === null || query === '') resolve([])
     const re = new RegExp("^" + _.escapeRegExp(query.toUpperCase()), 'i')
     const isMatch = courseId => re.test(courseId.$.key)
     const filteredNames = _.filter(courseNames, isMatch)
@@ -145,10 +151,6 @@ const filterDepts = query => new Promise((resolve, reject)=> {
       });
 }, Promise.resolve, Promise.reject)
 
-/**
- * filters courseArray containing given key and returns array of JSON objects with: key, title, descr
- * @ param key is the course key (integer) and courseArray is an array of JSON objects with: key, title, descr
- */
 const filterCourses = (key, courseArray) => new Promise((resolve, reject)=> {
     const re = new RegExp("^" + _.escapeRegExp(key.toUpperCase()), 'i')
     const isMatch = course => re.test(course.$.key)
@@ -161,10 +163,6 @@ const filterCourses = (key, courseArray) => new Promise((resolve, reject)=> {
       });
 }, Promise.resolve, Promise.reject)
 
-/**
- * parses department url and returns array of JSON objects with: key, title, descr
- * @ param url is the url to be fetched
- */
 const getParsedDepartment = (url) => {
 return fetch (url, {method: 'GET'})
     .then ((response) => response.text())
@@ -180,10 +178,6 @@ return fetch (url, {method: 'GET'})
     })
 }
 
-/**
- * returns array of JSON objects with: id, name, description, credits, pr for each course parsed in the url
- * @ param url is the url to be fetched and dept is the department name
- */
 const getCourses = (url, dept) => {
   return fetch (url, {method: 'GET'})
       .then ((response) => response.text())

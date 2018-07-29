@@ -1,6 +1,6 @@
 // import {PROGRAM_REQUIREMENTS_LOADED} from "../constants/BCSConstnats";
 import { ON_AUTOCOMPLETE_DEPT_SUCCESS, ON_AUTOCOMPLETE_SELECT, ON_QUERY_SUCCESS, ON_AUTOCOMPLETE_FAIL, ON_AUTOCOMPLETE_COURSE_SUCCESS, ON_QUERY_FAIL, ON_LOAD_DEPARTMENT_SUCCESS,
-  ON_UNLOAD_DEPARTMENT_SUCCESS, ON_AUTOCOMPLETE_DEPT_FAIL, ON_AUTOCOMPLETE_COURSE_FAIL } from "../constants/CourseSearchConstants";
+  ON_UNLOAD_DEPARTMENT_SUCCESS } from "../constants/CourseSearchConstants";
 import { LOG_OUT } from "../constants/LoginConstants";
 
 
@@ -17,7 +17,7 @@ const initialState = {
 
 const CourseSearchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ON_AUTOCOMPLETE_DEPT_FAIL:
+    case ON_AUTOCOMPLETE_FAIL:
       var autocomplete = [];
       var autocomplete_orig = [];
       var isCourseCodeLoaded = false;
@@ -30,9 +30,6 @@ const CourseSearchReducer = (state = initialState, action) => {
         return { title: course.key, description: course.title }
       });
       return { ...state, autocomplete, autocomplete_orig };
-    case ON_AUTOCOMPLETE_COURSE_FAIL:
-      var isCourseCodeLoaded = false;
-        return { ...state, isCourseCodeLoaded };
     case ON_AUTOCOMPLETE_COURSE_SUCCESS:
       var { result } = action;
       var { name } = action;

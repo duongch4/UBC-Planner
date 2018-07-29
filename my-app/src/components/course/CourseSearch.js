@@ -13,6 +13,7 @@ const deptUrl = proxyUrl + baseUrl + '&sessyr=' + new Date().getFullYear() + '&s
 const creditExclusionUrl = proxyUrl + "http://www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414"
 const parseString = require('react-native-xml2js').parseString;
 
+
 class CourseSearch extends Component {
 
     resetComponent = () => {
