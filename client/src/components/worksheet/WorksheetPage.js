@@ -8,7 +8,8 @@ import { Button } from 'semantic-ui-react';
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import axios from 'axios'
-
+import ReactDOM from 'react-dom';
+import domtoimage from 'dom-to-image';
 
 class WorksheetPage extends React.Component {
 
@@ -30,20 +31,24 @@ class WorksheetPage extends React.Component {
     }
 
     handleSaveExcel = () => {
-
     }
 
     handleSavePdf = () => {
-      const input = document.getElementById('divToPrint');
-          html2canvas(input)
-            .then((canvas) => {
-              const imgData = canvas.toDataURL('image/png');
-              const pdf = new jsPDF();
-              pdf.addImage(imgData, 'JPEG', 0, 0);
-              pdf.save("ubc-planner-worksheet.pdf");
-              console.log("pdf save")
-            });
-    }
+		domtoimage.toPng(window.document.getElementById('divToPrint'))
+		.then(function (dataUrl) {
+			let imgData = new Image();
+			imgData.src=dataUrl;
+		
+			let pdf = new jsPDF('p', 'mm', 'letter');
+			pdf.setFontSize(12);
+			pdf.addImage(imgData, 'PNG', 15, 20, 185, 220);
+			pdf.save('ubc-planner-worksheet.pdf');
+			console.log("pdf save");
+		})
+		.catch(function (error) {
+			console.error("dom-to-image error");
+		});
+	};
 
     handleInfoEdit = item => {
         if (!!this.state.inEditMode && this.state.inEditMode!=item) this.state.inEditMode.onSubmit();

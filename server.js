@@ -5,6 +5,8 @@ const config = require('./config');
 var cors = require('cors');
 const port = process.env.PORT || 5000;
 
+require("babel-polyfill");
+
 // connect to the database and load models
 require('./server/models').connect(config.dbUri);
 
