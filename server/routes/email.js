@@ -56,7 +56,7 @@ router.post('/forgot_password', (req, res, next) => {
     function(token, done) {
       User.findOne({"info.email" : req.body.email}, function(err, user) {
         if (!user) {
-          return res.status(200).send({ message: 'No account with that email address exists.' });
+          return res.status(400).send({ message: 'No account with that email address exists.' });
         }
 
         user.info.resetPasswordToken = token;
@@ -85,7 +85,7 @@ router.post('/forgot_password', (req, res, next) => {
     }
   ], function(err) {
     if (err) return next(err);
-    return res.status(500).send({ error: err });
+    return res.status(500).send({ message: err });
   });
 })
 

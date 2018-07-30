@@ -17,7 +17,7 @@ export default class ForgotPasswordPage extends React.Component {
                 <GeneralHeader
                     iconName="graduation"
                     headerText="BCS Graduation Planner"
-                    subHeaderText="Reset you password" />
+                    subHeaderText="Reset your password" />
                 <div className="Forgot-password-form-container">
                     <ForgotPasswordForm />
                 </div>
