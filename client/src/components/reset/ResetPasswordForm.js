@@ -1,6 +1,6 @@
 import React from 'react';
 import Validator from 'validator';
-import {lostPassword} from '../../api/LoginApi';
+import {resetPassword} from '../../api/LoginApi';
 import LoginErrorMessage from '../login/LoginErrorMessage';
 import { Form, Button, Message } from "semantic-ui-react";
 
@@ -23,15 +23,16 @@ class ResetPasswordForm extends React.Component {
         this.setState({ message: "" });
 
         if (Object.keys(error).length === 0 && error.constructor === Object) {
-          console.log("reset Password")
-/*            lostPassword(this.state.data)
+          var token = window.location.href.split('?token=')[1];
+          console.log("reset Password, token = " + token, "password: ", this.state.data.password)
+          resetPassword(this.state.data.password, token)
                 .then((data) => {
                     this.setState({ message: data.message});
                 })
                 .catch(function (e) {
                     console.log("failed");
                     this.setState({ message : e && e.error && e.error.message });
-                }.bind(this));*/
+                }.bind(this));
         }
     };
 
@@ -39,6 +40,8 @@ class ResetPasswordForm extends React.Component {
         const error = {};
 
         if (!data.password) error.password = "Can not be blank";
+        if (!data.retypedPassword) error.retypedPassword = "Can not be blank";
+        if (data.password !== data.retypedPassword) error.retypedPassword = "Password does not match"
         // TODO
         // else if (
         //     data.password.is().min(8)                                    // Minimum length 8
@@ -51,8 +54,6 @@ class ResetPasswordForm extends React.Component {
         // )
         //
         //     error.password = "Password criteria unmet";
-
-        if (data.password !== data.retypedPassword) error.retypedPassword = "Passwords do not match"
 
         return error;
     };
@@ -79,15 +80,16 @@ class ResetPasswordForm extends React.Component {
 
                   </Form.Field>
 
-                  <Form.Field error={!!error.retypedPassword}>
-                      <label htmlFor='password'>Confirm Password</label>
-                      {error.retypedPassword && <LoginErrorMessage text={error.retypedPassword}/>}
+                  <Form.Field error = {!!error.retypedPassword}>
+                      <label htmlFor = 'retypedPassword'>Confirm Password</label>
+                      { error.retypedPassword &&  <LoginErrorMessage text ={error.retypedPassword} /> }
                       <input
                           type='password'
-                          name='retype password'
+                          name='retypedPassword'
                           placeholder='password'
-                          value={data.retypedPassword}
-                          onChange={this.onFieldTextChange}/>
+                          value = { data.retypedPassword }
+                          onChange = { this.onFieldTextChange }
+                      />
                   </Form.Field>
 
                     <Button id = 'Login-button' fluid> Update </Button>

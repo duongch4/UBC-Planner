@@ -1,6 +1,9 @@
 const express = require('express');
 const validator = require('validator');
 const passport = require('passport');
+const async = require('async');
+const nodemailer = require('nodemailer')
+const User = require('mongoose').model('User');
 
 const router = new express.Router();
 
@@ -158,6 +161,52 @@ router.post('/login', (req, res, next) => {
     });
   })(req, res, next);
 });
+
+router.post('/reset_password', (req, res) => {
+  console.log("post reset, passowrd: ", req.body.password, "token: ", req.body.token)
+  async.waterfall([
+    function(done) {
+      User.findOne({ "info.resetPasswordToken": req.body.token, "info.resetPasswordExpires": { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          return res.status(200).send({ message: 'Password reset token is invalid or has expired.' });
+        }
+
+        user.info.password = req.body.password;
+        user.info.resetPasswordToken = undefined;
+        user.info.resetPasswordExpires = undefined;
+
+        user.save(function(err) {
+            done(err, user);
+        });
+      });
+    },
+    function(user, done) {
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+          user: 'ubc.planner.app@gmail.com',
+          pass: 'upa-admin-MEA3'
+        }
+      });
+      var mailOptions = {
+        to: user.info.email,
+        from: 'ubc.planner.app@gmail.com',
+        subject: 'Your password has been changed',
+        text: 'Hello,\n\n' +
+          'This is a confirmation that the password for your account ' + user.info.email + ' has just been changed.\n'
+      };
+      transporter.sendMail(mailOptions, function(err) {
+        return res.status(200).send({ message: 'Success! Your password has been changed.' });
+        done(err);
+      });
+    }
+  ], function(err) {
+    console.log(err);
+  });
+})
 
 
 

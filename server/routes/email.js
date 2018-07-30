@@ -43,7 +43,7 @@ router.post('/worksheet', (req, res) => {
   })
 })
 
-router.post('/forgot_password', (req, res) => {
+router.post('/forgot_password', (req, res, next) => {
   console.log("forgot password: ", req.body.email)
 
   async.waterfall([
@@ -56,8 +56,7 @@ router.post('/forgot_password', (req, res) => {
     function(token, done) {
       User.findOne({"info.email" : req.body.email}, function(err, user) {
         if (!user) {
-          console.log('error', 'No account with that email address exists.');
-          return res.redirect('/forgotpassword');
+          return res.status(200).send({ message: 'No account with that email address exists.' });
         }
 
         user.info.resetPasswordToken = token;
@@ -68,6 +67,7 @@ router.post('/forgot_password', (req, res) => {
         });
       });
     },
+    // CHANGE http://localhost:3000 later!!!!
     function(token, user, done) {
       var mailOptions = {
         to: req.body.email,
@@ -75,18 +75,17 @@ router.post('/forgot_password', (req, res) => {
         subject: 'Password Reset Request',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your UBC-Planner account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+          'http://localhost:3000' + '/reset?token=' + token + '\n\n' +
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       transporter.sendMail(mailOptions, function(err) {
-      //  return res.send(200, { message: 'Password reset email was sent.' });
-        req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+        return res.status(200).send({ message: 'Password reset email was sent.' });
         done(err, 'done');
       });
     }
   ], function(err) {
     if (err) return next(err);
-    res.redirect('/forgotpassword');
+    return res.status(500).send({ error: err });
   });
 })
 

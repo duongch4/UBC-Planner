@@ -56,7 +56,7 @@ class App extends Component {
               <Route path="/" exact component={ IndexPage } />
               <Route path="/signup" exact component={ SignupPage } />
               <Route path="/forgotpassword" exact component={ ForgotPasswordPage } />
-          //    <Route path="/reset" exact component={ ResetPasswordPage } />
+              <Route path="/reset" exact component={ ResetPasswordPage } />
           </div>
       </div>
     );
