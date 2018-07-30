@@ -8,25 +8,18 @@ import { Button } from 'semantic-ui-react';
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import axios from 'axios'
-
+import {emailWorksheet} from '../../api/WorksheetApi';
 
 class WorksheetPage extends React.Component {
 
     state = {
         inEditMode: null,
-        name: 'user',
         message: 'pdf file',
-        email: 'angeli_corpin@hotmail.com'
     }
 
     async handleEmail () {
-      const { name, email, message } = this.state
-      console.log("handleEmail")
-      const form = await axios.post('/email/worksheet', {
-        name,
-        message,
-        email
-      })
+      const { message } = this.state
+      emailWorksheet({message})
     }
 
     handleSaveExcel = () => {

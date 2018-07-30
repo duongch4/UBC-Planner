@@ -17,10 +17,11 @@ export const doLogout = () => dispatch =>
     dispatch(logoutSuccess());
 
 export const lostPassword = ({ email }) => {
-        return Promise.resolve({
-            message: "Password reset email was sent."
-        });
-    };
+axios.post("/email/forgot_password", {email: email})
+    return Promise.resolve({
+        message: "Password reset email was sent."
+    });
+};
 
 export const updateStudentInfo = info => dispatch =>
 axios.post("/api/info_update", {info:info},  { headers: {'Authorization': "bearer " + localStorage.getItem('token')}})

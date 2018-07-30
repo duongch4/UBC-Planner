@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./config');
+var flash = require('express-flash');
 var cors = require('cors');
 const port = process.env.PORT || 5000;
 
@@ -36,6 +37,8 @@ app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/email', emailRoutes);
 app.use(cors());
+
+app.use(flash());
 
 
 // start the server

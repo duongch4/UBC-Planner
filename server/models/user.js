@@ -9,7 +9,9 @@ const UserSchema = new mongoose.Schema({
     name: String,
     sid: Number,
     bm: String,
-    cohort: Number
+    cohort: Number,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
   },
   courses: Object,
   remarks: Object
