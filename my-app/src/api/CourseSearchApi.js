@@ -5,7 +5,7 @@ var data  = require("../data/courseSearchList.json");
 var async = require('async');
 const parseString = require('react-native-xml2js').parseString;
 var courseNames = data.depts.dept;
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+const proxyUrl = "https://cryptic-headland-94862.herokuapp.com/";//'https://cors-anywhere.herokuapp.com/';
 const baseURL = 'https://courses.students.ubc.ca/cs/servlets/SRVCourseSchedule?';
 var date = new Date().getFullYear();
 const deptUrl = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=2&dept=';
@@ -48,16 +48,14 @@ export const doUnloadDepartment = query => (dispatch, getState) => {
 export const doAutocompleteCourse = query => (dispatch, getState) => {
   const {loadedDeptName} = getState().courseSearch;
   const {loadedDept} = getState().courseSearch;
-  console.log("query", query)
   var dept, key, deptName = "";
   if (/\s+/.test(query)) {
     dept = query.split(/\s+/)[0];
     key = query.split(/\s+/)[1];
   }
   var courses = null;
-  if (loadedDeptName === "") dispatch(courseAutocompleteFail())
+  if (loadedDeptName === "" || loadedDept === [] || loadedDept === undefined) dispatch(courseAutocompleteFail())
   else {
-    const {loadedDept} = getState().courseSearch;
     filterCourses (key, loadedDept)
       .then(data => {
         const {loadedDeptName} = getState().courseSearch;
@@ -89,9 +87,10 @@ export const doAutocompleteSelect = query => (dispatch, getState) => {
 export const doSearch = query => (dispatch, getState) => {
   const {isCourseCodeLoaded} = getState().courseSearch;
   const {loadedDeptName} = getState().courseSearch;
+  const {loadedDept} = getState().courseSearch;
   const {autocomplete_orig} = getState().courseSearch;
 
-  if (!query || query === '' || autocomplete_orig === undefined || autocomplete_orig === null) { dispatch(courseSearchFail()) }
+  if (!query || query === '' || autocomplete_orig === undefined || autocomplete_orig === null || loadedDept === undefined || loadedDept === []) { dispatch(courseSearchFail()) }
   else {
     if (isCourseCodeLoaded) {
       // load courses in autocomplete_orig
@@ -101,10 +100,11 @@ export const doSearch = query => (dispatch, getState) => {
             "id": loadedDeptName + ' ' + course.key,
             "name": course.title,
             "description": course.descr,
-            "credits": '',
+            "credits": course.prereqnote,
             "pr": preProcess(course.prereqs)
           }
         })
+        console.log(JSON.stringify(courses))
         resolve (courses);
       }, Promise.resolve, Promise.reject)
       .then (data => {dispatch(courseSearchSuccess(data))})
@@ -116,9 +116,7 @@ export const doSearch = query => (dispatch, getState) => {
           else {
             var dept = depts[0].key;
             getCourses(deptUrl + dept + '&output=3', dept).then((data) => {
-              if (data !== undefined) {
-              dispatch(courseSearchSuccess(data))}})
-          }
+              if (data !== undefined) dispatch(courseSearchSuccess(data))})}
         })
       }
   }
@@ -195,11 +193,12 @@ const getCourses = (url, dept) => {
                 "id": dept + ' ' + course.$.key,
                 "name": course.$.title,
                 "description": course.$.descr,
-                "credits": '',
+                "credits": course.$.prereqnote,
                 "pr": preProcess(course.$.prereqs)
               }
             })
           });
+          console.log("result courses: ", JSON.stringify(courses))
           return courses;
       })
       .catch((err) => {

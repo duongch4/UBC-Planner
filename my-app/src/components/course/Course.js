@@ -75,7 +75,7 @@ class Course extends React.Component {
                 <Card.Description>{description}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <div>{ credits } credits</div>
+                <div>{ credits } </div>
                 {this.createPrerequisites()}
             </Card.Content>
         </Card>

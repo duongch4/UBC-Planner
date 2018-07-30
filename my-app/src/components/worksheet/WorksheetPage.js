@@ -14,7 +14,7 @@ class WorksheetPage extends React.Component {
 
     state = {
         inEditMode: null,
-        message: 'pdf'
+        message: 'pdf file'
     }
 
     async handleEmail () {
@@ -29,16 +29,21 @@ class WorksheetPage extends React.Component {
     }
 
     handleSavePdf = () => {
-      const input = document.getElementById('divToPrint');
-          html2canvas(input)
-            .then((canvas) => {
-              const imgData = canvas.toDataURL('image/png');
-              const pdf = new jsPDF();
-              pdf.addImage(imgData, 'JPEG', 0, 0);
-              pdf.save("download.pdf");
-              console.log("pdf save")
-            });
-    }
+      domtoimage.toPng(window.document.getElementById('divToPrint'))
+      .then(function (dataUrl) {
+        let imgData = new Image();
+        imgData.src=dataUrl;
+
+        let pdf = new jsPDF('p', 'mm', 'letter');
+        pdf.setFontSize(12);
+        pdf.addImage(imgData, 'PNG', 15, 20, 185, 220);
+        pdf.save('ubc-planner-worksheet.pdf');
+        console.log("pdf save");
+      })
+      .catch(function (error) {
+        console.error("dom-to-image error");
+      });
+    };
 
     handleInfoEdit = item => {
         if (!!this.state.inEditMode && this.state.inEditMode!=item) this.state.inEditMode.onSubmit();
@@ -50,7 +55,7 @@ class WorksheetPage extends React.Component {
     render () {
         const {name, bm, cohort, sid} = this.props.student;
         return (
-            <div id="divToPrint">
+            <div>
                 <Header as='h1' icon textAlign={'left'}>
                         {name}
                 </Header>
