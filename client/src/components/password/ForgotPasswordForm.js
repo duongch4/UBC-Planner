@@ -28,7 +28,7 @@ class ForgotPasswordForm extends React.Component {
                 })
                 .catch(function (e) {
                     console.log("failed");
-                    this.setState({ message : e && e.error && e.error.message });
+                    this.setState({ message :  e.error && e.error.message });
                 }.bind(this));
         }
     };

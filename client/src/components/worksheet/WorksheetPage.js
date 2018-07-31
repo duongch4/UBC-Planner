@@ -8,35 +8,39 @@ import { Button } from 'semantic-ui-react';
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import axios from 'axios'
-import {emailWorksheet} from '../../api/WorksheetApi';
+import {emailUserWorksheet} from '../../api/WorksheetApi';
+import domtoimage from 'dom-to-image';
 
 class WorksheetPage extends React.Component {
 
     state = {
-        inEditMode: null,
-        message: 'pdf file',
+        inEditMode: null
     }
 
-    async handleEmail () {
-      const { message } = this.state
-      emailWorksheet({message})
+    handleEmailUser = () => {
+      emailUserWorksheet(this.props.student.email, window.document.getElementById('divToPrint'));
     }
 
-    handleSaveExcel = () => {
-
+    handleEmailSteve = () => {
+    //  emailSteveWorksheetSteve(this.props.student.email, window.document.getElementById('divToPrint'));
     }
 
     handleSavePdf = () => {
-      const input = document.getElementById('divToPrint');
-          html2canvas(input)
-            .then((canvas) => {
-              const imgData = canvas.toDataURL('image/png');
-              const pdf = new jsPDF();
-              pdf.addImage(imgData, 'JPEG', 0, 0);
-              pdf.save("ubc-planner-worksheet.pdf");
-              console.log("pdf save")
-            });
-    }
+		    domtoimage.toPng(window.document.getElementById('divToPrint'))
+		      .then(function (dataUrl) {
+            let imgData = new Image();
+            imgData.src=dataUrl;
+
+            let pdf = new jsPDF('p', 'mm', 'letter');
+            pdf.setFontSize(12);
+            pdf.addImage(imgData, 'PNG', 15, 20, 185, 220);
+            pdf.save('ubc-planner-worksheet.pdf');
+            console.log("pdf save");
+		      })
+          .catch(function (error) {
+            console.error("dom-to-image error");
+          });
+        };
 
     handleInfoEdit = item => {
         if (!!this.state.inEditMode && this.state.inEditMode!=item) this.state.inEditMode.onSubmit();
@@ -48,9 +52,15 @@ class WorksheetPage extends React.Component {
     render () {
         const {name, bm, cohort, sid} = this.props.student;
         return (
+          <div>
+          <div class="button">
+            <button class="ui left attached button" onClick= {this.handleEmailUser.bind(this)}>Send to my email</button>
+            <button class="ui right attached button" onClick= {this.handleEmailSteve.bind(this)}>Email Steve</button>
+          </div>
             <div id='divToPrint'>
                 <Header as='h1' icon textAlign={'left'}>
                         {name}
+
                 </Header>
                 <div class = "student-info-container">
                     <WorksheetInfo
@@ -78,11 +88,7 @@ class WorksheetPage extends React.Component {
                 <WorksheetProgress />
                 <Worksheet {...this.props}/>
 
-                <div class="ui small basic icon buttons">
-                  <button class="ui button" onClick= {this.handleEmail.bind(this)}><i class="mail icon"></i></button>
-                  <button class="ui button" onClick= {this.handleEmail.bind(this)}><i class="save icon"></i></button>
-                  <button class="ui button" onClick= {this.handleSavePdf.bind(this)}><i class="download icon"></i></button>
-                </div>
+            </div>
             </div>
 
         );

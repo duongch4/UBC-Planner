@@ -1,0 +1,1825 @@
+{
+  "depts": {
+    "dept": [{
+      "$": {
+        "key": "AANB",
+        "title": "Applied Animal Biology",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "ACAM",
+        "title": "Asian Canadian and Asian Migration Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ADHE",
+        "title": "Adult and Higher Education",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "AFST",
+        "title": "African Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "AGEC",
+        "title": "Agricultural Economics",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "ANAT",
+        "title": "Anatomy",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "ANSC",
+        "title": "Animal Science",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "ANTH",
+        "title": "Anthropology",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "APBI",
+        "title": "Applied Biology",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "APPP",
+        "title": "Applied Science Professional Program Platform",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "APSC",
+        "title": "Applied Science",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "ARBC",
+        "title": "Arabic Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ARC",
+        "title": "Alternative Routes to Computing",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "ARCH",
+        "title": "Architecture",
+        "faccode": "SALA",
+        "faculty": "School of Arch and Landscape Arch"
+      }
+    }, {
+      "$": {
+        "key": "ARCL",
+        "title": "Anthropological Archaeology",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ARST",
+        "title": "Archival Studies",
+        "faccode": "LAIS",
+        "faculty": "School of Library, Archival, and Info"
+      }
+    }, {
+      "$": {
+        "key": "ARTH",
+        "title": "Art History",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ARTS",
+        "title": "Arts One Program",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ASIA",
+        "title": "Asian Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ASIC",
+        "title": "Arts and Science Interdisciplinary Courses",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "ASLA",
+        "title": "Asian Languages",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ASTR",
+        "title": "Astronomy",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "ASTU",
+        "title": "Arts Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ATSC",
+        "title": "Atmospheric Science",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "AUDI",
+        "title": "Audiology and Speech Sciences",
+        "faccode": "AUDI",
+        "faculty": "School of Audiology and Speech Scie"
+      }
+    }, {
+      "$": {
+        "key": "BA",
+        "title": "Business Administration:  Core",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAAC",
+        "title": "Business Administration: Accounting",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BABS",
+        "title": "Business Administration: Business Statistics",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAEN",
+        "title": "Business Administration: Entrepreneurship",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAFI",
+        "title": "Business Administration: Finance",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAHC",
+        "title": "Business Administration: Health Care",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAHR",
+        "title": "Business Administration: Human Resources Management",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAIM",
+        "title": "Business Administration: International Management",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAIT",
+        "title": "Business Administration: Business Technology Management",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BALA",
+        "title": "Business Administration: Law",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAMA",
+        "title": "Business Administration: Marketing",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAMS",
+        "title": "Business Administration: Management Science",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAPA",
+        "title": "Business Administration: Policy Analysis",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BASC",
+        "title": "Business Administration: Supply Chain",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BASD",
+        "title": "Business Administration: Sustainable Development",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BASM",
+        "title": "Business Administration: Strategic Management",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BATL",
+        "title": "Business Administration: Transportation and Logistics",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BAUL",
+        "title": "Business Administration: Urban Land Economics",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "BIOC",
+        "title": "Biochemistry",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "BIOF",
+        "title": "Bioinformatics",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "BIOL",
+        "title": "Biology",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "BIOT",
+        "title": "Biotechnology",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "BMEG",
+        "title": "Biomedical Engineering",
+        "faccode": "SBME",
+        "faculty": "School of Biomedical Engineering"
+      }
+    }, {
+      "$": {
+        "key": "BOTA",
+        "title": "Botany",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "BRDG",
+        "title": "Bridge Program",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "BUSI",
+        "title": "Business",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "CAPS",
+        "title": "Cellular, Anatomical and Physiological Sciences",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "CCFI",
+        "title": "Centre for Cross-Faculty Inquiry",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "CCST",
+        "title": "Critical and Curatorial Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CDST",
+        "title": "Canadian Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CEEN",
+        "title": "Clean Energy Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "CELL",
+        "title": "Cell and Developmental Biology",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "CENS",
+        "title": "Central, Eastern and Northern European Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CHBE",
+        "title": "Chemical and Biological Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "CHEM",
+        "title": "Chemistry",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "CHIL",
+        "title": "Children's Literature",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CHIN",
+        "title": "Chinese",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CICS",
+        "title": "Computing Information and Cognitive Systems",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "CIVL",
+        "title": "Civil Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "CLCH",
+        "title": "Classical Chinese",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CLST",
+        "title": "Classical Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CNPS",
+        "title": "Counselling Psychology",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "CNRS",
+        "title": "Classical, Near Eastern and Religious Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CNTO",
+        "title": "Cantonese",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "COEC",
+        "title": "Commerce Economics",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "COGS",
+        "title": "Cognitive Systems Program",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "COHR",
+        "title": "Commerce Human Resources",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "COLX",
+        "title": "Computational Linguistics",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "COMM",
+        "title": "Commerce",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "COMR",
+        "title": "Commerce Minor",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "CONS",
+        "title": "Natural Resources Conservation",
+        "faccode": "FRST",
+        "faculty": "Faculty of Forestry"
+      }
+    }, {
+      "$": {
+        "key": "CPEN",
+        "title": "Computer Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "CPSC",
+        "title": "Computer Science",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "CRWR",
+        "title": "Creative Writing",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CSIS",
+        "title": "Critical Studies in Sexuality",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "CSPW",
+        "title": "Coordinated Science Program Workshop",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "CTLN",
+        "title": "Catalan",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "DANI",
+        "title": "Danish",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "DENT",
+        "title": "Dentistry",
+        "faccode": "DENT",
+        "faculty": "Faculty of Dentistry"
+      }
+    }, {
+      "$": {
+        "key": "DES",
+        "title": "Design",
+        "faccode": "SALA",
+        "faculty": "School of Arch and Landscape Arch"
+      }
+    }, {
+      "$": {
+        "key": "DHYG",
+        "title": "Dental Hygiene",
+        "faccode": "DENT",
+        "faculty": "Faculty of Dentistry"
+      }
+    }, {
+      "$": {
+        "key": "DMED",
+        "title": "Digital Media",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "DSCI",
+        "title": "Data Science",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "ECED",
+        "title": "Early Childhood Education",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "ECON",
+        "title": "Economics",
+        "faccode": "ECON",
+        "faculty": "Vancouver School of Economics"
+      }
+    }, {
+      "$": {
+        "key": "ECPS",
+        "title": "Educational & Counselling Psychology, & Special Education",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "EDCP",
+        "title": "Curriculum and Pedagogy",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "EDST",
+        "title": "Educational Studies",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "EDUC",
+        "title": "Education",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "EECE",
+        "title": "Electrical and Computer Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "ELEC",
+        "title": "Electrical Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "ELI",
+        "title": "English Language Institute",
+        "faccode": "REGI",
+        "faculty": "Regi"
+      }
+    }, {
+      "$": {
+        "key": "EMBA",
+        "title": "Executive M.B.A.",
+        "faccode": "COMM",
+        "faculty": "Faculty of Comm and Bus Admin"
+      }
+    }, {
+      "$": {
+        "key": "ENDS",
+        "title": "Environmental Design",
+        "faccode": "SALA",
+        "faculty": "School of Arch and Landscape Arch"
+      }
+    }, {
+      "$": {
+        "key": "ENGL",
+        "title": "English",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ENPH",
+        "title": "Engineering Physics",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "ENPP",
+        "title": "Engineering and Public Policy",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "ENVR",
+        "title": "Environmental Science",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "EOSC",
+        "title": "Earth and Ocean Sciences",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "EPSE",
+        "title": "Educational Psychology and Special Education",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "ETEC",
+        "title": "Educational Technology",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "EXCH",
+        "title": "Exchange Programs",
+        "faccode": "REGI",
+        "faculty": "Regi"
+      }
+    }, {
+      "$": {
+        "key": "EXGR",
+        "title": "Exchange Graduate Research",
+        "faccode": "REGI",
+        "faculty": "Regi"
+      }
+    }, {
+      "$": {
+        "key": "FACT",
+        "title": "Faculty of Arts Commuter Transition Program",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "FEBC",
+        "title": "Forest Engineering British Columbia",
+        "faccode": "FRST",
+        "faculty": "Faculty of Forestry"
+      }
+    }, {
+      "$": {
+        "key": "FHIS",
+        "title": "French, Hispanic and Italian Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "FIPR",
+        "title": "Film Production",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "FISH",
+        "title": "Fisheries Research",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "FIST",
+        "title": "Film Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "FMPR",
+        "title": "Family Practice",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "FMST",
+        "title": "Family Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "FNEL",
+        "title": "First Nations and Endangered Languages Program",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "FNH",
+        "title": "Food, Nutrition and Health",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "FNIS",
+        "title": "First Nations and Indigenous Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "FOOD",
+        "title": "Food Science",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "FOPR",
+        "title": "Forest Operations",
+        "faccode": "FRST",
+        "faculty": "Faculty of Forestry"
+      }
+    }, {
+      "$": {
+        "key": "FRE",
+        "title": "Food and Resource Economics",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "FREN",
+        "title": "French",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "FRSI",
+        "title": "Forestry Silviculture Institute",
+        "faccode": "FRST",
+        "faculty": "Faculty of Forestry"
+      }
+    }, {
+      "$": {
+        "key": "FRST",
+        "title": "Forestry",
+        "faccode": "FRST",
+        "faculty": "Faculty of Forestry"
+      }
+    }, {
+      "$": {
+        "key": "FSCT",
+        "title": "Biochemistry and Forensic Science",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "GBPR",
+        "title": "Green Bioproducts",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "GEM",
+        "title": "Geomatics for Environmental Management",
+        "faccode": "FRST",
+        "faculty": "Faculty of Forestry"
+      }
+    }, {
+      "$": {
+        "key": "GENE",
+        "title": "Genetics",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "GEOB",
+        "title": "Geographical Sciences",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "GEOG",
+        "title": "Geography",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "GERM",
+        "title": "German",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "GPP",
+        "title": "Global Public Policy",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "GREK",
+        "title": "Greek",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "GRS",
+        "title": "Global Resource Systems",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "GRSJ",
+        "title": "Gender, Race, Sexuality and Social Justice",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "GSAT",
+        "title": "Genome Science and Technology",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "HEBR",
+        "title": "Hebrew",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "HESO",
+        "title": "Health and Society",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "HGSE",
+        "title": "Haida Gwaii Semesters",
+        "faccode": "FRST",
+        "faculty": "Faculty of Forestry"
+      }
+    }, {
+      "$": {
+        "key": "HINU",
+        "title": "Hindi-Urdu",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "HIST",
+        "title": "History",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "HPB",
+        "title": "High Performance Buildings",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "HUNU",
+        "title": "Human Nutrition",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "IAR",
+        "title": "Institute of Asian Research",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "IEST",
+        "title": "European Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "IGEN",
+        "title": "Integrated Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "INDE",
+        "title": "Interdepartmental Medicine",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "INDO",
+        "title": "Indonesian",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "INDS",
+        "title": "Interdisciplinary Studies",
+        "faccode": "GRAD",
+        "faculty": "Faculty of Grad and Pdoc Studies"
+      }
+    }, {
+      "$": {
+        "key": "INFO",
+        "title": "Information Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "INLB",
+        "title": "Indigenous Land-Based Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ISCI",
+        "title": "Integrated Sciences",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "ITAL",
+        "title": "Italian",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "ITST",
+        "title": "Italian Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "IWME",
+        "title": "Integrated Water Management Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "JAPN",
+        "title": "Japanese",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "JRNL",
+        "title": "Journalism",
+        "faccode": "JRNL",
+        "faculty": "School of Journalism"
+      }
+    }, {
+      "$": {
+        "key": "KIN",
+        "title": "Kinesiology",
+        "faccode": "KIN",
+        "faculty": "School of Kinesiology"
+      }
+    }, {
+      "$": {
+        "key": "KORN",
+        "title": "Korean",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "LAIS",
+        "title": "Library, Archival and Information Studies",
+        "faccode": "LAIS",
+        "faculty": "School of Library, Archival, and Info"
+      }
+    }, {
+      "$": {
+        "key": "LARC",
+        "title": "Landscape Architecture",
+        "faccode": "SALA",
+        "faculty": "School of Arch and Landscape Arch"
+      }
+    }, {
+      "$": {
+        "key": "LASO",
+        "title": "Law and Society",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "LAST",
+        "title": "Latin American Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "LATN",
+        "title": "Latin",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "LAW",
+        "title": "Law",
+        "faccode": "LAW",
+        "faculty": "Peter A. Allard School of Law"
+      }
+    }, {
+      "$": {
+        "key": "LFS",
+        "title": "Land & Food Systems",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "LIBE",
+        "title": "Teacher Librarianship",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "LIBR",
+        "title": "Library and Information Studies",
+        "faccode": "LAIS",
+        "faculty": "School of Library, Archival, and Info"
+      }
+    }, {
+      "$": {
+        "key": "LING",
+        "title": "Linguistics",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "LLED",
+        "title": "Language and Literacy Education",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "LWS",
+        "title": "Land and Water Systems",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "MATH",
+        "title": "Mathematics",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "MDVL",
+        "title": "Medieval Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "MECH",
+        "title": "Mechanical Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "MEDD",
+        "title": "Doctor of Medicine",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "MEDG",
+        "title": "Medical Genetics",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "MEDI",
+        "title": "Medicine",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "MGMT",
+        "title": "Management",
+        "faccode": "VANT",
+        "faculty": "Vantage College"
+      }
+    }, {
+      "$": {
+        "key": "MICB",
+        "title": "Microbiology",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "MIDW",
+        "title": "Midwifery",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "MINE",
+        "title": "Mining Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "MRNE",
+        "title": "Marine Science",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "MTRL",
+        "title": "Materials Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "MUSC",
+        "title": "Music",
+        "faccode": "MUSC",
+        "faculty": "School of Music"
+      }
+    }, {
+      "$": {
+        "key": "NAME",
+        "title": "Naval Architecture and Marine Engineering",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "NEST",
+        "title": "Near Eastern Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "NEUR",
+        "title": "Neurosurgery",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "NRSC",
+        "title": "Neuroscience",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "NURS",
+        "title": "Nursing",
+        "faccode": "NURS",
+        "faculty": "School of Nursing"
+      }
+    }, {
+      "$": {
+        "key": "OBMS",
+        "title": "Oral Biological Medical Sciences",
+        "faccode": "DENT",
+        "faculty": "Faculty of Dentistry"
+      }
+    }, {
+      "$": {
+        "key": "OBST",
+        "title": "Obstetrics and Gynaecology",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "OHS",
+        "title": "Oral Health Sciences",
+        "faccode": "DENT",
+        "faculty": "Faculty of Dentistry"
+      }
+    }, {
+      "$": {
+        "key": "ONCO",
+        "title": "Oncology",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "ORNT",
+        "title": "Orientation to Medical School",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "ORPA",
+        "title": "Orthopaedics",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "OSOT",
+        "title": "Occupational Science and Occupational Therapy",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "PATH",
+        "title": "Pathology",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "PCTH",
+        "title": "Pharmacology and Therapeutics",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "PERS",
+        "title": "Persian",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "PHAR",
+        "title": "Pharmaceutical Sciences",
+        "faccode": "PHAR",
+        "faculty": "Faculty of Pharmaceutical Sciences"
+      }
+    }, {
+      "$": {
+        "key": "PHIL",
+        "title": "Philosophy",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "PHRM",
+        "title": "Pharmacy",
+        "faccode": "PHAR",
+        "faculty": "Faculty of Pharmaceutical Sciences"
+      }
+    }, {
+      "$": {
+        "key": "PHTH",
+        "title": "Physical Therapy",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "PHYL",
+        "title": "Cellular and Physiological Sciences",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "PHYS",
+        "title": "Physics",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "PLAN",
+        "title": "Community and Regional Planning",
+        "faccode": "PLAN",
+        "faculty": "School of Comm and Reg Planning"
+      }
+    }, {
+      "$": {
+        "key": "PLAS",
+        "title": "Plastic Surgery",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "PLNT",
+        "title": "Plant Science",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "POLI",
+        "title": "Political Science",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "POLS",
+        "title": "Polish",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "PORT",
+        "title": "Portuguese",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "PSYC",
+        "title": "Psychology",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "PSYT",
+        "title": "Psychiatry",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "PUNJ",
+        "title": "Punjabi",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "RADI",
+        "title": "Radiology",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "RELG",
+        "title": "Religious Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "RES",
+        "title": "Resources, Environment and Sustainability",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "RGLA",
+        "title": "Religion, Literature and The Arts",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "RHSC",
+        "title": "Rehabilitation Sciences",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "RMST",
+        "title": "Romance Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "RSOT",
+        "title": "Occupational Therapy",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "RUSS",
+        "title": "Russian",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "SANS",
+        "title": "Sanskrit",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "SCAN",
+        "title": "Scandinavian",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "SCIE",
+        "title": "Science",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "SEAL",
+        "title": "Southeast Asian Languages",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "SGES",
+        "title": "Smart Grid Energy Systems",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "SLAV",
+        "title": "Slavic Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "SOAL",
+        "title": "South Asian Languages",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "SOCI",
+        "title": "Sociology",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "SOIL",
+        "title": "Soil Science",
+        "faccode": "LFS",
+        "faculty": "Faculty of Land and Food Systems"
+      }
+    }, {
+      "$": {
+        "key": "SOWK",
+        "title": "Social Work",
+        "faccode": "SOWK",
+        "faculty": "School of Social Work"
+      }
+    }, {
+      "$": {
+        "key": "SPAN",
+        "title": "Spanish",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "SPHA",
+        "title": "School of Population & Public Health",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "SPPH",
+        "title": "School of Population & Public Health",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "STAT",
+        "title": "Statistics",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }, {
+      "$": {
+        "key": "STS",
+        "title": "Science and Technology Studies",
+        "faccode": "GRAD",
+        "faculty": "Faculty of Grad and Pdoc Studies"
+      }
+    }, {
+      "$": {
+        "key": "SURG",
+        "title": "Surgery",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "SWED",
+        "title": "Swedish",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "TEST",
+        "title": "Test",
+        "faccode": "REGI",
+        "faculty": "Regi"
+      }
+    }, {
+      "$": {
+        "key": "THTR",
+        "title": "Theatre",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "TIBT",
+        "title": "Tibetan Languages",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "TRSC",
+        "title": "Transition School",
+        "faccode": " ",
+        "faculty": "No Faculty (Blank for Cross Edits)"
+      }
+    }, {
+      "$": {
+        "key": "UDES",
+        "title": "Urban Design",
+        "faccode": "SALA",
+        "faculty": "School of Arch and Landscape Arch"
+      }
+    }, {
+      "$": {
+        "key": "UFOR",
+        "title": "Urban Forestry",
+        "faccode": "FRST",
+        "faculty": "Faculty of Forestry"
+      }
+    }, {
+      "$": {
+        "key": "UKRN",
+        "title": "Ukrainian",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "URO",
+        "title": "Undergraduate Research Opportunities",
+        "faccode": " ",
+        "faculty": "No Faculty (Blank for Cross Edits)"
+      }
+    }, {
+      "$": {
+        "key": "UROL",
+        "title": "Urological Surgery",
+        "faccode": "MEDI",
+        "faculty": "Faculty of Medicine"
+      }
+    }, {
+      "$": {
+        "key": "URST",
+        "title": "Urban Studies",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "URSY",
+        "title": "Urban Systems",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "VANT",
+        "title": "Vantage College",
+        "faccode": "VANT",
+        "faculty": "Vantage College"
+      }
+    }, {
+      "$": {
+        "key": "VGRD",
+        "title": "Visiting Graduate Student",
+        "faccode": "GRAD",
+        "faculty": "Faculty of Grad and Pdoc Studies"
+      }
+    }, {
+      "$": {
+        "key": "VISA",
+        "title": "Visual Arts",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "VRHC",
+        "title": "Vocational Rehabilitation Counselling",
+        "faccode": "EDUC",
+        "faculty": "Faculty of Education"
+      }
+    }, {
+      "$": {
+        "key": "VURS",
+        "title": "Visiting Undergraduate Research Students",
+        "faccode": "APSC",
+        "faculty": "Faculty of Applied Science"
+      }
+    }, {
+      "$": {
+        "key": "WOOD",
+        "title": "Wood Products Processing",
+        "faccode": "FRST",
+        "faculty": "Faculty of Forestry"
+      }
+    }, {
+      "$": {
+        "key": "WRDS",
+        "title": "Arts Studies in Writing",
+        "faccode": "ARTS",
+        "faculty": "Faculty of Arts"
+      }
+    }, {
+      "$": {
+        "key": "WRIT",
+        "title": "University Writing Centre Courses",
+        "faccode": "CCFE",
+        "faculty": "Centre for Continuing Education"
+      }
+    }, {
+      "$": {
+        "key": "ZOOL",
+        "title": "Zoology",
+        "faccode": "SCIE",
+        "faculty": "Faculty of Science"
+      }
+    }]
+  }
+}

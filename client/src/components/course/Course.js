@@ -46,6 +46,12 @@ class Course extends React.Component {
                     &nbsp; all of: [ {item.and.map(function(el) { return this.createLabels(el); }.bind(this)) } ]
                 </span>
             )
+        else if (item && item.twoOf)
+                return (<span>
+                        &nbsp; two of: [ {item.twoOf.map(function(el) {
+                            return this.createLabels(el); }.bind(this)) } ]
+                    </span>
+                )
     }
 
     checkIfTaken = (id) => {
@@ -69,7 +75,7 @@ class Course extends React.Component {
                 <Card.Description>{description}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <div>{ credits } credits</div>
+                <div>{ credits } </div>
                 {this.createPrerequisites()}
             </Card.Content>
         </Card>

@@ -8,8 +8,10 @@ axios.post("/api/remarks_update", data, {
 })
     .then(res => dispatch(updateRemarksSuccess(data)));
 
-export const emailWorksheet = data =>
-axios.post("/email/worksheet", data)
+export const emailUserWorksheet = (email, data) => {
+  console.log(data.innerHTML)
+  axios.post("/email/worksheet", { email: email, data: data.innerHTML })
+}
 
 // Promise.resolve(data)
 // .then(data => dispatch(updateRemarksSuccess(data)));

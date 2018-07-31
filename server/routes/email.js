@@ -5,7 +5,6 @@ const async = require('async');
 const crypto = require('crypto');
 
 const router = new express.Router();
-const emailAddress = "angeli_corpin@hotmail.com"; //get email of current user?
 
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport({
@@ -19,21 +18,21 @@ var transporter = nodemailer.createTransport({
   }
 });
 
+
 router.post('/worksheet', (req, res) => {
   nodemailer.createTestAccount((err, account) => {
-    const htmlEmail = "<p>${req}</p>"
-    console.log(req.body.message)
+    const style = '<style>table, td, th { border: 1px solid #ddd; text-align: left; } table { border-collapse: collapse; width: 100%; } th, td { padding: 15px; }</style>';
+    const htmlEmail = style + req.body.data;
 
     let mailOptions = {
       from: 'ubc.planner.app@gmail.com',
-      to: emailAddress,
+      to: req.body.email,
       subject: 'Worksheet for BCS Courses',
-      text: req.body.message,
       html: htmlEmail
+
     }
 
     transporter.sendMail(mailOptions, (err, info) => {
-      console.log("sendEmail")
       if (err) {
         return console.log(err)
       }
@@ -44,7 +43,6 @@ router.post('/worksheet', (req, res) => {
 })
 
 router.post('/forgot_password', (req, res, next) => {
-  console.log("forgot password: ", req.body.email)
 
   async.waterfall([
     function(done) {
@@ -56,7 +54,7 @@ router.post('/forgot_password', (req, res, next) => {
     function(token, done) {
       User.findOne({"info.email" : req.body.email}, function(err, user) {
         if (!user) {
-          return res.status(400).send({ message: 'No account with that email address exists.' });
+          return res.status(200).send({ message: 'No account with that email address exists.' });
         }
 
         user.info.resetPasswordToken = token;
@@ -67,7 +65,7 @@ router.post('/forgot_password', (req, res, next) => {
         });
       });
     },
-    // CHANGE http://localhost:3000 later!!!!
+    // TODO CHANGE http://localhost:3000 to heroku later!!!!
     function(token, user, done) {
       var mailOptions = {
         to: req.body.email,
