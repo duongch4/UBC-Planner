@@ -13,25 +13,25 @@ class ResetPasswordForm extends React.Component {
         },
         loading: false,
         error: {},
-        message: ""
+        resetPasswordSuccess: "",
+        resetPasswordError: ""
     };
 
     onSubmit = () => {
 
         const error = this.validate(this.state.data);
         this.setState({ error: error });
-        this.setState({ message: "" });
+        this.setState({ resetPasswordError: "" });
 
         if (Object.keys(error).length === 0 && error.constructor === Object) {
           var token = window.location.href.split('?token=')[1];
           console.log("reset Password, token = " + token, "password: ", this.state.data.password)
           resetPassword(this.state.data.password, token)
                 .then((data) => {
-                    this.setState({ message: data.message});
+                    this.setState({ resetPasswordSuccess: data.message});
                 })
                 .catch(function (e) {
-                    console.log("failed");
-                    this.setState({ message : e && e.error && e.error.message });
+                    this.setState({ resetPasswordError : e.response.data.error });
                 }.bind(this));
         }
     };
@@ -61,11 +61,12 @@ class ResetPasswordForm extends React.Component {
     onFieldTextChange = e => this.setState({data: {...this.state.data, [ e.target.name ]: e.target.value}});
 
     render() {
-        const {data, error, message} = this.state;
+        const {data, error, resetPasswordSuccess, resetPasswordError} = this.state;
         return (
             <div>
 
-                {message && <Message positive>{ message }</Message>}
+                {resetPasswordSuccess && <Message positive>{ resetPasswordSuccess }</Message>}
+                {resetPasswordError && <Message negative>{ resetPasswordError }</Message>}
 
                 <Form onSubmit={ this.onSubmit }>
                   <Form.Field error = {!!error.password}>

@@ -168,7 +168,7 @@ router.post('/reset_password', (req, res) => {
     function(done) {
       User.findOne({ "info.resetPasswordToken": req.body.token, "info.resetPasswordExpires": { $gt: Date.now() } }, function(err, user) {
         if (!user) {
-          return res.status(200).send({ message: 'Password reset token is invalid or has expired.' });
+          return res.status(401).send({ error: 'Password reset token is invalid or has expired.' });
         }
 
         user.info.password = req.body.password;
@@ -204,7 +204,7 @@ router.post('/reset_password', (req, res) => {
       });
     }
   ], function(err) {
-    return res.status(500).send({ message: err });
+    return res.status(500).send({ error: err });
   });
 })
 

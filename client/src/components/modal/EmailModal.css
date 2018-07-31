@@ -1,0 +1,31 @@
+.Email-modal-page-container {
+    padding-top: 5%;
+    text-align: center;
+    /*margin-bottom: 7%;*/
+}
+
+.Email-modal-form-container {
+    max-width: 300px;
+    margin: auto;
+}
+
+.Email-modal-form-container label {
+    float: left;
+}
+
+#Email-button {
+    background-color: #002145;
+    display: block;
+    color: white;
+
+}
+
+#Email-button:hover {
+    background-color: #004fa7;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.Email-modal-error-message {
+    float: right;
+    color: #ae5856;
+}

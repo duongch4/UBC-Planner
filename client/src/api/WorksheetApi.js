@@ -8,10 +8,11 @@ axios.post("/api/remarks_update", data, {
 })
     .then(res => dispatch(updateRemarksSuccess(data)));
 
-export const emailUserWorksheet = (email, data) => {
-  console.log(data.innerHTML)
-  axios.post("/email/worksheet", { email: email, data: data.innerHTML })
-}
+export const emailUserWorksheet = (email, divToPrint) =>
+axios.post("/email/user_worksheet", { email: email, divToPrint: divToPrint.innerHTML })
+
+export const emailDirectorWorksheet = (data, divToPrint) =>
+axios.post("/email/director_worksheet", { data: data, divToPrint: divToPrint.innerHTML })
 
 // Promise.resolve(data)
 // .then(data => dispatch(updateRemarksSuccess(data)));

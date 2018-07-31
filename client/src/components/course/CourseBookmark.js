@@ -26,6 +26,7 @@ class CourseBookmark extends React.Component {
             console.log(this.props.course);
             this.props.doAddCourse({email: this.props.email, id: this.props.course.id});
 
+            // TODO fix this: this.props.courses is null
             if (this.props.courses[this.props.course.id])
                 this.setState({ color: 'olive'})
         }
