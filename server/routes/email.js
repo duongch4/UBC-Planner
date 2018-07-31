@@ -35,7 +35,7 @@ router.post('/user_worksheet', (req, res) => {
       if (err) {
         return res.status(400).send({ error: "Email not sent." });
       }
-      return res.status(200).send({ message: 'No account with that email address exists.' });
+      return res.status(200).send({ message: 'Email successfully sent.' });
     })
 })
 

@@ -10,16 +10,27 @@ import jsPDF from 'jspdf'
 import axios from 'axios'
 import {emailUserWorksheet} from '../../api/WorksheetApi';
 import EmailModal from '../modal/EmailModal';
+import MessageModal from '../modal/MessageModal';
 import domtoimage from 'dom-to-image';
 
 class WorksheetPage extends React.Component {
 
     state = {
-        inEditMode: null
+        inEditMode: null,
+        messageModalOpen: false,
+        messageModalSuccess: "",
+        messageModalError: ""
     }
 
     handleEmailUser = () => {
-      emailUserWorksheet(this.props.student.email, window.document.getElementById('divToPrint'));
+      emailUserWorksheet(this.props.student.email, window.document.getElementById('divToPrint'))
+      .then((result) => {
+          this.setState({ messageModalSuccess : result.data.message  });
+          this.setState({ messageModalOpen : true});
+      })
+      .catch(function (e) {
+          this.setState({ messageModalError : e.response.data.error});
+      }.bind(this));
     }
 
     handleSavePdf = () => {
@@ -81,7 +92,7 @@ class WorksheetPage extends React.Component {
                 <Worksheet {...this.props}/>
 
             </div>
-
+            <MessageModal />
             <EmailModal />
             <div class="button">
               <button class="ui left attached button" onClick= {this.handleEmailUser.bind(this)}>Send to my email</button>

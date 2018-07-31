@@ -4,6 +4,12 @@
     /*margin-bottom: 7%;*/
 }
 
+.Message-modal-page-container {
+    padding-top: 5%;
+    text-align: center;
+    /*margin-bottom: 7%;*/
+}
+
 .Email-modal-form-container {
     max-width: 300px;
     margin: auto;

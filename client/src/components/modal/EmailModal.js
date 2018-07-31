@@ -1,6 +1,6 @@
 import React from 'react'
-import './EmailModal.css';
-import { Button, Modal, Header, Image, Form } from 'semantic-ui-react';
+import './Modal.css';
+import { Button, Modal, Header, Form } from 'semantic-ui-react';
 import EmailModalForm from './EmailModalForm'
 
 class EmailModal extends React.Component {
