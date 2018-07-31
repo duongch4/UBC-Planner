@@ -89,6 +89,7 @@ class MainPage extends React.Component {
                         <Dropdown item text={name}>
                             <Dropdown.Menu>
                                 <Dropdown.Item
+									name='account'
 									active={activeItem === 'account'}
 									onClick={this.handleItemClick}>Account</Dropdown.Item>
                                 <Dropdown.Item
