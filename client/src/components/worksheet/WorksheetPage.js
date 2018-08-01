@@ -18,19 +18,28 @@ class WorksheetPage extends React.Component {
     state = {
         inEditMode: null,
         messageModalOpen: false,
-        messageModalSuccess: "",
-        messageModalError: ""
+        messageModal: "",
+        messageModalHeader: ""
     }
 
     handleEmailUser = () => {
       emailUserWorksheet(this.props.student.email, window.document.getElementById('divToPrint'))
       .then((result) => {
-          this.setState({ messageModalSuccess : result.data.message  });
-          this.setState({ messageModalOpen : true});
+          this.setState({ messageModalOpen : true,
+            messageModal : result.data.message,
+            messageModalHeader: "Success"  });
       })
       .catch(function (e) {
-          this.setState({ messageModalError : e.response.data.error});
+          this.setState({ messageModalOpen : true,
+            messageModal : e.response.data.error,
+            messageModalHeader: "Error"});
       }.bind(this));
+    }
+
+    hideMessageModal = () => {
+          this.setState({messageModalOpen: false,
+            messageModal: "",
+            messageModalHeader: ""})
     }
 
     handleSavePdf = () => {
@@ -92,7 +101,7 @@ class WorksheetPage extends React.Component {
                 <Worksheet {...this.props}/>
 
             </div>
-            <MessageModal />
+            <MessageModal messageModalOpen={this.state.messageModalOpen} messageModal={this.state.messageModal} messageModalHeader={this.state.messageModalHeader}/>
             <EmailModal />
             <div class="button">
               <button class="ui left attached button" onClick= {this.handleEmailUser.bind(this)}>Send to my email</button>

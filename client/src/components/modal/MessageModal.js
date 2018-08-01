@@ -4,14 +4,13 @@ import { Button, Modal, Header, Form } from 'semantic-ui-react';
 
 class EmailModal extends React.Component {
 
-
   render() {
       return (
         <div className="Message-modal-page-container">
-        <Modal size="tiny" trigger={<Button>Message</Button>} closeIcon>
-        <Modal.Header>Success</Modal.Header>
+        <Modal size="tiny" open={this.props.messageModalOpen} closeIcon>
+        <Modal.Header>{this.props.messageModalHeader}</Modal.Header>
         <Modal.Content>
-        <p>Email sent to your account.</p>
+        <p>{this.props.messageModal}</p>
         </Modal.Content>
         </Modal>
         </div>
