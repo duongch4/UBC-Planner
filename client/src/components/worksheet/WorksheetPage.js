@@ -101,7 +101,7 @@ class WorksheetPage extends React.Component {
                 <Worksheet {...this.props}/>
 
             </div>
-            <MessageModal messageModalOpen={this.state.messageModalOpen} messageModal={this.state.messageModal} messageModalHeader={this.state.messageModalHeader}/>
+  
             <EmailModal />
             <div class="button">
               <button class="ui left attached button" onClick= {this.handleEmailUser.bind(this)}>Send to my email</button>
