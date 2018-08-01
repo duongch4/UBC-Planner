@@ -57,4 +57,23 @@ router.post('/courses', (req, res) => {
     });
 });
 
+router.post('/editaccount', (req, res) => {
+	console.log("Request");
+	console.log(req.body);
+	console.log(req.body.info);
+    var query = {"info.email" : req.body.info.email};   
+    var newData = {};
+    console.log("New Data");
+    console.log(req.body.info);
+    newData = req.body.info; 
+    console.log("Query");
+    subDoc.set (req.body.info);
+    User.findOneAndUpdate(query, { info : newData }, {}, function(err, doc) {
+		if (err) return res.send(500, {error: err});
+		console.log(
+		console.log("successfully updated");
+		return res.send("successfully saved");
+	});
+});	
+
 module.exports = router;

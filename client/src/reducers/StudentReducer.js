@@ -1,5 +1,6 @@
 import { STUDENT_INIT_COURSE, STUDENT_UPDATE_COURSE, STUDENT_ADD_COURSE, STUDENT_REMOVE_COURSE, UPDATE_REMARKS_SUCCESS } from '../constants/WorksheetConstants';
 import { LOG_IN, LOG_OUT, UPDATE_INFO_SUCCESS } from '../constants/LoginConstants';
+import { ACCOUNT_EDIT, ACCOUNT_CHANGE_PASSWORD, ACCOUNT_DELETE } from '../constants/AccountConstants';
 
 const initialState = {
     isLoggedIn: false,
@@ -58,6 +59,21 @@ const StudentReducer = (state = initialState, action) => {
             delete newCourses[course.id];
 
             return { ...state, courses:newCourses};
+            
+        case ACCOUNT_EDIT:
+            const fields = Object.keys(action.student);
+            var {info}     = state;
+            fields.forEach(name => {
+                info[name] = action.student[name];
+            });
+            return { ...state, info};
+			
+        case ACCOUNT_CHANGE_PASSWORD:
+			return { ...state}
+			
+        case ACCOUNT_DELETE:
+			return { ...state}
+			
         default: return state;
     }
 };
