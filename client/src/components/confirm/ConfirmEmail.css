@@ -1,0 +1,20 @@
+.Confirm-email-page-container {
+    padding-top: 10%;
+    text-align: center;
+}
+
+.Confirm-email-form-container {
+    max-width: 300px;
+    margin: auto;
+}
+
+.Confirm-email-form-container button {
+    background-color: #002145;
+    display: block;
+    color: white
+}
+
+.Confirm-email-form-container button:hover {
+    background-color: #004fa7;
+    transition: all 0.3s ease-in-out 0s;
+}

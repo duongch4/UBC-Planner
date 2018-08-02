@@ -23,12 +23,14 @@ router.post('/user_worksheet', (req, res) => {
     const style = '<style>table, td, th { border: 1px solid #ddd; text-align: left; } table { border-collapse: collapse; width: 100%; } th, td { padding: 15px; }</style>';
     const htmlEmail = style + req.body.divToPrint;
 
+    //TODO: pass in isVerified and check if true
+    //if (!req.body.isVerified) return res.status(401).send({ error: 'Your account has not been verified.' })
+
     let mailOptions = {
       from: 'ubc.planner.app@gmail.com',
       to: req.body.email,
       subject: 'Worksheet for BCS Courses',
       html: htmlEmail
-
     }
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -44,6 +46,10 @@ router.post('/director_worksheet', (req, res) => {
     const htmlChecklist = style + req.body.divToPrint;
     const message = req.body.data.text + "\n\n" + "NOTE: Please reply to the email address in the “to” address bar and not to the ubc.planner.app@gmail.com account." + "\n";
     const htmlMessage = '<p>' + message.replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>") + '</p>';
+
+    //TODO: pass in isVerified and check if true
+    //if (!req.body.isVerified) return res.status(401).send({ error: 'Your account has not been verified.' })
+
 
     let mailOptions = {
       from: 'ubc.planner.app@gmail.com',
