@@ -13,7 +13,8 @@ class WorksheetPage extends React.Component {
     }
 
     handleInfoEdit = item => {
-        if (!!this.state.inEditMode && this.state.inEditMode!=item) this.state.inEditMode.onSubmit();
+        if (!!this.state.inEditMode && this.state.inEditMode!=item)
+            this.state.inEditMode.onSubmit();
         console.log(this.state.inEditMode);
         this.state.inEditMode = item;
         console.log(item);

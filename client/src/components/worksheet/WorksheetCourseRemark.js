@@ -53,7 +53,7 @@ class WorksheetCourseRemark extends React.Component {
                                   autofocus
                                   className={'remarks-textarea'}
                         />
-                        <Button className={'submit-remarks-button'} size={'mini'} compact>Submit</Button>
+                        <Button circular className={'submit-remarks-button'} size={'mini'} compact>Submit</Button>
                     </Form>
                 )}
             </div>

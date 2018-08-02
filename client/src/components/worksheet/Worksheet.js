@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { Table, Icon } from 'semantic-ui-react'
 import WorksheetCourseRemark from "./WorksheetCourseRemark";
 import './Worksheet.css'
+import WorksheetCourseId from "./WorksheetCourseId";
 
 class Worksheet extends React.Component
 {
@@ -13,16 +14,17 @@ class Worksheet extends React.Component
     }
 
     handleRemarksEdit = cell => {
-        if (!!this.state.inEditMode && this.state.inEditMode!=cell) this.state.inEditMode.onSubmit();
-        console.log(this.state.inEditMode);
+        console.log('old',  this.state.inEditMode && this.state.inEditMode.props, 'new:', cell.props);
+        if (!!this.state.inEditMode && this.state.inEditMode !== cell)
+            this.state.inEditMode.onSubmit();
         this.state.inEditMode = cell;
-        console.log(cell);
     };
 
     createWorksheetCells = (requirements, courses, remarks) => {
         const courseNames = courses && Object.keys(courses);
         return requirements.map((requirement) => {
-            const matchingCourseId = courseNames && courseNames.find(name =>((courses[name].id === requirement.id) | (courses[name].creditFor === requirement.id)));
+            const matchingCourseId = this.props.creditFor[requirement.id];
+                //courseNames && courseNames.find(name => ((courses[name].creditFor === requirement.id) || (courses[name].id === requirement.id)));
             const hasCompleted = matchingCourseId && courses[matchingCourseId].grade;
             const course = matchingCourseId && courses[matchingCourseId];
 
@@ -32,10 +34,15 @@ class Worksheet extends React.Component
                 >
                     <Table.Cell textAlign='center'>
                         {!!hasCompleted && <Icon color='green' name='checkmark' size='large' />}
-                        {!!matchingCourseId && course.year}
+                        {!!matchingCourseId && ((course.year + course.term) || "")}
                     </Table.Cell>
                     <Table.Cell>{requirement.name}</Table.Cell>
-                    <Table.Cell>{matchingCourseId && course.id}</Table.Cell>
+                    <Table.Cell><WorksheetCourseId
+                        onClick       ={this.handleRemarksEdit.bind(this)}
+                        isEditMode    ={false}
+                        courseId      ={matchingCourseId}
+                        requirementId ={requirement.id}
+                    /></Table.Cell>
                     <Table.Cell className={"remark-cell"}>
                         <WorksheetCourseRemark
                             onClick     ={this.handleRemarksEdit.bind(this)}
@@ -70,7 +77,8 @@ class Worksheet extends React.Component
 const mapStateToProps = state => ({
     requirements: state.bcs.requirements,
     courses: state.student.courses,
-    remarks: state.student.remarks
+    remarks: state.student.remarks,
+    creditFor: state.student.creditFor
 });
 
 Worksheet.propTypes = {
