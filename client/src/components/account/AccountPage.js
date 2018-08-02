@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Button, Divider, Form, Header, Message, Table } from "semantic-ui-react";
 import * as AccountActions from '../../actions/AccountActions';
 import { updateStudentInfoSuccess } from '../../actions/LoginActions';
-//import EditPasswordForm from "./EditPasswordForm";
+import EditPasswordForm from "./EditPasswordForm";
 import EditAccountInfoForm from "./EditAccountInfoForm";
 import {updateStudentInfo} from "../../api/LoginApi";
 
@@ -17,15 +17,20 @@ class AccountPage extends React.Component {
 			student: this.props.student
 		};
 		this.saveAccountInfo = this.saveAccountInfo.bind(this);
+		this.savePassword = this.savePassword.bind(this);		
 		this.toggleEdit = this.toggleEdit.bind(this);
 		this.updateAccountInfo = this.updateAccountInfo.bind(this);
 	}
 	
-	//API call
 	saveAccountInfo(event) {
 		this.toggleEdit();
+		//this.forceUpdate();
 	//	event.preventDefault();
 	//	this.props.actions.updateAccountInfo(this.state.student);
+	}
+	
+	savePassword() {
+		//this.forceUpdate();
 	}
 		
 	toggleEdit() {
@@ -38,7 +43,6 @@ class AccountPage extends React.Component {
 		student[field] = event.target.value;
 		return this.setState({student: student});
 	}
-
 	
     render () {
 			if (this.state.isEditing) {
@@ -98,6 +102,10 @@ class AccountPage extends React.Component {
 					<div id = "edit-password">
 						<Divider />
 						<h3> Edit password </h3>
+						<EditPasswordForm 
+							student = {this.state.student}
+							onSave = {this.savePassword}
+						/>
 					</div>
 					<div id = "delete-account">
 						<Divider />

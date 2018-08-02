@@ -7,4 +7,11 @@ export const doEditAccount = info => dispatch =>
 		console.log(res);
 		dispatch(accountEditSuccess(info));
 		});
+		
+export const doEditPassword = data => dispatch =>
+	axios.post("/api/editpassword", data, { headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
+	.then(res => {
+		console.log(res);
+		dispatch(accountChangePassword(data));
+	});
 

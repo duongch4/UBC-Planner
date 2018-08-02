@@ -63,13 +63,17 @@ const StudentReducer = (state = initialState, action) => {
         case ACCOUNT_EDIT:
             const fields = Object.keys(action.student);
             var {info}     = state;
-            fields.forEach(name => {
-                info[name] = action.student[name];
-            });
-            return { ...state, info};
+            info['name'] = action.student['name'];
+            info['bm'] = action.student['bm'];
+            //fields.forEach(name => {
+            //    info[name] = action.student[name];
+            //});
+            return { ...state, info}; 
 			
         case ACCOUNT_CHANGE_PASSWORD:
-			return { ...state}
+			var {info} = state;
+			info['password'] = action.student['newpassword'];
+			return { ...state, info};
 			
         case ACCOUNT_DELETE:
 			return { ...state}

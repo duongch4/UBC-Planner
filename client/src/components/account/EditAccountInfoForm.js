@@ -9,13 +9,16 @@ import {doEditAccount} from '../../api/EditAccountApi';
 class EditAccountInfoForm extends React.Component {
 	state = {
 		data: {
-			email: this.props.student.email,
-			password: this.props.student.password,
-			name: this.props.student.name,
-			sid: this.props.student.sid,
-			bm: this.props.student.bm,
-			cohort: this.props.student.cohort,
-		},
+			emailkey: this.props.student.email,
+			info: {			
+					email: this.props.student.email,
+					password: this.props.student.password,
+					name: this.props.student.name,
+					sid: this.props.student.sid,
+					bm: this.props.student.bm,
+					cohort: this.props.student.cohort
+				}
+			},
 		loading: false,
 		error: {},
 		editError: "",
@@ -25,7 +28,7 @@ class EditAccountInfoForm extends React.Component {
 	onFieldTextChange = e => this.setState({data: {...this.state.data, [e.target.name]:e.target.value}});
 	
 	onSubmit = () => {
-        const error = this.validate(this.state.data);
+        const error = this.validate(this.state.data.info);
         this.setState({ error: error });
         this.setState({ editError: "" });
         console.log(error);
@@ -33,13 +36,13 @@ class EditAccountInfoForm extends React.Component {
         if (Object.keys(error).length === 0 && error.constructor === Object) {
             this.props.doEditAccount(this.state.data)
                 .then((data) => {
-                    this.setState({ editSuccess : "Account successfully edited." });
+                    this.setState({ editSuccess : "Account successfully updated." });
                     setTimeout(() => {
                         this.props.onSave();
                     }, 1500);
                 })
                 .catch(function (e) {
-                    console.log("Account edit failure");
+                    console.log("Account update failure");
                     this.setState({ editError : e && e.response && e.response.data && e.response.data.message});
                 }.bind(this));
 			};
@@ -47,12 +50,12 @@ class EditAccountInfoForm extends React.Component {
 
     validate = data => {
         const error = {};
-        if (!data.name) error.name = "Cannot be blank";
-        if (!data.sid) error.sid = "Cannot be blank";
-        if (!data.bm) error.bm = "Cannot be blank";
-        if (!data.cohort) error.cohort = "Cannot be blank";     
-        if (!data.email) error.email = "Cannot be blank";
-        else if (!Validator.isEmail(data.email)) error.email = "Invalid email address";
+        if (!data.info.name) error.name = "Cannot be blank";
+        if (!data.info.sid) error.sid = "Cannot be blank";
+        if (!data.info.bm) error.bm = "Cannot be blank";
+        if (!data.info.cohort) error.cohort = "Cannot be blank";     
+        if (!data.info.email) error.email = "Cannot be blank";
+        else if (!Validator.isEmail(data.info.email)) error.email = "Invalid email address";
         return error;
     }
 	
@@ -68,8 +71,8 @@ class EditAccountInfoForm extends React.Component {
                     <input
                         type='text'
                         name='name'
-                        value={ this.state.data.name }
-                        placeholder = {this.state.data.name}
+                        value={ this.state.data.info.name }
+                        placeholder = {this.state.data.info.name}
                         onChange={this.onFieldTextChange}/>		
                 </Form.Field>	
 				<Form.Field error={!!this.state.error.sid }>
@@ -78,8 +81,8 @@ class EditAccountInfoForm extends React.Component {
                     <input
                         type='number'
                         name='sid'
-                        value={ this.state.data.sid }
-                        placeholder = {this.state.data.sid }
+                        value={ this.state.data.info.sid }
+                        placeholder = {this.state.data.info.sid }
                         onChange={this.onFieldTextChange}/>
                 </Form.Field>	 
 				<Form.Field error={!!this.state.error.bm }>
@@ -88,8 +91,8 @@ class EditAccountInfoForm extends React.Component {
                     <input
                         type='text'
                         name='bm'
-                        value={ this.state.data.bm }
-                        placeholder = {this.state.data.bm}
+                        value={ this.state.data.info.bm }
+                        placeholder = {this.state.data.info.bm}
                         onChange={this.onFieldTextChange}/>
                 </Form.Field>
 				<Form.Field error={!!this.state.error.cohort}>
@@ -98,8 +101,8 @@ class EditAccountInfoForm extends React.Component {
                     <input
                         type='text'
                         name='cohort'
-                        value={ this.state.data.cohort }
-                        placeholder = {this.state.data.cohort}
+                        value={ this.state.data.info.cohort }
+                        placeholder = {this.state.data.info.cohort}
                         onChange={this.onFieldTextChange}/>
                 </Form.Field>	 	        
 				<Form.Field error={!!this.state.error.sid}>
@@ -108,8 +111,8 @@ class EditAccountInfoForm extends React.Component {
                     <input
                         type='text'
                         name='email'
-                        value={ this.state.data.email }
-                        placeholder = {this.state.data.email}
+                        value={ this.state.data.info.email }
+                        placeholder = {this.state.data.info.email}
                         onChange={this.onFieldTextChange}/>
                 </Form.Field>	                                 
 			<Button id = "Edit-Account-button">Save changes</Button>
