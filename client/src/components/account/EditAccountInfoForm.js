@@ -36,7 +36,7 @@ class EditAccountInfoForm extends React.Component {
                 .then((data) => {
                     this.setState({ editSuccess : "Account successfully edited." });
                     setTimeout(() => {
-                        this.props.onSave();
+                        this.props.onSave(this.state.data);
                     }, 1500);
                 })
                 .catch(function (e) {

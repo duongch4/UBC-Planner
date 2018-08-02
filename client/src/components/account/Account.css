@@ -1,0 +1,25 @@
+accountblock {
+	align-content: center;
+	display: block;
+	width: 100%;
+}
+	
+.accountleft {
+	align-content: center;
+	float: left;
+	padding-right: 3%;
+	width: 46%;
+}
+
+.accountright {
+	align-content: center;
+	float: right;
+	padding-left: 3%;
+	width: 46%;
+}
+
+.accountwrap {
+	align-content: center;
+	display: flex;
+	width: 100%;
+}

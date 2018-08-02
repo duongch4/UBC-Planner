@@ -61,10 +61,19 @@ const StudentReducer = (state = initialState, action) => {
             return { ...state, courses:newCourses};
             
         case ACCOUNT_EDIT:
-            const fields = Object.keys(action.student);
+            //const fields = Object.keys(action.student);
+            //console.log("AccountEdit");
+            // console.log(action); //The action type and Student (up to date)
+            // console.log(action.student); //What's on file (state)
+            //console.log(state); //curent state
             var {info}     = state;
+            //console.log("var");
+            //console.log({info});
             info['name'] = action.student['name'];
             info['bm'] = action.student['bm'];
+            info['cohort'] = action.student['cohort'];
+            info['sid'] = action.student['sid'];
+            info['email'] = action.student['email'];
             //fields.forEach(name => {
             //    info[name] = action.student[name];
             //});

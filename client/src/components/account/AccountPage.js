@@ -4,10 +4,11 @@ import {bindActionCreators} from 'redux';
 import PropTypes from "prop-types";
 import { Button, Divider, Form, Header, Message, Table } from "semantic-ui-react";
 import * as AccountActions from '../../actions/AccountActions';
-import { updateStudentInfoSuccess } from '../../actions/LoginActions';
+//import { updateStudentInfoSuccess } from '../../actions/LoginActions';
 import EditPasswordForm from "./EditPasswordForm";
 import EditAccountInfoForm from "./EditAccountInfoForm";
-import {updateStudentInfo} from "../../api/LoginApi";
+//import {updateStudentInfo} from "../../api/LoginApi";
+import './Account.css';
 
 class AccountPage extends React.Component {
 	constructor (props, context) {
@@ -22,11 +23,9 @@ class AccountPage extends React.Component {
 		this.updateAccountInfo = this.updateAccountInfo.bind(this);
 	}
 	
-	saveAccountInfo(event) {
+	saveAccountInfo(stateFromChild) {
+		this.setState({student: stateFromChild});
 		this.toggleEdit();
-		//this.forceUpdate();
-	//	event.preventDefault();
-	//	this.props.actions.updateAccountInfo(this.state.student);
 	}
 	
 	savePassword() {
@@ -47,32 +46,44 @@ class AccountPage extends React.Component {
     render () {
 			if (this.state.isEditing) {
 				return (
-				<div>
-				<Header as= 'h1' icon textAlign={'left'}>
+				<div class = "accountwrap">
+				<div class = 'accountleft'>
+				<div class = "accountblock">
+				<h1>
 				Account information
-				</Header>
+				</h1>
+				</div>
+				<div class = "accountblock">
 				<EditAccountInfoForm 
 					student = {this.state.student}
 					onChange = {this.updateAccountInfo}
 					onSave = {this.saveAccountInfo}/>
-				<div id = "edit-password">
-					<Divider />
-					<h3> Edit password </h3>
+					</div>
 				</div>
-				<div id = "delete-account">
-					<Divider />
-					<h3> Delete account </h3>
+				<div class = "accountright" id = "edit-password">
+				<div class = "accountblock">
+					<h1> Edit password </h1>
+					</div>
+					<div class = "accountblock">
+					<EditPasswordForm 
+							student = {this.state.student}
+							onSave = {this.savePassword}
+						/>
+						</div>
 				</div>
 				</div>				
 				);
 			}
 			else {
 				return (
-					<div>
-					<div id = "account-info">
-						<Header as='h1' icon textAlign={'left'}>
+					<div class = "accountwrap">
+					<div class = 'accountleft' id = "account-info">
+					<div class = 'accountblock'>
+						<h1>
 						Account information
-						</Header>
+						</h1>
+						</div>
+						<div class = 'accountblock'>
 						<Table basic = 'very' celled collapsing>
 						<Table.Body>
 							<Table.Row>
@@ -99,17 +110,17 @@ class AccountPage extends React.Component {
 						</Table>
 						<Button id = 'Edit-AccountInfo-Button' onClick = { this.toggleEdit }>Edit account information</Button>				
 					</div>
-					<div id = "edit-password">
-						<Divider />
-						<h3> Edit password </h3>
+					</div>
+					<div class = "accountright" id = "edit-password">
+					<div class = 'accountblock'>
+						<h1> Edit password </h1>
+						</div>
+						<div class = 'accountblock'>					
 						<EditPasswordForm 
 							student = {this.state.student}
 							onSave = {this.savePassword}
 						/>
-					</div>
-					<div id = "delete-account">
-						<Divider />
-						<h3> Delete account </h3>
+						</div>
 					</div>
 					</div>
 			);

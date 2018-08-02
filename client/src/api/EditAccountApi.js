@@ -5,7 +5,7 @@ export const doEditAccount = data => dispatch =>
 	axios.post("/api/editaccount", data, { headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
     .then(res => { 
 		console.log(res);
-		dispatch(accountEditSuccess(data));
+		dispatch(accountEdit(data));
 		});
 		
 export const doEditPassword = data => dispatch =>
