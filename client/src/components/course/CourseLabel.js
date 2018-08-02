@@ -22,7 +22,7 @@ class CourseLabel extends React.Component {
     checkIfTaken = () => {
         const {courses} = this.props;
         const {courseId} = this.props;
-        const course = courses[courseId];
+        const course = courses && courses[courseId];
         if (!course) return '';
         if (!!course.grade) return 'green';
         return 'olive';

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import _ from 'lodash';
 import { Form, Search } from 'semantic-ui-react';
-import {doSearch, doAutocomplete} from "../../api/CourseSearchApi";
-import {reset, courseSearchSuccess, courseAutocompleteSelect} from "../../actions/CourseSearchActions";
+import { doSearch, doAutocomplete } from "../../api/CourseSearchApi";
+import { reset, courseSearchSuccess, courseAutocompleteSelect } from "../../actions/CourseSearchActions";
 
 class CourseSearch extends Component {
 
