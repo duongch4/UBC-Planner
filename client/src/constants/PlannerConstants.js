@@ -1,0 +1,2 @@
+export const STUDENT_ADD_TERM = 'STUDENT_ADD_TERM';
+export const STUDENT_EDIT_TERM = 'STUDENT_EDIT_TERM';

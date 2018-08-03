@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import { Button } from 'semantic-ui-react';
-import {doAddCourse, doRemoveCourse} from "../../api/BookmarkApi";
+import { Button, Modal } from 'semantic-ui-react';
+import { doAddCourse, doRemoveCourse } from "../../api/BookmarkApi";
 // import { doSearch } from '../../api/CourseSearchApi';
 
 class CourseBookmark extends React.Component {
@@ -18,17 +18,27 @@ class CourseBookmark extends React.Component {
 
     onCourseClick = () => {
         const { color } = this.state;
-        console.log("clicked", this.props.course);
         if (color === 'olive') {
-            this.props.doRemoveCourse(this.props.course);
-            // this.setState({ color: 'grey'})
+            this.props.doRemoveCourse({
+                email: this.props.email,
+                course: {
+                    "id": this.props.course.id
+                }});
         } else if (color === 'grey') {
-            console.log(this.props.course);
-            this.props.doAddCourse({email: this.props.email, id: this.props.course.id});
-
-            // TODO fix this: this.props.courses is null
-            if (this.props.courses[this.props.course.id])
-                this.setState({ color: 'olive'})
+            this.props.doAddCourse({
+                email: this.props.email,
+                course: {
+                    "id": this.props.course.id,
+                    "isGradApproved": 0,
+                    "creditFor": null,
+                    "section": null,
+                    "credit": null,
+                    "grade": null,
+                    "year": null,
+                    "term": null,
+                    "remarks": ""
+                }
+            })
         }
     }
 

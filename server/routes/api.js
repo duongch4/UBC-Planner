@@ -32,25 +32,28 @@ router.post('/remarks_update', (req, res) => {
     });
 });
 
-router.post('/courses', (req, res) => {
-
+router.post('/courses_add', (req, res) => {
     var query = {"info.email" : req.body.email};
     var newData = {};
-    newData["courses." + req.body.id] = {
-            "id": req.body.id,
-            "isGradApproved": 0,
-            "creditFor": "",
-            "section": "",
-            "credit": null,
-            "grade": null,
-            "year": "",
-            "term": null,
-            "remarks": ""
-    };
+    newData["courses." + req.body.course.id] = req.body.course;
 
     console.log("new data", newData);
 
     User.findOneAndUpdate(query, newData, {upsert:true}, function(err, doc){
+        if (err) return res.send(500, { error: err });
+        console.log("successfully deleted");
+        return res.send("successfully deleted");
+    });
+});
+
+router.post('/courses_delete', (req, res) => {
+    var query = {"info.email" : req.body.email};
+    var newData = {};
+    newData["courses." + req.body.course.id] = 1;
+
+    console.log("new data", newData);
+
+    User.findOneAndUpdate(query, { $unset : newData }, {upsert:true}, function(err, doc){
         if (err) return res.send(500, { error: err });
         console.log("successfully updated");
         return res.send("successfully saved");

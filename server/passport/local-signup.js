@@ -21,7 +21,7 @@ module.exports = new PassportLocalStrategy({
         bm: req.body.bm.trim(),
         cohort: req.body.cohort
     },
-    courses: null,
+    courses: {},
     remarks: {
        "PADE": "",
        "ENGL 1XX": "",

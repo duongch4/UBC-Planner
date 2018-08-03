@@ -2,11 +2,9 @@ import {addCourseSuccess, removeCourseSuccess} from "../actions/CourseBookmarkAc
 import axios from 'axios';
 
 export const doAddCourse = data => dispatch =>
-    axios.post("/api/courses", data, { headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
-    // Promise.resolve(course)
-    .then(data => dispatch(addCourseSuccess(data)));
+    axios.post("/api/courses_add", data, { headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
+    .then(resp => dispatch(addCourseSuccess(data)));
 
-export const doRemoveCourse = course => dispatch =>
-    // axios.delete("/api/courses", data)
-    Promise.resolve(course)
-    .then(data => dispatch(removeCourseSuccess(data)));
+export const doRemoveCourse = data => dispatch =>
+    axios.post("/api/courses_delete", data, { headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
+    .then(resp => dispatch(removeCourseSuccess(data)));

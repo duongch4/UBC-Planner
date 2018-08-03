@@ -34,7 +34,14 @@ axios.post("/auth/reset_password", { password: password, token: token})
 
 export const updateStudentInfo = info => dispatch =>
 axios.post("/api/info_update", {info:info},  { headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
-    .then(res => { console.log(res);});
+    .then(res => {
+        if (res.status == 200)
+            dispatch(updateStudentInfoSuccess(info));
+        else {
+            alert('Unable to update');
+            console.error(res);
+        }
+    });
 
 export const doSignup = userData =>
 axios.post("/auth/signup", userData)

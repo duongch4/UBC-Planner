@@ -1,0 +1,63 @@
+.delete.icon {
+    color: lightgray;
+}
+
+.delete.icon:hover {
+    color: darkred;
+    cursor: pointer;
+}
+
+.save.icon:hover {
+    color: #b5cc18;
+    cursor: pointer;
+}
+
+.add-row-button-wrapper {
+    text-align: right;
+}
+
+.planner-tab.ui.menu {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: -15px;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+    z-index: 100;
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+.ui.secondary.menu .item.add:hover {
+    background-color: transparent;
+    color: #0a7a25;
+}
+
+.green.plus.small.circular.inverted.icon:hover {
+    color: #0a7a25 !important;
+    background-color: #44a85f;
+
+    -moz-box-shadow: rgba(115, 115, 115, 0.8) 1px 1px 1px inset;
+    -webkit-box-shadow: rgba(115, 115, 115, 0.8) 1px 1px 1px inset;
+    box-shadow: rgba(115, 115, 115, 0.8) 1px 1px 1px inset;
+}
+
+.planner-table-wrapper {
+    padding: 20px;
+}
+
+button.ubc-button {
+    background-color: #002145;
+    color: white;
+}
+
+button.ubc-button:hover {
+    background-color: #003b7c;
+    color: #cdcdcd;
+    -moz-box-shadow: rgba(115, 115, 115, 0.8) 1px 1px 1px inset;
+    -webkit-box-shadow: rgba(115, 115, 115, 0.8) 1px 1px 1px inset;
+    box-shadow: rgba(115, 115, 115, 0.8) 1px 1px 1px inset;
+}

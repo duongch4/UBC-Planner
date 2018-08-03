@@ -1,11 +1,11 @@
 import {STUDENT_ADD_COURSE, STUDENT_REMOVE_COURSE} from '../constants/WorksheetConstants'
 
-export const addCourseSuccess = course => ({
+export const addCourseSuccess = data => ({
     type: STUDENT_ADD_COURSE,
-    course
+    data
 });
 
-export const removeCourseSuccess = course => ({
+export const removeCourseSuccess = data => ({
     type: STUDENT_REMOVE_COURSE,
-    course
+    data
 });

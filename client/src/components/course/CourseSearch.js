@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import _ from 'lodash';
 import { Form, Search } from 'semantic-ui-react';
 import {doSearch, doAutocompleteCourse, doAutocompleteDepartment, doAutocompleteSelect, doLoadDepartment, doUnloadDepartment} from "../../api/CourseSearchApi";
