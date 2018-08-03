@@ -107,7 +107,6 @@ export const doSearch = query => (dispatch, getState) => {
             "conflict": getConflict(loadedDeptName + ' ' + course.key)
           }
         })
-        console.log(JSON.stringify(courses))
         resolve (courses);
       }, Promise.resolve, Promise.reject)
       .then (data => {dispatch(courseSearchSuccess(data))})
@@ -118,8 +117,18 @@ export const doSearch = query => (dispatch, getState) => {
           if (depts[0] === undefined) dispatch(courseSearchFail())
           else {
             var dept = depts[0].key;
-            getCourses(deptUrl + dept + '&output=3', dept).then((data) => {
-              if (data !== undefined) dispatch(courseSearchSuccess(data))})}
+            var key = "";
+            if (/\s+/.test(query)) {
+              key = query.split(/\s+/)[1];
+              }
+            if (key === "") {
+              getCourses(deptUrl + dept + '&output=3', dept).then((data) => {
+                if (data !== undefined) dispatch(courseSearchSuccess(data))})
+            } else {
+              filterAndGetCourses(deptUrl + dept + '&output=3', dept, key).then((data) => {
+                if (data !== undefined) dispatch(courseSearchSuccess(data))})
+            }
+          }
         })
       }
   }
@@ -193,6 +202,45 @@ return fetch (url, {method: 'GET'})
     })
 }
 
+
+const filterAndGetCourses = (url, dept, key) => {
+  return fetch (url, {method: 'GET'})
+      .then ((response) => response.text())
+      .then ((responseText) => {
+        var courseArray = [];
+          parseString(responseText, (err, result) => {
+            console.log("courseArray", courseArray)
+              courseArray = result.courses.course;
+            });
+            console.log("courseArray", courseArray)
+            return courseArray;
+          })
+      .then((courseArray) => {
+        const re = new RegExp("^" + _.escapeRegExp(key, 'i'))
+        const isMatch = course => re.test(course.$.key)
+        const filteredCourseArray = _.filter(courseArray, isMatch)
+        console.log("filteredCourseArray", filteredCourseArray)
+        return (filteredCourseArray);
+      })
+      .then((filteredCourseArray) => {
+        var courses = filteredCourseArray.map(course => {
+        return {
+          "id": dept + ' ' + course.$.key,
+          "name": course.$.title,
+          "description": course.$.descr,
+          "prnote": course.$.prereqnote,
+          "pr": preProcess(course.$.prereqs),
+          conflict: getConflict(dept + ' ' + course.$.key)
+          }
+        })
+        console.log("courses", courses)
+        return courses;
+      })
+      .catch((err) => {
+          return [];
+      })
+}
+
 /**
  * returns array of JSON objects with: id, name, description, credits, pr for each course parsed in the url
  * @ param url is the url to be fetched and dept is the department name
@@ -218,7 +266,7 @@ const getCourses = (url, dept) => {
           return courses;
       })
       .catch((err) => {
-          console.log('Error fetching the feed: ', err)
+          return [];
       })
 }
 
