@@ -60,4 +60,24 @@ router.post('/courses_delete', (req, res) => {
     });
 });
 
+router.post('/editaccount', (req, res) => {
+    var query = {"info.email" : req.body.emailKey};   
+    var newData = req.body.data;
+    User.findOneAndUpdate(query, { info : newData }, {}, function(err, doc) {
+		if (err) return res.send(500, {error: err});
+		console.log("successfully updated");
+		return res.send("successfully saved");
+	});
+});	
+
+router.post('/editpassword', (req, res) => {
+    var query = {"info.email" : req.body.email}; 
+    var newPassword = req.body.newpassword;
+    User.findOneAndUpdate(query, {"info.password": newPassword}, {}, function(err, doc) {
+		if (err) return res.send(500, {error: err});
+		console.log("Password successfully updated");
+		return res.send("Password successfully saved");
+	});
+});	
+
 module.exports = router;

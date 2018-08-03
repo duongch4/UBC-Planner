@@ -7,6 +7,7 @@ import {doLogout} from "../../api/LoginApi";
 import WorksheetPage from "../worksheet/WorksheetPage";
 import CoursePage from "../course/CoursePage";
 import PlannerPage from "../planner/PlannerPage";
+import AccountPage from "../account/AccountPage";
 import { Menu, Container, Dropdown, Sticky } from 'semantic-ui-react'
 
 class MainPage extends React.Component {
@@ -87,7 +88,10 @@ class MainPage extends React.Component {
                     <Menu.Menu position='right'>
                         <Dropdown item text={name}>
                             <Dropdown.Menu>
-                                <Dropdown.Item>Account</Dropdown.Item>
+                                <Dropdown.Item
+									name='account'
+									active={activeItem === 'account'}
+									onClick={this.handleItemClick}>Account</Dropdown.Item>
                                 <Dropdown.Item
                                     active={activeItem === 'logout'}
                                     onClick={this.logout}>Logout</Dropdown.Item>
@@ -99,6 +103,7 @@ class MainPage extends React.Component {
                     {activeItem === 'worksheet' && <WorksheetPage/>}
                     {activeItem === 'courses' && <CoursePage/>}
                     {activeItem === 'planner' && <PlannerPage/>}
+                    {activeItem === 'account' && <AccountPage />}
                 </Container>
 
             </div>

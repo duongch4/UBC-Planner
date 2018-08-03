@@ -6,6 +6,7 @@ import { STUDENT_ADD_TERM, STUDENT_EDIT_TERM } from '../constants/PlannerConstan
 import { LOG_IN, LOG_OUT, UPDATE_INFO_SUCCESS } from '../constants/LoginConstants';
 import update from 'react-addons-update';
 import bcs from '../data/bcs.json';
+import { ACCOUNT_EDIT, ACCOUNT_CHANGE_PASSWORD, ACCOUNT_DELETE } from '../constants/AccountConstants';
 
 const initialState = {
     isLoggedIn: false,
@@ -192,6 +193,33 @@ const StudentReducer = (state = initialState, action) => {
             delete newPlanner[origTerm];
 
             return { ...state, planner:newPlanner, courses};
+            case ACCOUNT_EDIT:
+                var {info}     = state;
+                var newinfo = {
+    				bm: action.student.data.bm,
+    				cohort: action.student.data.cohort,
+    				email: action.student.data.email,
+    				name: action.student.data.name,
+    				password: info['password'],
+    				sid: action.student.data.sid
+    			}
+                return { ...state, info: newinfo};
+
+            case ACCOUNT_CHANGE_PASSWORD:
+            console.log(action);
+    			var {info} = state;
+    			var newinfo = {
+    				bm: info['bm'],
+    				cohort: info['cohort'],
+    				email: info['email'],
+    				name: info['name'],
+    				password: action.student.newpassword,
+    				sid: info['sid']
+    			}
+    			return { ...state, info: newinfo};
+
+            case ACCOUNT_DELETE:
+    			return { ...state}
         default: return state;
     }
 };
