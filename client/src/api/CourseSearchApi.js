@@ -12,7 +12,6 @@ var date = new Date().getFullYear();
 const deptUrl = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=2&dept=';
 const oneCourseUrl = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=3&dept=';
 
-
 export const doCourseSelect = query => (dispatch, getState) => {
     var fullUrl, dept, key = "";
       if (/\s+/.test(query)) {

@@ -224,7 +224,7 @@ router.post('/reset_password', (req, res) => {
           'This is a confirmation that the password for your account ' + user.info.email + ' has just been changed.\n'
       };
       transporter.sendMail(mailOptions, function(err) {
-        return res.status(200).send({ message: 'Success! Your password has been changed.' });
+        return res.status(200).send({ message: 'Success! Redirecting you to the login page.' });
         done(err);
       });
     }

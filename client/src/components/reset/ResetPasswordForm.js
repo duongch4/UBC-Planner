@@ -1,5 +1,6 @@
 import React from 'react';
 import Validator from 'validator';
+import PropTypes from "prop-types";
 import {resetPassword} from '../../api/LoginApi';
 import LoginErrorMessage from '../login/LoginErrorMessage';
 import { Form, Button, Message } from "semantic-ui-react";
@@ -29,6 +30,9 @@ class ResetPasswordForm extends React.Component {
           resetPassword(this.state.data.password, token)
                 .then((data) => {
                     this.setState({ resetPasswordSuccess: data.message});
+                    setTimeout(() => {
+                        this.props.submit();
+                    }, 1500);
                 })
                 .catch(function (e) {
                     this.setState({ resetPasswordError : e.response.data.error });
@@ -99,5 +103,9 @@ class ResetPasswordForm extends React.Component {
         );
     }
 }
+
+ResetPasswordForm.propTypes = {
+    submit: PropTypes.func.isRequired,
+};
 
 export default ResetPasswordForm;
