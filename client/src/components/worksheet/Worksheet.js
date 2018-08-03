@@ -10,8 +10,16 @@ class Worksheet extends React.Component
 {
 
     state = {
-        inEditMode: null
+        inEditMode: null,
+        creditFor: this.props.creditFor
     }
+
+    componentWillReceiveProps = nextProps => {
+        const { creditFor } = nextProps;
+
+        console.log("creditFor updated", this.props.creditFor, creditFor)
+        this.setState({ creditFor });
+    };
 
     handleRemarksEdit = cell => {
         console.log('old',  this.state.inEditMode && this.state.inEditMode.props, 'new:', cell.props);
@@ -20,10 +28,10 @@ class Worksheet extends React.Component
         this.state.inEditMode = cell;
     };
 
-    createWorksheetCells = (requirements, courses, remarks) => {
+    createWorksheetCells = (requirements, courses, remarks, creditFor) => {
         const courseNames = courses && Object.keys(courses);
         return requirements.map((requirement) => {
-            const matchingCourseId = this.props.creditFor[requirement.id];
+            const matchingCourseId = creditFor[requirement.id];
                 //courseNames && courseNames.find(name => ((courses[name].creditFor === requirement.id) || (courses[name].id === requirement.id)));
             const hasCompleted = matchingCourseId && courses[matchingCourseId].grade;
             const course = matchingCourseId && courses[matchingCourseId];
@@ -56,6 +64,7 @@ class Worksheet extends React.Component
 
     render = () => {
         const { requirements, courses, remarks } = this.props;
+        const { creditFor } = this.state;
         return (
             <Table celled selectable className='Worksheet-table'>
                 <Table.Header>
@@ -67,7 +76,7 @@ class Worksheet extends React.Component
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {this.createWorksheetCells(requirements, courses, remarks)}
+                    {this.createWorksheetCells(requirements, courses, remarks, creditFor)}
                 </Table.Body>
             </Table>
         );

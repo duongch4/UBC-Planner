@@ -109,11 +109,11 @@ const StudentReducer = (state = initialState, action) => {
         case STUDENT_ADD_COURSE:
             var { course  } = action.data;
             var { courses } = state;
-            var newCourses = JSON.parse(JSON.stringify(courses));
+            var newCourses = (courses && JSON.parse(JSON.stringify(courses))) || {};
             newCourses[course.id] = JSON.parse(JSON.stringify(course));
 
             var planner = {};
-            var courseKeys = Object.keys(courses);
+            var courseKeys = (courses && Object.keys(courses)) || [];
             courseKeys.forEach(function (courseCode) {
                 var { year } = courses[courseCode];
                 var { term } = courses[courseCode];
@@ -124,12 +124,30 @@ const StudentReducer = (state = initialState, action) => {
 
             return { ...state, courses:newCourses};
         case STUDENT_REMOVE_COURSE:
-            var { course }  = action.data;
-            var { courses } = state;
+            var { courses, planner, creditFor } = state;
+            var { id }  = action.data.course;
+            var course = courses[id];
             var newCourses  = JSON.parse(JSON.stringify(courses));
+            var newPlannerForTerm;
 
-            delete newCourses[course.id];
-            return { ...state, courses:newCourses};
+
+            console.log("REMOVE", course);
+
+
+            var origPlannerForTerm = planner[course.year + course.term];
+            if (origPlannerForTerm) {
+                newPlannerForTerm = origPlannerForTerm.filter(courseCode => (courseCode != id)) ;
+                planner[course.year + course.term] = newPlannerForTerm;
+            }
+
+            var requirementId = course.creditFor;
+            if (requirementId) {
+                creditFor[requirementId] = null
+            }
+
+            delete newCourses[id];
+
+            return { ...state, courses:newCourses, planner, creditFor};
         case STUDENT_ADD_TERM:
             var { planner } = state;
             var { term } = action;
@@ -137,26 +155,23 @@ const StudentReducer = (state = initialState, action) => {
             newPlanner[term] = [];
             return { ...state, planner:newPlanner};
         case UPDATE_COURSE_REQUIREMENT_SUCCESS:
-            console.log('ACTION', action);
+            console.log('ACTION: ', action);
 
-            var { id, field, value, origId } = action;
+            var { courseId, field, value, origId } = action;
             var { courses, creditFor } = state;
 
             var newCourses;
             var course;
 
-            if (origId && origId.length !== 0) {
-                course = courses[origId];
-                course[origId][field] = null;
+            course = courses[origId];
+            if (course) {
+                courses[origId][field] = null;
                 // newCourses = update(courses, {[origId]: {[field]: {$set: null}}});
             } else {
                 newCourses = courses;
             }
 
-            console.log(courses);
-            console.log(newCourses);
-
-            course = courses[id];
+            course = courses[courseId];
             if (!!course) {
                 course[field] = value;
                 // newCourses = update(newCourses, {[id]: {[field]: {$set: value}}});
@@ -165,12 +180,13 @@ const StudentReducer = (state = initialState, action) => {
             var newCreditFor;
             if (field === 'creditFor') {
 
-                creditFor[value] = id;
+                // creditFor[value] = courseId;
                 // newCreditFor = update(creditFor, {[value]: {$set: id}});
-            } else {
-                newCreditFor = creditFor;
+                console.log("REDUCER:" , value, courseId);
+                creditFor = update(creditFor, {[value]: {$set: courseId}});
             }
 
+            console.log("REDUCER:", creditFor);
             return { ...state, courses, creditFor };
         case STUDENT_EDIT_TERM:
             var { planner, courses } = state;
@@ -178,17 +194,26 @@ const StudentReducer = (state = initialState, action) => {
             var year = newTerm.substring(0, 5);
             var semester = parseInt(newTerm.charAt(5));
             var newPlanner = ( planner && JSON.parse(JSON.stringify(planner)) ) || {};
-            var courseCodes = ( newPlanner && newPlanner[origTerm] && Object.keys(newPlanner[origTerm])) || [];
 
-            courseCodes.forEach(courseCode => {
-                var course = newPlanner[origTerm][courseCode];
+
+
+
+
+
+
+
+            var courseCodes = (planner && planner[origTerm]) || [];
+            console.log("ACTION", courseCodes, action);
+
+
+            newPlanner[newTerm] = courseCodes.reduce((arr, courseCode) => {
+                var course = courses[courseCode];
                 course.year = year;
                 course.term = semester;
-
                 courses[courseCode] = course;
-            });
-
-            newPlanner[newTerm] = newPlanner[origTerm];
+                arr.push(courseCode);
+                return arr;
+            }, []);
             delete newPlanner[origTerm];
 
             return { ...state, planner:newPlanner, courses};

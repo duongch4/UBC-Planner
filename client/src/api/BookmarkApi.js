@@ -7,4 +7,5 @@ export const doAddCourse = data => dispatch =>
 
 export const doRemoveCourse = data => dispatch =>
     axios.post("/api/courses_delete", data, { headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
-    .then(resp => dispatch(removeCourseSuccess(data)));
+        .then(resp => dispatch(removeCourseSuccess(data)))
+        .catch(err => console.error(err));

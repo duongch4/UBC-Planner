@@ -55,9 +55,55 @@ router.post('/courses_delete', (req, res) => {
 
     User.findOneAndUpdate(query, { $unset : newData }, {upsert:true}, function(err, doc){
         if (err) return res.send(500, { error: err });
-        console.log("successfully updated");
+        if (!!err) console.log("successfully updated");
         return res.send("successfully saved");
     });
 });
+
+router.post('/course_update', (req, res) =>{
+    var query = {"info.email": req.body.email};
+    try {
+        console.log({email: req.body.email, origId: req.body.origId, courseId: req.body.courseId, field: req.body.field, value: req.body.value})
+
+        if (req.body.origId) {
+
+            console.log(req.body.origId, req.body.origId? true:false);
+
+            var removeData = {};
+            removeData["courses." + req.body.origId + "." + req.body.field] = null;
+            console.log('/course_update: origId', removeData);
+
+            User.updateOne(query, removeData, {upsert:true}, function(err, doc){
+                if (err) return res.send(500, { error: err });
+                console.log("origId:", req.body.origId);
+            });
+        }
+
+        if (req.body.courseId) {
+
+            console.log(req.body.courseId, req.body.courseId? true:false);
+            var newData = {};
+            newData["courses." + req.body.courseId + "." + req.body.field] = req.body.value;
+            console.log('/course_update: newData', newData);
+
+            User.updateOne(query, newData, {upsert: true}, function (err, doc) {
+                if (err) return res.send(500, {error: err});
+
+                if (!err) console.log("successfully updated");
+                else console.error(">>>>>>>>error..", err);
+
+                return res.send("successfully");
+            });
+        } else {
+            res.send("successfully");
+        }
+    } catch (e) {
+        print(e);
+    }
+
+
+
+
+})
 
 module.exports = router;
