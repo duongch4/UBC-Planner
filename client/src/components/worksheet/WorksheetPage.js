@@ -31,7 +31,7 @@ class WorksheetPage extends React.Component {
         const {name, bm, cohort, sid} = this.props.student;
         return (
           <div>
-            <div id='divToPrint'>
+
                 <Header as='h1' icon textAlign={'left'}>
                 <div class="h-left">
                 {name}
@@ -44,7 +44,7 @@ class WorksheetPage extends React.Component {
 
                 </Header>
 
-
+<div id='divToPrint'>
 
                 <div class = "student-info-container">
                     <WorksheetInfo
