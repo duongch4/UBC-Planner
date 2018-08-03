@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import {courseSearchSuccess, courseAutocompleteSelect, courseAutocompleteDeptSuccess, courseAutocompleteFail, courseSearchFail,
   courseAutocompleteCourseSuccess, loadDepartment, unloadDepartment} from "../actions/CourseSearchActions";
+import exemptions from '../data/exemptions';
 var data  = require("../data/courseSearchList.json");
 var async = require('async');
 const parseString = require('react-native-xml2js').parseString;
@@ -10,6 +11,7 @@ const baseURL = 'https://courses.students.ubc.ca/cs/servlets/SRVCourseSchedule?'
 var date = new Date().getFullYear();
 const deptUrl = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=2&dept=';
 const oneCourseUrl = proxyUrl + baseURL + '&sessyr=' + date +'&sesscd=W&req=3&dept=';
+
 
 export const doCourseSelect = query => (dispatch, getState) => {
     var fullUrl, dept, key = "";
@@ -100,8 +102,9 @@ export const doSearch = query => (dispatch, getState) => {
             "id": loadedDeptName + ' ' + course.key,
             "name": course.title,
             "description": course.descr,
-            "credits": course.prereqnote,
-            "pr": preProcess(course.prereqs)
+            "prnote": course.prereqnote,
+            "pr": preProcess(course.prereqs),
+            "conflict": getConflict(loadedDeptName + ' ' + course.key)
           }
         })
         console.log(JSON.stringify(courses))
@@ -120,6 +123,18 @@ export const doSearch = query => (dispatch, getState) => {
         })
       }
   }
+}
+
+const getConflict = id => {
+  const re = new RegExp(_.escapeRegExp(id.toUpperCase()), 'i')
+  const isMatch = course => re.test(Object.keys(course)[0])
+  const filteredCourses = _.filter(exemptions, isMatch)
+  var result = [];
+  for (var i =0; i < filteredCourses.length; i++) {
+    result = result.concat(Object.values(filteredCourses[i])[0]);
+  }
+  if (result.size == 0) return;
+  else return result;
 }
 
 /**
@@ -193,8 +208,9 @@ const getCourses = (url, dept) => {
                 "id": dept + ' ' + course.$.key,
                 "name": course.$.title,
                 "description": course.$.descr,
-                "credits": course.$.prereqnote,
-                "pr": preProcess(course.$.prereqs)
+                "prnote": course.$.prereqnote,
+                "pr": preProcess(course.$.prereqs),
+                conflict: getConflict(dept + ' ' + course.$.key)
               }
             })
           });

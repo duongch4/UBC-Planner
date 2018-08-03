@@ -7,8 +7,6 @@ const User = require('mongoose').model('User');
 
 const router = new express.Router();
 
-//TODO: email verification
-
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.gmail.com',
@@ -255,7 +253,7 @@ router.post('/confirmation', (req, res) => {
         });
     });
 }
-*/
+
 router.post('/resend_confirmation', (req, res) => {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
@@ -291,7 +289,7 @@ router.post('/resend_confirmation', (req, res) => {
         });
 
     });
-})
+})*/
 
 
 

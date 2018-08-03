@@ -100,8 +100,7 @@ class EmailModalForm extends React.Component {
                     <Form.Field>
                     <label htmlFor='subject'>Your current graduation checklist will be attached.</label>
                     </Form.Field>
-
-                    <Button className='Email-button' id='Email-button' fluid> Submit </Button>
+                      <Button className='Email-button' id='Email-button' fluid> Submit </Button>
                 </Form> : null}
             </div>
         );

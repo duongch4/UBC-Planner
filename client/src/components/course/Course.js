@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 import { Card, List} from 'semantic-ui-react'
 import CourseBookmark from './CourseBookmark'
 import CourseLabel from './CourseLabel'
+import CourseConflictLabel from './CourseConflictLabel'
+import exemptions from '../../data/exemptions'
+import _ from 'lodash';
 
 class Course extends React.Component {
 
@@ -19,8 +22,9 @@ class Course extends React.Component {
             id: course.id,
             name: course.name,
             description: course.description,
-            cr: course.cr,
+            prnote: course.prnote,
             pr: course.pr,
+            conflict: course.conflict
         });
     };
 
@@ -29,6 +33,22 @@ class Course extends React.Component {
         return ((!!pr)? <List >{this.createLabels(pr)}</List> : '');
     }
 
+    createConflicts = () => {
+      let { conflict } = this.state;
+      return ((!!conflict)? <List >{this.createConflictLabels(conflict)}</List> : '');
+    }
+
+    createConflictLabels = (result) => {
+      console.log(result)
+      if (result.length > 0) {
+        return (<span>
+                &nbsp; conflict: [ {result.map(function(el) {
+                  return (<CourseConflictLabel courseId={el} />);
+                })}]
+                </span>
+            )
+      }
+  }
 
     createLabels = (item) => {
         console.log("create");
@@ -77,6 +97,7 @@ class Course extends React.Component {
             <Card.Content extra>
                 <div>{ credits } </div>
                 {this.createPrerequisites()}
+                {this.createConflicts()}
             </Card.Content>
         </Card>
     }
