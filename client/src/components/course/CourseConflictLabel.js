@@ -21,13 +21,11 @@ class CourseConflictLabel extends React.Component {
     checkIfTaken = () => {
         const {courses} = this.props;
         const {courseId} = this.props;
-        var course = null;
-        if (courses !== null) {
-         course = courses[courseId];
-        }
+        const course = courses[courseId];
+
         if (!course) return '';
         if (!!course.grade) return 'red';
-        return 'google plus';
+        return 'google plus red';
     }
 
     onLabelClick=(e, o)=>{
