@@ -10,6 +10,7 @@ import jsPDF from 'jspdf'
 import axios from 'axios'
 import {emailUserWorksheet} from '../../api/WorksheetApi';
 import EmailModal from '../modal/EmailModal';
+import ConfirmModal from '../modal/ConfirmModal';
 import domtoimage from 'dom-to-image';
 
 class WorksheetPage extends React.Component {
@@ -17,33 +18,6 @@ class WorksheetPage extends React.Component {
     state = {
         inEditMode: null
     }
-
-    handleEmailUser = () => {
-      emailUserWorksheet(this.props.student.email, window.document.getElementById('divToPrint'))
-      .then((result) => {
-        alert(result.data.message)
-      })
-      .catch(function (e) {
-        alert(e.response.data.error)
-      }.bind(this));
-    }
-
-    handleSavePdf = () => {
-		    domtoimage.toPng(window.document.getElementById('divToPrint'))
-		      .then((dataUrl) => {
-            let imgData = new Image();
-            imgData.src=dataUrl;
-
-            let pdf = new jsPDF('p', 'mm', 'letter');
-            pdf.setFontSize(12);
-            pdf.addImage(imgData, 'PNG', 15, 20, 185, 220);
-            pdf.save('ubc-planner-worksheet.pdf');
-            console.log("pdf save");
-		      })
-          .catch(function (error) {
-            console.error("dom-to-image error");
-          });
-        };
 
     handleInfoEdit = item => {
         if (!!this.state.inEditMode && this.state.inEditMode!=item)
@@ -59,8 +33,19 @@ class WorksheetPage extends React.Component {
           <div>
             <div id='divToPrint'>
                 <Header as='h1' icon textAlign={'left'}>
-                        {name}
+                <div class="h-left">
+                {name}
+                </div>
+                <div class="button" class="h-right">
+                <ConfirmModal />
+                  <EmailModal />
+
+                </div>
+
                 </Header>
+
+
+
                 <div class = "student-info-container">
                     <WorksheetInfo
                         isEditMode = {false}
@@ -87,12 +72,6 @@ class WorksheetPage extends React.Component {
                 <WorksheetProgress />
                 <Worksheet {...this.props}/>
 
-            </div>
-
-            <EmailModal />
-            <div class="button">
-              <button class="ui left attached button" onClick= {this.handleEmailUser.bind(this)}>Send to my email</button>
-              <button class="ui right attached button" onClick= {this.handleSavePdf.bind(this)}>Save as PDF</button>
             </div>
 
           </div>

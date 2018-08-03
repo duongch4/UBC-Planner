@@ -22,7 +22,7 @@ class CourseLabel extends React.Component {
         const {courses} = this.props;
         const {courseId} = this.props;
         var course = null;
-        if (courses !== null) {
+        if (!!courses) {
          course = courses[courseId];
         }
         if (!course) return '';

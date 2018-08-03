@@ -21,7 +21,10 @@ class CourseConflictLabel extends React.Component {
     checkIfTaken = () => {
         const {courses} = this.props;
         const {courseId} = this.props;
-        const course = courses[courseId];
+        var course = null;
+        if (!!courses) {
+         course = courses[courseId];
+        }
 
         if (!course) return '';
         if (!!course.grade) return 'red';

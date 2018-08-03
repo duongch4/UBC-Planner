@@ -54,3 +54,10 @@
   display: inline-block !important;
   position: relative;
 }
+.h-left{
+  float: left;
+}
+.h-right{
+  float: right;
+    display:flex; flex-direction:row;
+}

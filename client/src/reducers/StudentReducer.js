@@ -109,11 +109,11 @@ const StudentReducer = (state = initialState, action) => {
         case STUDENT_ADD_COURSE:
             var { course  } = action.data;
             var { courses } = state;
-            var newCourses = JSON.parse(JSON.stringify(courses));
+            var newCourses = (courses && JSON.parse(JSON.stringify(courses))) || {};
             newCourses[course.id] = JSON.parse(JSON.stringify(course));
 
             var planner = {};
-            var courseKeys = Object.keys(courses);
+            var courseKeys = (courses && Object.keys(courses)) || [];
             courseKeys.forEach(function (courseCode) {
                 var { year } = courses[courseCode];
                 var { term } = courses[courseCode];

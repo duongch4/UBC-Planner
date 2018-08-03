@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     sid: Number,
     bm: String,
     cohort: Number,
-    //isVerified: Boolean
+    //isVerified: Boolean TODO: email verification
     resetPasswordToken: String,
     resetPasswordExpires: Date
   },
