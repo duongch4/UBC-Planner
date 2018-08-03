@@ -2,13 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
 import PropTypes from "prop-types";
-import { Button, Divider, Form, Header, Message, Table } from "semantic-ui-react";
+import { Button, Divider, Form, Grid, Header, Message, Table } from "semantic-ui-react";
 import * as AccountActions from '../../actions/AccountActions';
-//import { updateStudentInfoSuccess } from '../../actions/LoginActions';
 import EditPasswordForm from "./EditPasswordForm";
 import EditAccountInfoForm from "./EditAccountInfoForm";
-//import {updateStudentInfo} from "../../api/LoginApi";
-import './Account.css';
 
 class AccountPage extends React.Component {
 	constructor (props, context) {
@@ -24,12 +21,15 @@ class AccountPage extends React.Component {
 	}
 	
 	saveAccountInfo(stateFromChild) {
-		this.setState({student: stateFromChild});
+		//this.setState({student: stateFromChild});
+		console.log(this.props);
+		console.log(this.state);
 		this.toggleEdit();
 	}
 	
-	savePassword() {
-		//this.forceUpdate();
+	savePassword(stateFromChild) {
+		//var f = this.state.student.password;
+	//	this.setState({f: stateFromChild});
 	}
 		
 	toggleEdit() {
@@ -43,47 +43,42 @@ class AccountPage extends React.Component {
 		return this.setState({student: student});
 	}
 	
+	componentWillReceiveProps(nextProps) {
+		if ((this.props.student.sid !== nextProps.student.sid) ||
+			(this.props.student.name !== nextProps.student.name) ||
+			(this.props.student.email !== nextProps.student.email) ||
+			(this.props.student.cohort !== nextProps.student.cohort) ||
+			(this.props.student.bm !== nextProps.student.bm)){
+			this.setState({student: nextProps.student});
+		}
+	}
+	
     render () {
 			if (this.state.isEditing) {
 				return (
-				<div class = "accountwrap">
-				<div class = 'accountleft'>
-				<div class = "accountblock">
-				<h1>
-				Account information
-				</h1>
-				</div>
-				<div class = "accountblock">
+				<Grid columns = {2} stackable>
+				<Grid.Column>
+				<Header as='h1' content ='Account information' />
 				<EditAccountInfoForm 
 					student = {this.state.student}
 					onChange = {this.updateAccountInfo}
 					onSave = {this.saveAccountInfo}/>
-					</div>
-				</div>
-				<div class = "accountright" id = "edit-password">
-				<div class = "accountblock">
-					<h1> Edit password </h1>
-					</div>
-					<div class = "accountblock">
+				</Grid.Column>
+				<Grid.Column>
+				<Header as='h1' content ='Edit password' />
 					<EditPasswordForm 
 							student = {this.state.student}
 							onSave = {this.savePassword}
 						/>
-						</div>
-				</div>
-				</div>				
+				</Grid.Column>
+				</Grid>				
 				);
 			}
 			else {
 				return (
-					<div class = "accountwrap">
-					<div class = 'accountleft' id = "account-info">
-					<div class = 'accountblock'>
-						<h1>
-						Account information
-						</h1>
-						</div>
-						<div class = 'accountblock'>
+					<Grid columns = {2} stackable>
+					<Grid.Column>
+					<Header as='h1' content ='Account information' />
 						<Table basic = 'very' celled collapsing>
 						<Table.Body>
 							<Table.Row>
@@ -109,20 +104,15 @@ class AccountPage extends React.Component {
 						</Table.Body>
 						</Table>
 						<Button id = 'Edit-AccountInfo-Button' onClick = { this.toggleEdit }>Edit account information</Button>				
-					</div>
-					</div>
-					<div class = "accountright" id = "edit-password">
-					<div class = 'accountblock'>
-						<h1> Edit password </h1>
-						</div>
-						<div class = 'accountblock'>					
+					</Grid.Column>
+					<Grid.Column>
+					<Header as='h1' content ='Edit password' />					
 						<EditPasswordForm 
 							student = {this.state.student}
 							onSave = {this.savePassword}
 						/>
-						</div>
-					</div>
-					</div>
+					</Grid.Column>
+					</Grid>
 			);
 		}
 	}

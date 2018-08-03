@@ -57,32 +57,32 @@ const StudentReducer = (state = initialState, action) => {
             var newCourses = JSON.parse(JSON.stringify(courses));
 
             delete newCourses[course.id];
-
             return { ...state, courses:newCourses};
             
         case ACCOUNT_EDIT:
-            //const fields = Object.keys(action.student);
-            //console.log("AccountEdit");
-            // console.log(action); //The action type and Student (up to date)
-            // console.log(action.student); //What's on file (state)
-            //console.log(state); //curent state
             var {info}     = state;
-            //console.log("var");
-            //console.log({info});
-            info['name'] = action.student['name'];
-            info['bm'] = action.student['bm'];
-            info['cohort'] = action.student['cohort'];
-            info['sid'] = action.student['sid'];
-            info['email'] = action.student['email'];
-            //fields.forEach(name => {
-            //    info[name] = action.student[name];
-            //});
-            return { ...state, info}; 
-			
+            var newinfo = {
+				bm: action.student.data.bm,
+				cohort: action.student.data.cohort,
+				email: action.student.data.email,
+				name: action.student.data.name,
+				password: info['password'],
+				sid: action.student.data.sid
+			}
+            return { ...state, info: newinfo}; 
+            
         case ACCOUNT_CHANGE_PASSWORD:
+        console.log(action);
 			var {info} = state;
-			info['password'] = action.student['newpassword'];
-			return { ...state, info};
+			var newinfo = {
+				bm: info['bm'],
+				cohort: info['cohort'],
+				email: info['email'],
+				name: info['name'],
+				password: action.student.newpassword,
+				sid: info['sid']
+			}
+			return { ...state, info: newinfo};
 			
         case ACCOUNT_DELETE:
 			return { ...state}

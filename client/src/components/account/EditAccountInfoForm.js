@@ -35,9 +35,10 @@ class EditAccountInfoForm extends React.Component {
             this.props.doEditAccount(this.state)
                 .then((data) => {
                     this.setState({ editSuccess : "Account successfully edited." });
-                    setTimeout(() => {
-                        this.props.onSave(this.state.data);
-                    }, 1500);
+                    this.props.onSave(this.state.data);
+                    //setTimeout(() => {
+                     //   this.props.onSave(this.state.data);
+                    //}, 1500);
                 })
                 .catch(function (e) {
                     console.log("Account edit failure");
@@ -97,7 +98,7 @@ class EditAccountInfoForm extends React.Component {
 					<label htmlFor='cohort'>Cohort</label>
                     {this.state.error.cohort && <EditAccountErrorMessage text={this.state.error.cohort}/>}
                     <input
-                        type='text'
+                        type='number'
                         name='cohort'
                         value={ this.state.data.cohort }
                         placeholder = {this.state.data.cohort}
@@ -124,4 +125,8 @@ EditAccountInfoForm.propTypes = {
 	onSave: PropTypes.func.isRequired
 };
 
-export default connect (null, {doEditAccount}) (EditAccountInfoForm);
+const mapStateToProps = state => ({
+    student: state.student.info
+})
+
+export default connect (mapStateToProps, {doEditAccount}) (EditAccountInfoForm);
