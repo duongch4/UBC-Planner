@@ -80,8 +80,7 @@ router.post('/course_update', (req, res) =>{
         }
 
         if (req.body.courseId) {
-
-            console.log(req.body.courseId, req.body.courseId? true:false);
+            console.log('courseID', req.body.courseId, req.body.courseId? true:false);
             var newData = {};
             newData["courses." + req.body.courseId + "." + req.body.field] = req.body.value;
             console.log('/course_update: newData', newData);
@@ -89,10 +88,41 @@ router.post('/course_update', (req, res) =>{
             User.updateOne(query, newData, {upsert: true}, function (err, doc) {
                 if (err) return res.send(500, {error: err});
 
-                if (!err) console.log("successfully updated");
+                if (!err) console.log("successfully updated new", doc.courses[req.body.courseId], "old", doc.courses[req.body.origId]);
                 else console.error(">>>>>>>>error..", err);
 
-                return res.send("successfully");
+                return res.send(true);
+            });
+        } else {
+            res.send("successfully");
+        }
+    } catch (e) {
+        console.log(e);
+    }
+})
+
+
+router.post('/planner_update_term', (req, res) =>{
+    var query = {"info.email": req.body.email};
+    try {
+        console.log({email: req.body.email, origTerm: req.body.origTerm, newTerm: req.body.newTerm, year: req.body.year, term: req.body.term, courses: req.body.courses})
+
+        if (req.body.courses && req.body.courses.length) {
+            // console.log('courseID', req.body.newTerm, req.body.courses);
+            var newData = req.body.courses.reduce((obj, courseId) => {
+                obj["courses." + courseId + ".year"] = req.body.year;
+                obj["courses." + courseId + ".term"] = req.body.term;
+                return obj;
+            }, {});
+            console.log('/planner_update_term: newData', newData, 'query', query);
+
+            User.findOneAndUpdate(query, newData, {upsert: true, new:true}, function (err, doc) {
+                if (err) return res.send(500, {error: err});
+
+                // if (!err) console.log("successfully updated new", doc.courses[req.body.courseId], "old", doc.courses[req.body.origId]);
+                // else console.error(">>>>>>>>error..", err);
+
+                return res.send({courses:doc.courses});
             });
         } else {
             res.send("successfully");

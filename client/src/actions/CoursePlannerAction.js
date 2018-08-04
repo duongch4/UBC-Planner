@@ -5,7 +5,7 @@ export const addTerm = term => ({
     term
 });
 
-export const editTerm = term => ({
+export const editTerm = data => ({
     type: STUDENT_EDIT_TERM,
-    term
+    data
 });
