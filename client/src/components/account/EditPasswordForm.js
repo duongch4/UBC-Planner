@@ -1,7 +1,6 @@
 import React from "react";
-import Validator from 'validator';
 import { connect } from "react-redux";
-import { Button, Form, Header, Input, Message } from "semantic-ui-react";
+import { Button, Form, Icon, Input, Message } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import EditPasswordErrorMessage from './EditPasswordErrorMessage';
 import { doEditPassword } from '../../api/EditAccountApi';
@@ -18,7 +17,8 @@ class EditPasswordForm extends React.Component {
 		loading: false,
 		error: {},
 		editError: "",
-		editSuccess: ""
+		editSuccess: "",
+		submitted: false
 	};
 
 /*	shouldComponentUpdate = (props) => {
@@ -35,15 +35,14 @@ class EditPasswordForm extends React.Component {
 		editError: "",
 		editSuccess: ""
 	});
-	
-	console.log('didupdate', this.state);
 
+	console.log('didupdate', this.state);
 		}
 		* */
-		
+
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.student.password != this.state.data.currentpasswordonrecord) {
-			
+		if (nextProps.student.password !== this.state.data.currentpasswordonrecord) {
+
 			this.setState( {
 			data: {
 			email: nextProps.student.email,
@@ -59,25 +58,26 @@ class EditPasswordForm extends React.Component {
 	});
 
 	}
-}	
-	
+}
+
 	onFieldTextChange = e => this.setState({data: {...this.state.data, [e.target.name]:e.target.value}});
-	
+
 	onSubmit = () => {
 		const error = this.validate(this.state.data);
 		this.setState( {error: error});
         if (Object.keys(error).length === 0 && error.constructor === Object) {
             this.props.doEditPassword(this.state.data)
 			.then((data) => {
-                    this.setState({ editSuccess : "Password successfully updated." });					
+                    this.setState({ editSuccess : "Password successfully updated." });
+                    this.setState({ submitted: true});
 			})
             .catch(function (e) {
                    console.log("Account update failure");
                     this.setState({ editError : e && e.response && e.response.data && e.response.data.message});
                 }.bind(this));
 		};
-	}				
-	
+	}
+
 	validate = data => {
 		const error  = {};
 		if (data.currentpasswordentered.length < 1) {
@@ -93,7 +93,7 @@ class EditPasswordForm extends React.Component {
 			error.newpassword = "New password must be different from current passoword.";
 		}
 		if (data.confirmnewpassword.length < 1 ) {
-			error.confirmnewpassword = "Please type in your new password again.";			
+			error.confirmnewpassword = "Please type in your new password again.";
 		}
 		if (data.newpassword.valueOf() !== data.confirmnewpassword.valueOf()) {
 			error.confirmnewpassword = "Please make sure your passwords match.";
@@ -102,16 +102,16 @@ class EditPasswordForm extends React.Component {
 	}
 
 	render() {
-		
-		console.log("RENDER", this.state);
-		
-		
+
+		if (this.state.submitted === false) {
+
+
 		const { confirmnewPassword, newPassword } = this.state.data;
 		return(
 			<div id = "editpasswordform">
 			{this.state.editError && <Message error>{this.state.editError}</Message>}
 			{this.state.editSuccess && <Message success>{this.state.editSuccess}</Message>}
-			<Form onSubmit = {this.onSubmit}>			
+			<Form onSubmit = {this.onSubmit}>
 			<Form.Field error = { !!this.state.error.currentpasswordentered }>
 			<label htmlFor = 'currentpasswordentered'>Current Password</label>
                 {this.state.error.currentpasswordentered && <EditPasswordErrorMessage text={this.state.error.currentpasswordentered}/>}
@@ -121,10 +121,10 @@ class EditPasswordForm extends React.Component {
                     placeholder = 'Current Password'
                     value = {this.state.data.currentpasswordentered}
                     onChange = {this.onFieldTextChange}/>
-            </Form.Field>            
+            </Form.Field>
             <Form.Field error = { !!this.state.error.newpassword }>
             <label htmlFor='newpassword'>New Password</label>
-                {this.state.error.newpassword && <EditPasswordErrorMessage text={this.state.error.newpassword}/>}            
+                {this.state.error.newpassword && <EditPasswordErrorMessage text={this.state.error.newpassword}/>}
             <Input
 				type = 'password'
 				name = 'newpassword'
@@ -141,12 +141,24 @@ class EditPasswordForm extends React.Component {
 				placeholder = 'Confirm New Password'
 				value = {confirmnewPassword}
 				onChange = {this.onFieldTextChange}/>
-            </Form.Field>                
+            </Form.Field>
             <Button id='EditPassword-button'> Submit </Button>
-            </Form>   
-            </div>       
+            </Form>
+            </div>
 		);
 	}
+	else {
+		return (
+			<div id = "passwordconfirmmessage">
+			<Message positive icon>
+			<Icon name = 'check'check />
+			<Message.Content>
+			<Message.Header>Password successfully updated.</Message.Header>
+			</Message.Content>
+			</Message>
+			</div>);
+		}
+	};
 }
 
 const mapStateToProps = state => ({

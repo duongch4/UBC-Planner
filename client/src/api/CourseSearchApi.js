@@ -3,7 +3,6 @@ import {courseSearchSuccess, courseAutocompleteSelect, courseAutocompleteDeptSuc
   courseAutocompleteCourseSuccess, loadDepartment, unloadDepartment} from "../actions/CourseSearchActions";
 import exemptions from '../data/exemptions';
 var data  = require("../data/courseSearchList.json");
-var async = require('async');
 const parseString = require('react-native-xml2js').parseString;
 var courseNames = data.depts.dept;
 const proxyUrl = "https://cryptic-headland-94862.herokuapp.com/";//'https://cors-anywhere.herokuapp.com/';
@@ -42,19 +41,16 @@ export const doLoadDepartment = query => (dispatch, getState) => {
 
 export const doUnloadDepartment = query => (dispatch, getState) => {
   const {loadedDeptName} = getState().courseSearch;
-  const {autocomplete_orig} = getState().courseSearch;
   if (loadedDeptName !== "") dispatch(unloadDepartment());
 }
 
 export const doAutocompleteCourse = query => (dispatch, getState) => {
   const {loadedDeptName} = getState().courseSearch;
   const {loadedDept} = getState().courseSearch;
-  var dept, key, deptName = "";
+  var key = "";
   if (/\s+/.test(query)) {
-    dept = query.split(/\s+/)[0];
     key = query.split(/\s+/)[1];
   }
-  var courses = null;
   if (loadedDeptName === "" || loadedDept === [] || loadedDept === undefined) dispatch(courseAutocompleteFail())
   else {
     filterCourses (key, loadedDept)
@@ -141,7 +137,7 @@ const getConflict = id => {
   for (var i =0; i < filteredCourses.length; i++) {
     result = result.concat(Object.values(filteredCourses[i])[0]);
   }
-  if (result.size == 0) return;
+  if (result.size === 0) return;
   else return result;
 }
 

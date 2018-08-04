@@ -66,7 +66,7 @@ class MainPage extends React.Component {
 
         return (
             <div>
-                <Menu pointing secondary  id='MainMenu'>
+                <Menu pointing secondary stackable id='MainMenu'>
                     <span ref={this.MainMenu}>
                         {/*<img src={logo}/>*/}
                     </span>
