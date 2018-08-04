@@ -12,9 +12,9 @@ class PlannerInputRow extends React.Component {
         courseId: this.props.courseId,
         term: this.props.term,
         year: this.props.year,
-        creditFor: (this.props.courses[this.props.courseId] && this.props.courses[this.props.courseId].creditFor) || "",
-        section: (this.props.courses[this.props.courseId] && this.props.courses[this.props.courseId].section) || "",
-        grade: (this.props.courses[this.props.courseId] && this.props.courses[this.props.courseId].grade) || "",
+        creditFor: (this.props.courses && this.props.courses[this.props.courseId] && this.props.courses[this.props.courseId].creditFor) || "",
+        section: (this.props.courses && this.props.courses[this.props.courseId] && this.props.courses[this.props.courseId].section) || "",
+        grade: (this.props.courses && this.props.courses[this.props.courseId] && this.props.courses[this.props.courseId].grade) || "",
         unassigned: this.props.unassigned
     }
 

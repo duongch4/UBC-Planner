@@ -28,7 +28,7 @@ export const updateCourses = data => dispatch =>
     axios.post("/api/course_update", data, {headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
         .then(res => {
             console.log('UPDATE courses', res);
-            dispatch(updateRequirementCourseSuccess(res.data))
+            dispatch(updateRequirementCourseSuccess(data))
         })
         .catch(err=> {
             console.error('caught', err);

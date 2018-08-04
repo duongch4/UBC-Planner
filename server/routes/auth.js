@@ -157,6 +157,7 @@ router.post('/login', (req, res, next) => {
   const validationResult = validateLoginForm(req.body);
 
   if (!validationResult.success) {
+    console.log("bad", validationResult.message)
     return res.status(400).json({
       success: false,
       message: validationResult.message,
@@ -167,14 +168,15 @@ router.post('/login', (req, res, next) => {
   return passport.authenticate('local-login', (err, token, userData) => {
       // console.log('auth result: ', token? 'success ' + token:'failed ' + err);
     if (err) {
+        res.status(400);
       if (err.name === 'IncorrectCredentialsError') {
-        return res.status(400).json({
+        return res.send({
           success: false,
           message: err.message
         });
       }
 
-      return res.status(400).json({
+      return res.send({
         success: false,
         message: 'Could not process the form.',
         error: err

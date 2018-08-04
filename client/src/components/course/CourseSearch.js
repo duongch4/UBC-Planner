@@ -19,83 +19,78 @@ class CourseSearch extends Component {
     resetComponent = () => {
         reset();
         this.setState({ isLoading: false, result: [], value: ''})
-    }
+    };
 
     getSearchList = () => {
       fetch (deptUrl, { method: 'GET' })
         .then ((response) => response.text())
         .then ((responseText) => {
-            parseString(responseText, function (err, result) {
-              console.log(JSON.stringify(result))
-            });
+            // parseString(responseText, function (err, result) {
+            //   console.log(JSON.stringify(result))
+            // });
         })
         .catch((err) => {
             console.error('Error fetching the feed: ', err)
         })
-    }
+    };
 
     getCreditExclusionList = () => {
-      var array = [];
-      request(creditExclusionUrl, (error, response, html) => {
-        if (!error) {
-          var $ = cheerio.load(html);
-          $(".double li").each(function() {
-            var courses = $(this).text();
-            array.push(courses);
-          })
-          this.createJsonArray(array).then((data) => {
-            return this.modifyExemptionArray(data);
-          })
-          .then((data) => console.log(JSON.stringify(data)))
-    }
-  });
-}
+        let array = [];
+        request(creditExclusionUrl, (error, response, html) => {
+            if (!error) {
+                let $ = cheerio.load(html);
 
-createJsonArray = (array) => new Promise((resolve, reject)=> {
-  var result = array.map((courses) => {
-    var exemptions = [];
-    var code, deptName = "";
-    var json = {};
-    if (/,\s+/.test(courses)) {
-      courses = courses.split(/,\s+/);
-      code = courses[0];
-      deptName = code.split(/\s+/)[0];
-      exemptions = courses.splice(1);
-    }
-    json[code] = exemptions;
-    return json;
-  })
-  resolve(result);
-  }, Promise.resolve, Promise.reject)
+                $(".double li").each(function() {
+                    let courses = $(this).text();
+                    array.push(courses);
+                });
+                this.createJsonArray(array)
+                    .then((data) => this.modifyExemptionArray(data))
+        }
+        });
+    };
 
+    createJsonArray = array => new Promise((resolve, reject)=> {
+        let result = array.map((courses) => {
+            let exemptions = [];
+            let code, deptName = "";
+            var json = {};
+            if (/,\s+/.test(courses)) {
+                courses = courses.split(/,\s+/);
+                code = courses[0];
+                deptName = code.split(/\s+/)[0];
+                exemptions = courses.splice(1);
+            }
+            json[code] = exemptions;
+            return json;
+        });
+        resolve(result);
+        }, Promise.resolve, Promise.reject);
 
-modifyExemptionArray = (array) => new Promise((resolve, reject)=> {
-  var result = array.map((json) => {
-    var code = Object.keys(json)[0];
-    var curr = code.split(/\s+/)[0];
-    var exemptions = Object.values(json)[0];
-    for (var i = 0; i < exemptions.length; i++) {
-      var exemption = exemptions[i];
-      exemption = exemption.replace(/\s*\n\s*/, "");
-      if (/[A-Z]{2,4}\s+\d/.test(exemption)) {
-        curr = exemption.split(/\s+/)[0];
-        exemptions[i] = exemption;
-      } else {
-        exemptions[i] = curr + " " + exemption;
-      }
-    }
-  var json = {};
-  json[code] = exemptions;
-  return json;
-});
-  resolve(result);
-  }, Promise.resolve, Promise.reject)
+    modifyExemptionArray = (array) => new Promise((resolve, reject)=> {
+        let result = array.map((json) => {
+            let code = Object.keys(json)[0];
+            let curr = code.split(/\s+/)[0];
+            let exemptions = Object.values(json)[0];
+            for (var i = 0; i < exemptions.length; i++) {
+                let exemption = exemptions[i];
+                exemption = exemption.replace(/\s*\n\s*/, "");
+                if (/[A-Z]{2,4}\s+\d/.test(exemption)) {
+                    curr = exemption.split(/\s+/)[0];
+                    exemptions[i] = exemption;
+                } else {
+                    exemptions[i] = curr + " " + exemption;
+                }
+            }
+            var json = {};
+            json[code] = exemptions;
+            return json;
+        });
+        resolve(result);
+        }, Promise.resolve, Promise.reject);
 
     componentWillMount = () => {
       this.resetComponent();
-      //  to update department and exemptions list: save printed results in courseSearchList.json and exemptions.json
-      //    this.getSearchList();
-      //    this.getCreditExclusionList();
     }
 
     handleResultSelect = (e, { result }) => {
@@ -145,8 +140,7 @@ modifyExemptionArray = (array) => new Promise((resolve, reject)=> {
                         placeholder={'CPSC...'}
                         minCharacters={1}
                         showNoResults={false}
-                        {...this.props}
-                />
+                        {...this.props} />
             </Form>
             </div>
         )

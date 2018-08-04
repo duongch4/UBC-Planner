@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-     "start": "node server.js",
-     "heroku-postbuild": "cd client && npm install && npm run build"
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
-    "express-flash": "0.0.2",
     "express": "^4.16.3",
+    "express-flash": "0.0.2",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.1",
     "nodemailer": "^4.6.7",

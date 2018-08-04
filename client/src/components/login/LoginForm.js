@@ -29,24 +29,13 @@ class LoginForm extends React.Component {
         const {data} = this.state;
 
         if (Object.keys(error).length === 0 && error.constructor === Object) {
-            doLogin(data).catch(function (e) {
-                        this.setState({ authError : e && e.error && e.error.message });
-                    }.bind(this));
-            // LoginApi.doLogin(this.state.data)
-            //     .then((data) => {
-            //         LoginActions.login(data.jwt);
-            //     })
-            //     .catch(function (e) {
-            //         this.setState({ authError : e && e.error && e.error.message });
-            //     }.bind(this));
+            doLogin(data)
+                .catch(function (e) {
+                    console.log("DSFD", arguments);
+                        this.setState({ authError : e && e.response && e.response.data && e.response.data.message });
+                }.bind(this));
         }
     };
-
-    // _onLoginSuccess = () => this.props.submit();
-
-    // componentDidMount = () => StudentStore.addChangeListener(this._onLoginSuccess);
-    //
-    // componentWillUnmount = () => StudentStore.removeChangeListener(this._onLoginSuccess);
 
     validate = data => {
         const error = {};
@@ -61,7 +50,7 @@ class LoginForm extends React.Component {
 
     onFieldTextChange = e => this.setState({data: {...this.state.data, [ e.target.name ]: e.target.value}});
 
-    onForgotPasswordClicked = () => this.props.password()
+    onForgotPasswordClicked = () => this.props.password();
 
     onSignupClicked = () => this.props.signup();
 
