@@ -1,7 +1,6 @@
 import React from "react";
-import Validator from 'validator';
 import { connect } from "react-redux";
-import { Button, Form, Header, Icon, Input, Message } from "semantic-ui-react";
+import { Button, Form, Icon, Input, Message } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import EditPasswordErrorMessage from './EditPasswordErrorMessage';
 import { doEditPassword } from '../../api/EditAccountApi';
@@ -43,7 +42,7 @@ class EditPasswordForm extends React.Component {
 		* */
 		
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.student.password != this.state.data.currentpasswordonrecord) {
+		if (nextProps.student.password !== this.state.data.currentpasswordonrecord) {
 			
 			this.setState( {
 			data: {

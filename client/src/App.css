@@ -6,6 +6,7 @@ body {
   text-align: center;
 }
 
+@media only screen and (min-width: 700px) {
 .App-logo {
   float: left;
   height: 60px;
@@ -13,8 +14,25 @@ body {
   margin-left: 100px;
   transform: translate(0%, 25%);
   background: url(./images/ubc-full-logo-white.png) no-repeat;
-  background-size: 27%;
+  background-size: 30%;
 }
+}
+
+@media only screen and (max-width: 699px) {
+.App-logo {
+  float: left;
+  height: 60px;
+  width: 100%;
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  transform: translate(0%, 25%);
+  background: url(./images/ubc-full-logo-white.png) no-repeat;
+  background-size: 80%;
+}
+}
+
+
 
 .App-logo:hover {
   cursor: pointer;
