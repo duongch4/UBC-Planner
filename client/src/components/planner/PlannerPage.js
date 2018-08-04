@@ -13,7 +13,8 @@ class PlannerPage extends React.Component {
             planner: this.parseTerms(props.planner, props.cohort),
             activeItem: null,
             isTabEditMode: false,
-            lastActive: null
+            lastActive: null,
+            inEditMode: null
         }
 
         if (this.state.planner.length !== 0) this.state.activeItem = this.state.planner[0];
@@ -82,6 +83,11 @@ class PlannerPage extends React.Component {
         if (newTerm) this.setState({activeItem: newTerm});
     }
 
+    handleRowSubmit = row => {
+        console.log('old',  this.state.inEditMode && this.state.inEditMode.props, 'new:', row && row.props);
+        this.setState({inEditMode: null});
+    }
+
     createSegment = (activeItem) => {
         console.log('activeItem:', activeItem);
         if (!activeItem)
@@ -102,7 +108,9 @@ class PlannerPage extends React.Component {
         return <PlannerTable year={ parseInt(activeItem.substring(0,4)) }
                              season={activeItem.substring(4,5)}
                              term={ parseInt(activeItem.slice(-1)) }
-                             onSubmit={this.handleTermChangeSubmit} />
+                             onTermChange={this.handleTermChangeSubmit}
+                             onSubmit={this.handleRowSubmit}
+        />
     }
 
     render() {

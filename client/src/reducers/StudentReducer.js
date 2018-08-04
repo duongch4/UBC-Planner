@@ -2,7 +2,7 @@ import {
     STUDENT_INIT_COURSE, STUDENT_UPDATE_COURSE, STUDENT_ADD_COURSE, STUDENT_REMOVE_COURSE, UPDATE_REMARKS_SUCCESS,
     UPDATE_COURSE_REQUIREMENT_SUCCESS
 } from '../constants/WorksheetConstants';
-import { STUDENT_ADD_TERM, STUDENT_EDIT_TERM } from '../constants/PlannerConstants';
+import {STUDENT_ADD_TERM, STUDENT_EDIT_TERM, UPDATE_COURSE_PLANNER_SUCCESS} from '../constants/PlannerConstants';
 import { LOG_IN, LOG_OUT, UPDATE_INFO_SUCCESS } from '../constants/LoginConstants';
 import update from 'react-addons-update';
 import bcs from '../data/bcs.json';
@@ -13,15 +13,14 @@ const initialState = {
     courses: {},
     remarks: {},
     planner: {},
-    creditFor: {},
-    token: ''
+    creditFor: {}
 };
 
 const StudentReducer = (state = initialState, action) => {
     console.log(state);
     switch(action.type) {
         case LOG_IN:
-            const { courses, info, remarks, token } = action.student;
+            const { courses, info, remarks } = action.student;
             const isLoggedIn = true;
             let creditFor = {
                 "PADE": null,
@@ -56,7 +55,7 @@ const StudentReducer = (state = initialState, action) => {
                 planner[yearTerm].push(courseCode);
                 creditFor[courses[courseCode].creditFor] = courseCode;
             }, planner);
-            return { ...state, isLoggedIn, courses, info, remarks, token, planner, creditFor };
+            return { ...state, isLoggedIn, courses, info, remarks, planner, creditFor };
         case LOG_OUT:
             localStorage.removeItem('token');
             return {
@@ -195,16 +194,8 @@ const StudentReducer = (state = initialState, action) => {
             var semester = parseInt(newTerm.charAt(5));
             var newPlanner = ( planner && JSON.parse(JSON.stringify(planner)) ) || {};
 
-
-
-
-
-
-
-
             var courseCodes = (planner && planner[origTerm]) || [];
             console.log("ACTION", courseCodes, action);
-
 
             newPlanner[newTerm] = courseCodes.reduce((arr, courseCode) => {
                 var course = courses[courseCode];
@@ -217,6 +208,45 @@ const StudentReducer = (state = initialState, action) => {
             delete newPlanner[origTerm];
 
             return { ...state, planner:newPlanner, courses};
+        case UPDATE_COURSE_PLANNER_SUCCESS:
+            var { courses } = action.data;
+
+            var planner = {};
+            var courseKeys = courses? Object.keys(courses) : [];
+            var creditFor = {
+                "PADE": null,
+                "ENGL 1XX": null,
+                "CPSC 110": null,
+                "CPSC 121": null,
+                "MATH 180": null,
+                "STAT 203": null,
+                "Communication": null,
+                "CPSC 210": null,
+                "CPSC 221": null,
+                "CPSC 213": null,
+                "CPSC 310": null,
+                "CPSC 320": null,
+                "CPSC 313": null,
+                "CPSC 3X1": null,
+                "CPSC 3X2": null,
+                "CPSC 4X1": null,
+                "CPSC 4X2": null,
+                "BM1": null,
+                "BM2": null,
+                "BM3": null,
+                "BM4": null
+            };
+
+            courseKeys.forEach(function (courseCode) {
+                let { year } = courses[courseCode];
+                let { term } = courses[courseCode];
+                let yearTerm = (year && term && year+term) || null;
+                planner[yearTerm] = planner[yearTerm]? planner[yearTerm] : [];
+                planner[yearTerm].push(courseCode);
+                creditFor[courses[courseCode].creditFor] = courseCode;
+            });
+
+            return { ...state, courses, planner, creditFor};
         default: return state;
     }
 };

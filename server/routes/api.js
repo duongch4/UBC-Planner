@@ -98,12 +98,78 @@ router.post('/course_update', (req, res) =>{
             res.send("successfully");
         }
     } catch (e) {
-        print(e);
+        console.log(e);
     }
-
-
-
-
 })
 
+
+//course_update_detail
+
+
+router.post('/planner_course_update', (req, res) =>{
+    var query = {"info.email": req.body.email};
+
+    try {
+        console.log({email: req.body.email, origId: req.body.origId, courseId: req.body.courseId, course: req.body.course})
+
+        if (req.body.origId && (!req.body.courseId || req.body.origId !== req.body.courseId)) {
+            console.log(req.body.origId, req.body.courseId, req.body.origId !== req.body.courseId);
+
+            var removeData = {};
+            removeData["courses." + req.body.origId + "." + "term"] = null;
+            removeData["courses." + req.body.origId + "." + "year"] = null;
+            console.log('/course_update: origId', removeData);
+
+            User.updateOne(query, removeData, {upsert:true}, function(err, doc){
+                if (err) return res.send(500, { error: err });
+                console.log("origId:", req.body.origId);
+            }).then(r => {
+
+                if (req.body.courseId) {
+                    console.log(req.body.courseId, req.body.courseId ? true : false);
+
+
+                    var keys = Object.keys(req.body.course);
+
+                    var newData = keys.reduce((obj, fieldName) => {
+                        obj["courses." + req.body.courseId + "." + fieldName] = req.body.course[fieldName]
+                        return obj;
+                    }, {});
+                    console.log('/course_update: newData', newData);
+                    User.findOneAndUpdate(query, newData, {upsert: true, new: true}, function (err, doc) {
+                        if (err) return res.send(500, {error: err});
+
+                        if (!err) console.log("successfully updated new", doc.courses[req.body.courseId], "old", doc.courses[req.body.origId]);
+                        else console.error(">>>>>>>>error..", err);
+
+                        return res.send({courses: doc.courses});
+                    });
+                } else {
+                    User.findOne(query,'courses', function(err, doc) {
+                        return res.send({courses: doc.courses});
+                    })
+                }
+            });
+        } else if (req.body.courseId) {
+            console.log(req.body.courseId, req.body.courseId? true:false);
+            var keys = Object.keys(req.body.course);
+
+            var newData = keys.reduce((obj, fieldName)=>{
+                obj["courses."+req.body.courseId +"." + fieldName] = req.body.course[fieldName]
+                return obj;
+            }, {});
+            console.log('/course_update: newData', newData);
+            User.findOneAndUpdate(query, newData, {upsert: true, new:true}, function (err, doc) {
+                if (err) return res.send(500, {error: err});
+
+                if (!err) console.log("successfully updated new", doc.courses[req.body.courseId], "old", doc.courses[req.body.origId]);
+                else console.error(">>>>>>>>error..", err);
+
+                return res.send({courses: doc.courses});
+            });
+        }
+    } catch (e) {
+        console.error(e);
+    }
+})
 module.exports = router;

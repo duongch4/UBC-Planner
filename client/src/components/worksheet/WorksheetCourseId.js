@@ -107,7 +107,7 @@ class WorksheetCourseId extends React.Component {
         value = value.toUpperCase();
         const {courses} = this.props;
         if (courses[value]) {
-            return Promise.reject('You are taking course' + (courses[value].year? (courses[value].year + courses[value].term): ""));
+            return Promise.reject('You are taking course ' + (courses[value].year? ("in " + courses[value].year + courses[value].term): ""));
         } else
         // TODO validation (check if course exists)
         return this.props.doAddCourse({
@@ -126,7 +126,8 @@ class WorksheetCourseId extends React.Component {
             });
     };
 
-    handleAddition = (e, { value }) => this.addCourse(value.toUpperCase().trim());
+    handleAddition = (e, { value }) =>
+        this.addCourse(value.toUpperCase().trim()).catch(err => { alert(err); this.onCancel()});
 
     handleCourseSelect = (e, { value }) => {
         console.log('selected:', value);

@@ -83,7 +83,7 @@ class LoginForm extends React.Component {
                             placeholder='username@ugrad.cs.ubc.ca'
                             value = { data.email }
                             onChange = { this.onFieldTextChange }
-                            autofocus="true"
+                            autoFocus="true"
                         />
                     </Form.Field>
 

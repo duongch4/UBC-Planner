@@ -15,33 +15,36 @@ class PlannerTable extends React.Component {
         this.state = {
             inEditMode: false,
             fullTermName: fullTermName,
-            courses: props.planner[fullTermName] || []
-        }
-
-        console.log('constructor', this.courses);
+            courses: props.planner[fullTermName] || [],
+            term: props.term,
+            year: props.year,
+            season: props.season,
+        };
     }
 
 
     componentWillReceiveProps = nextProps => {
         const fullTermName = nextProps.year + nextProps.season + nextProps.term;
-        this.setState({ inEditMode: false, courses: nextProps.planner[fullTermName], fullTermName });
+        const {term, year, season} = nextProps;
+        this.setState({ inEditMode: false, courses: nextProps.planner[fullTermName], fullTermName, term, year,season });
     };
 
-    createRow = (courses, term) => {
+    renderRow = (courses, term, year, season) => {
         let result = [];
         let keys = courses || [];
 
-        console.log('createRow', courses);
+        console.log('RENDER_ROW', courses);
 
-        if (courses.length === 0) {
+        if (keys.length === 0) {
             this.addRow();
             return;
         }
 
-        courses.forEach(courseId => {
+        keys.forEach(courseId => {
             result.push(
                 <PlannerInputRow courseId   = { courseId }
                                  term       = { term }
+                                 year       = { year+season }
                                  inEditMode = { courseId === "" }
                                  onEditMode = { this.handleEdit }
                                  onSubmit   = { this.onSubmit }
@@ -56,7 +59,6 @@ class PlannerTable extends React.Component {
         let { courses, inEditMode } = this.state;
         if (inEditMode) return alert('Save current course first!');
 
-
         let newCourses  = Object.assign([], courses);
         console.log('createRow', courses);
         newCourses.push(null);
@@ -64,43 +66,60 @@ class PlannerTable extends React.Component {
         this.setState({inEditMode: true, courses: newCourses})
     }
 
-    handleEdit = () => {
-        this.setState({inEditMode:true, error: null})
+    handleEdit = row => {
+        if (!!this.state.inEditMode && this.state.inEditMode !== row) {
+            alert('Save current course first!');
+            return false;
+        } else {
+            this.state.inEditMode = row;
+            this.setState({error: null})
+            return true;
+        }
     }
 
-    onSubmit = data => {
+    onTermChange = row => {
         this.setState({inEditMode:false, error: null})
-        this.props.onSubmit(data);
+        this.props.onTermChange(row);
+    }
+
+    onSubmit = row => {
+        let { courses } = this.state;
+        let newCourses;
+        if (!row.state.courseId || row.state.courseId==="") newCourses = courses.filter(courseId => courseId);
+        else newCourses = courses;
+
+        this.setState({inEditMode: false, courses: newCourses});
+        this.props.onSubmit(row);
     }
 
     render () {
-        const { term, year, season, fullTermName, planner    } = this.props;
-        const {courses} = this.state;
+        // const { term, year, season, fullTermName, planner    } = this.props;
+        const { term, year, season, courses, inEditMode } = this.state;
 
         return (
             <div class="planner-table-wrapper">
                 <Divider hidden />
-                <PlannerForm onSubmit={this.onSubmit} onClick={this.handleEdit} term={term} year={year} season={season}/>
+                <PlannerForm onSubmit={this.onTermChange} onClick={this.handleEdit} term={term} year={year} season={season}/>
                 <Divider hidden />
                 <div class="">
                     <Table compact basic='very' selectable color={'blue'} textAlign='center'>
                         <Table.Header>
                             <Table.Row>
-                                <Table.HeaderCell width={4}>Course</Table.HeaderCell>
-                                <Table.HeaderCell width={4}>Section</Table.HeaderCell>
-                                <Table.HeaderCell width={4}>BCS requirement</Table.HeaderCell>
-                                <Table.HeaderCell width={4}>Grade</Table.HeaderCell>
+                                <Table.HeaderCell width={3}>Course</Table.HeaderCell>
+                                <Table.HeaderCell width={3}>Section</Table.HeaderCell>
+                                <Table.HeaderCell width={3}>BCS requirement</Table.HeaderCell>
+                                <Table.HeaderCell width={3}>Grade</Table.HeaderCell>
                                 <Table.HeaderCell width={1}></Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            { this.createRow(courses, fullTermName) }
+                            { this.renderRow(courses, term, year, season) }
                         </Table.Body>
                     </Table>
                 </div>
-                <div class='add-row-button-wrapper'>
+                {(!inEditMode) && (<div class='add-row-button-wrapper'>
                     <Button circular size={'mini'} color='olive' icon='plus' content={'add'} onClick={ this.addRow } />
-                </div>
+                </div>)}
             </div>
     )};
 }
@@ -109,6 +128,7 @@ PlannerTable.PropTypes = {
     term: PropTypes.number.isRequired,
     year: PropTypes.number.isRequired,
     season: PropTypes.string.isRequired,
+    onTermChange: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired
 }
 

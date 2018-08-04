@@ -61,3 +61,7 @@ button.ubc-button:hover {
     -webkit-box-shadow: rgba(115, 115, 115, 0.8) 1px 1px 1px inset;
     box-shadow: rgba(115, 115, 115, 0.8) 1px 1px 1px inset;
 }
+
+.inputField input {
+    text-align: center;
+}
