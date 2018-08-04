@@ -5,6 +5,7 @@ const passport = require('passport');
 const config = require('./config');
 var flash = require('express-flash');
 var cors = require('cors');
+const path = require('path');
 const port = process.env.PORT || 5000;
 
 // connect to the database and load models
@@ -13,7 +14,6 @@ require('./server/models').connect(config.dbUri);
 const app = express();
 
 // Serve any static files
- app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.static('./server/static/'));
 app.use(express.static('./client/build/'));
 // tell the app to parse HTTP body messages
@@ -43,10 +43,14 @@ app.use(cors());
 
 app.use(flash());
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
-
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 
 // start the server
 app.listen(port, () => console.log(`Listening on port ${port}`));
