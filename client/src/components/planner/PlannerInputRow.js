@@ -187,8 +187,7 @@ class PlannerInputRow extends React.Component {
     }
 
     onRemoveCourse = () => {
-        this.state.courseId = null;
-        this.onSubmit();
+        this.setState({courseId: null}, this.onSubmit.bind(this));
     };
 
     render() {

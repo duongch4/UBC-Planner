@@ -30,8 +30,8 @@ class PlannerForm extends React.Component {
     };
 
     onClick = () => {
-        this.setState({isEditMode: true});
-        this.props.onClick(this);
+        if (this.props.onClick(this))
+            this.setState({isEditMode: true});
     }
 
     onSubmit = e => {

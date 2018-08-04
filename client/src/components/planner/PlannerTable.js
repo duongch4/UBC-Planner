@@ -55,12 +55,10 @@ class PlannerTable extends React.Component {
     }
 
     addRow = () => {
-
         let { courses, inEditMode } = this.state;
         if (inEditMode) return alert('Save current course first!');
 
         let newCourses  = Object.assign([], courses);
-        console.log('createRow', courses);
         newCourses.push(null);
 
         this.setState({inEditMode: true, courses: newCourses})
