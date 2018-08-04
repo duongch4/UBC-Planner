@@ -140,7 +140,7 @@ class WorksheetCourseId extends React.Component {
         const {isEditMode, courseId} = this.state;
         return (
             <div onClick={this.onClick}>
-                {!isEditMode && <div class="remark-div">{!!courseId? courseId:"  "}</div>}
+                {!isEditMode && <div className="remark-div">{!!courseId? courseId:"  "}</div>}
                 {isEditMode && (
                     <div>
                     <Form onSubmit={this.onSubmit}>

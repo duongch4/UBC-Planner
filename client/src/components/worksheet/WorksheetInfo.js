@@ -37,7 +37,7 @@ class WorksheetInfo extends React.Component {
         const {fieldName, fieldType} = this.props;
         return (
             <span className={'student-info' + isEditMode? "edit":""} onClick={this.onClick}>
-                {!isEditMode && <span class="editable">{fieldValue}</span>}
+                {!isEditMode && <span className="editable">{fieldValue}</span>}
                 {isEditMode && (
                     <Form onSubmit={this.onSubmit}
                           size={'mini'}
@@ -59,7 +59,10 @@ WorksheetInfo.propTypes = {
     isEditMode: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     fieldName: PropTypes.string.isRequired,
-    fieldValue: PropTypes.object.isRequired,
+    fieldValue: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     fieldType: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired
 }

@@ -13,7 +13,7 @@ class IndexPage extends React.Component {
     render() {
         const {isLoggedIn} = this.props;
         return (
-            <div class="index">
+            <div className={"index"}>
                 {!isLoggedIn && <LoginPage
                     password={this.handleForgotPassword}
                     signup={this.handleSignup}
@@ -23,10 +23,6 @@ class IndexPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    isLoggedIn: state
-};
-
 IndexPage.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired
@@ -34,5 +30,5 @@ IndexPage.propTypes = {
 };
 
 export default connect (
-    state=>{console.log(state); return({isLoggedIn: state.student.isLoggedIn})}
+    state=>{return({isLoggedIn: state.student.isLoggedIn})}
 )(IndexPage);

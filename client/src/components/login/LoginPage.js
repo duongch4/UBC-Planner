@@ -13,13 +13,13 @@ export default class LoginPage extends React.Component {
 
     render() {
         return (
-            <div className="Login-page-container">
+            <div className={"Login-page-container"}>
                 <GeneralHeader
                     iconName="graduation"
                     headerText="BCS Graduation Planner"
                     subHeaderText="Login Authentication"
                 />
-                <div className="Login-form-container">
+                <div className={"Login-form-container"}>
                     <LoginForm password={this.props.password}
                                     // handleForgotPassword}
                                 signup={this.props.signup
@@ -33,8 +33,8 @@ export default class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
     history: PropTypes.shape({
-        push: PropTypes.func.isRequired
-    }).isRequired,
+        push: PropTypes.func
+    }),
     signup: PropTypes.func.isRequired,
     password: PropTypes.func.isRequired
 };

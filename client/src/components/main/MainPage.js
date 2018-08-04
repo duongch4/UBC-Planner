@@ -117,9 +117,9 @@ const mapStateToProps = state => ({
 
 MainPage.propTypes = {
     history: PropTypes.shape({
-        push: PropTypes.func.isRequired
-    }).isRequired,
-    student: PropTypes.Object,
+        push: PropTypes.func
+    }),
+    student: PropTypes.object,
     getRequirements: PropTypes.func.isRequired
 };
 

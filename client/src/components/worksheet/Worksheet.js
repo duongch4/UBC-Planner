@@ -29,15 +29,13 @@ class Worksheet extends React.Component
     };
 
     createWorksheetCells = (requirements, courses, remarks, creditFor) => {
-        const courseNames = courses && Object.keys(courses);
         return requirements.map((requirement) => {
             const matchingCourseId = creditFor[requirement.id];
-                //courseNames && courseNames.find(name => ((courses[name].creditFor === requirement.id) || (courses[name].id === requirement.id)));
             const hasCompleted = matchingCourseId && courses[matchingCourseId].grade;
             const course = matchingCourseId && courses[matchingCourseId];
 
             return(
-                <Table.Row
+                <Table.Row key = {requirement.id}
                            positive={!!hasCompleted}
                 >
                     <Table.Cell textAlign='center'>
@@ -64,6 +62,9 @@ class Worksheet extends React.Component
 
     render = () => {
         const { requirements, courses, remarks } = this.props;
+
+
+        console.log("REMARKS", remarks);
         const { creditFor } = this.state;
         return (
             <Table celled selectable className='Worksheet-table'>
@@ -92,10 +93,8 @@ const mapStateToProps = state => ({
 
 Worksheet.propTypes = {
     history: PropTypes.shape({
-        push: PropTypes.func.isRequired
-    }).isRequired
-    // , getProfiles: PropTypes.func.isRequired
-    // , setProfile: PropTypes.func.isRequired
+        push: PropTypes.func
+    })
 };
 
 export default connect(

@@ -28,15 +28,15 @@ class WorksheetPage extends React.Component {
     };
 
     render () {
-        const {name, bm, cohort, sid} = this.props.student;
+        const {name, bm, cohort, sid, email} = this.props.student;
         return (
           <div>
 
                 <Header as='h1' icon textAlign={'left'}>
-                <div class="h-left">
+                <div className="h-left">
                 {name}
                 </div>
-                <div class="button" class="h-right">
+                <div className="button h-right">
                 <ConfirmModal />
                   <EmailModal />
 
@@ -46,13 +46,14 @@ class WorksheetPage extends React.Component {
 
 <div id='divToPrint'>
 
-                <div class = "student-info-container">
+                <div className = "student-info-container">
                     <WorksheetInfo
                         isEditMode = {false}
                         onClick = {this.handleInfoEdit.bind(this)}
                         fieldName = {'sid'}
                         fieldValue = {sid}
                         fieldType = {'number'}
+                        email = {email}
                     />&nbsp;|&nbsp;
                     <WorksheetInfo
                         isEditMode = {false}
@@ -60,6 +61,7 @@ class WorksheetPage extends React.Component {
                         fieldName = {'bm'}
                         fieldValue = {bm}
                         fieldType = {'string'}
+                        email = {email}
                     />&nbsp;|&nbsp;
                     <WorksheetInfo
                         isEditMode = {false}
@@ -67,6 +69,7 @@ class WorksheetPage extends React.Component {
                         fieldName = {'cohort'}
                         fieldValue = {cohort}
                         fieldType = {'number'}
+                        email = {email}
                     />
                 </div>
                 <WorksheetProgress />

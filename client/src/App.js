@@ -8,50 +8,10 @@ import IndexPage from "./components/index/IndexPage";
 import ResetPasswordPage from "./components/reset/ResetPasswordPage";
 import ConfirmEmailPage from "./components/confirm/ConfirmEmailPage";
 
-// let jwt = localStorage.getItem('jwt');
-// if (jwt) {
-//     LoginActions.login(jwt);
-// }
-
 class App extends Component {
-
-
-    // state = {
-    //     response: ''
-    // };
-    //
-    // componentDidMount() {
-    //
-    //
-    //     this.callApi().then(response => {
-    //         console.log(response);
-    //         this.setState({response: response});
-    //     });
-    //
-    //
-    //     // this.callApi()
-    //     //     .then(res => this.setState({ response: res.express }))
-    //     //     .catch(err => console.log(err));
-    // }
-    //
-    // callApi = async () => {
-    //     const response = await fetch('/admin/michelle.huh@hotmail.com');
-    //     const body = await response;
-    //
-    //     if (response.status !== 200) throw Error(body.message);
-    //
-    //     console.log(response);
-    //
-    //
-    //     return body;
-    // };
-
-
   render() {
-      // const {response} = this.state
     return (
       <div className="App">
-          {/*{response}*/}
         <MainHeader />
           <div className="ui-container">
               <Route path="/" exact component={ IndexPage } />

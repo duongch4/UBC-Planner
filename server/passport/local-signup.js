@@ -29,7 +29,7 @@ module.exports = new PassportLocalStrategy({
        "CPSC 121": "",
        "MATH 180": "",
        "STAT 203": "",
-       "Communication": "",
+       "ENGL 3XX": "",
        "CPSC 210": "",
        "CPSC 221": "",
        "CPSC 213": "",

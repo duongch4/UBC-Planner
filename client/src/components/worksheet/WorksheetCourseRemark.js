@@ -42,7 +42,7 @@ class WorksheetCourseRemark extends React.Component {
         const {courseId} = this.props;
         return (
             <div onClick={this.onClick}>
-                {!isEditMode && <div class="remark-div">{!!remarks? remarks:"  "}</div>}
+                {!isEditMode && <div className="remark-div">{!!remarks? remarks:"  "}</div>}
                 {isEditMode && (
                     <Form onSubmit={this.onSubmit}>
                         <TextArea rows={1}
