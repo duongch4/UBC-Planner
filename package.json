@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "node server.js && cd client/build && npm start",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+     "start": "node server.js",
+     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -21,5 +21,9 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
+  },
+  "engines": {
+    "node": "10.5.0",
+    "npm": "6.1.0"
   }
 }
