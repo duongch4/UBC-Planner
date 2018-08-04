@@ -160,10 +160,7 @@ const filterDepts = query => new Promise((resolve, reject)=> {
 
     if (filteredNames && filteredNames.length) resolve(filteredNames.map(name=>name.$));
     else
-      reject({
-        exists: false,
-        error: { message: "Department does not exist." }
-      });
+      resolve([])
 }, Promise.resolve, Promise.reject)
 
 /**
@@ -197,7 +194,7 @@ return fetch (url, {method: 'GET'})
            return courses;
          })
     .catch((err) => {
-        console.log('Error fetching the feed: ', err)
+        console.error('Error fetching the feed: ', err)
     })
 }
 
@@ -208,17 +205,14 @@ const filterAndGetCourses = (url, dept, key) => {
       .then ((responseText) => {
         var courseArray = [];
           parseString(responseText, (err, result) => {
-            console.log("courseArray", courseArray)
               courseArray = result.courses.course;
             });
-            console.log("courseArray", courseArray)
             return courseArray;
           })
       .then((courseArray) => {
         const re = new RegExp("^" + _.escapeRegExp(key, 'i'))
         const isMatch = course => re.test(course.$.key)
         const filteredCourseArray = _.filter(courseArray, isMatch)
-        console.log("filteredCourseArray", filteredCourseArray)
         return (filteredCourseArray);
       })
       .then((filteredCourseArray) => {
@@ -232,7 +226,6 @@ const filterAndGetCourses = (url, dept, key) => {
           conflict: getConflict(dept + ' ' + course.$.key)
           }
         })
-        console.log("courses", courses)
         return courses;
       })
       .catch((err) => {
@@ -261,7 +254,6 @@ const getCourses = (url, dept) => {
               }
             })
           });
-          console.log("result courses: ", JSON.stringify(courses))
           return courses;
       })
       .catch((err) => {

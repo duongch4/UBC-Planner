@@ -30,7 +30,7 @@ class CourseSearch extends Component {
             });
         })
         .catch((err) => {
-            console.log('Error fetching the feed: ', err)
+            console.error('Error fetching the feed: ', err)
         })
     }
 
@@ -93,9 +93,9 @@ modifyExemptionArray = (array) => new Promise((resolve, reject)=> {
 
     componentWillMount = () => {
       this.resetComponent();
-      // to update department list: save printed results in courseSearchList.json
-  //    this.getSearchList();
-      this.getCreditExclusionList();
+      //  to update department and exemptions list: save printed results in courseSearchList.json and exemptions.json
+      //    this.getSearchList();
+      //    this.getCreditExclusionList();
     }
 
     handleResultSelect = (e, { result }) => {
@@ -116,7 +116,6 @@ modifyExemptionArray = (array) => new Promise((resolve, reject)=> {
             } else if (this.state.value.length == 4) {
               this.props.doAutocompleteDepartment(this.state.value);
               this.props.doLoadDepartment(this.state.value);
-          //    this.props.doAutocompleteCourse(this.state.value)
               this.setState({ isLoading: false, value })
             } else {
               this.props.doAutocompleteCourse(this.state.value)

@@ -29,7 +29,6 @@ function validateSignupForm(payload) {
   const errors = {};
   let isFormValid = true;
   let message = '';
-  console.log("payload", payload);
 
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
     isFormValid = false;
@@ -108,9 +107,7 @@ router.post('/signup', (req, res, next) => {
   return passport.authenticate('local-signup', (err) => {
     if (err) {
 
-      console.log(err);
       if (err.name === 'MongoError' && err.code === 11000) {
-        console.log('email taken mongo error');
         // the 11000 Mongo code is for a duplication email error
         // the 409 HTTP status code is for conflict error
         return res.status(409).json({
@@ -157,12 +154,9 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  console.log('body: ', req.body);
   const validationResult = validateLoginForm(req.body);
-  console.log('validation: ', validationResult.success);
 
   if (!validationResult.success) {
-      console.log('error');
     return res.status(400).json({
       success: false,
       message: validationResult.message,
@@ -198,7 +192,6 @@ router.post('/login', (req, res, next) => {
 });
 
 router.post('/reset_password', (req, res) => {
-  console.log("post reset, passowrd: ", req.body.password, "token: ", req.body.token)
   async.waterfall([
     function(done) {
       User.findOne({ "info.resetPasswordToken": req.body.token, "info.resetPasswordExpires": { $gt: Date.now() } }, function(err, user) {
