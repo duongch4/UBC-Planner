@@ -6,12 +6,10 @@ export const doLogin = credentials => dispatch =>
 axios.post("/auth/login", credentials)
     .then(res => {
         if (res) {
-            // res.data.user.token = res.data.token;
             localStorage.setItem('token', res.data.token);
         }
         dispatch(loginSuccess(res.data.user));
     });
-// .catch(error=>console.log(error));
 
 export const doLogout = () => dispatch =>
     dispatch(logoutSuccess());
