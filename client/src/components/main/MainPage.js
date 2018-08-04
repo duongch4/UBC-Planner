@@ -8,21 +8,20 @@ import WorksheetPage from "../worksheet/WorksheetPage";
 import CoursePage from "../course/CoursePage";
 import PlannerPage from "../planner/PlannerPage";
 import AccountPage from "../account/AccountPage";
-import { Menu, Container, Dropdown, Sticky } from 'semantic-ui-react'
+import { Menu, Container, Dropdown } from 'semantic-ui-react'
 
 class MainPage extends React.Component {
+
+    state = { activeItem: 'worksheet' };
 
     constructor () {
         super();
         this.MainMenu = React.createRef();
     }
 
-    state = { activeItem: 'worksheet' };
-
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
     logout = () => this.props.doLogout();
-
 
     getOffset = (element) => {
         let bounding = element.getBoundingClientRect();
@@ -37,7 +36,6 @@ class MainPage extends React.Component {
         let mainMenu = this.MainMenu.current.parentElement;
         let offset = this.getOffset(mainMenu);
         if(windowsScrollTop >= offset.top){
-
             mainMenu.classList.add("inverted");
             mainMenu.classList.add("custom");
         }else if (mainMenu.classList.contains("inverted")){
@@ -56,19 +54,15 @@ class MainPage extends React.Component {
     componentWillMount = () => {
         const {getRequirements} = this.props;
         getRequirements();
-    }
+    };
 
     render() {
         const { activeItem } = this.state;
         const { name } = this.props.student;
-
-        console.log(name);
-
         return (
             <div>
                 <Menu pointing secondary stackable id='MainMenu'>
                     <span ref={this.MainMenu}>
-                        {/*<img src={logo}/>*/}
                     </span>
                     <Menu.Item
                         name='worksheet'

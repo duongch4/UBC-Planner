@@ -5,23 +5,18 @@ import { Grid } from 'semantic-ui-react'
 
 
 class CourseSearchResults extends React.Component {
-    createList = (courses) => {
-        return courses.map((course)=>{
-            console.log('mapping:', course.id);
-            return (
-                <Grid.Column mobile={16} tablet={8} computer={8}>
-                <Course {...course} course={course}/>
-                </Grid.Column>)
-        })
-    }
+
+    renderList = (courses) => courses.map((course)=>(
+        <Grid.Column key={course.id} mobile={16} tablet={8} computer={8}>
+            <Course {...course} course={course}/>
+        </Grid.Column>));
 
     render() {
         const { result } = this.props;
-
         return (
-            <div class="course search">
+            <div className="course search">
                 <Grid>
-                {this.createList(result)}
+                {this.renderList(result)}
                 </Grid>
             </div>
         );

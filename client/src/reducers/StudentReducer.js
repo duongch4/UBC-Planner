@@ -110,19 +110,22 @@ const StudentReducer = (state = initialState, action) => {
             var { course  } = action.data;
             var { courses } = state;
             var newCourses = (courses && JSON.parse(JSON.stringify(courses))) || {};
-            newCourses[course.id] = JSON.parse(JSON.stringify(course));
+            newCourses[course.id] = course;
 
-            var planner = {};
-            var courseKeys = (courses && Object.keys(courses)) || [];
+            var planner = Object.keys(state.planner).reduce((obj, key) => {
+                obj[key] = [];
+                return obj;
+            }, {});
+
+            var courseKeys = (newCourses && Object.keys(newCourses)) || [];
             courseKeys.forEach(function (courseCode) {
-                var { year } = courses[courseCode];
-                var { term } = courses[courseCode];
+                var { year } = newCourses[courseCode];
+                var { term } = newCourses[courseCode];
                 var yearTerm = (year && term && year+term) || null;
-                planner[yearTerm] = planner[yearTerm]? planner[yearTerm] : {};
-                planner[yearTerm][courseCode] = courses[courseCode];
+                planner[yearTerm] = planner[yearTerm]? planner[yearTerm] : [];
+                planner[yearTerm].push(courseCode);
             }, planner);
-
-            return { ...state, courses:newCourses};
+            return { ...state, courses:newCourses, planner};
         case STUDENT_REMOVE_COURSE:
             var { courses, planner, creditFor } = state;
             var { id }  = action.data.course;
@@ -168,14 +171,10 @@ const StudentReducer = (state = initialState, action) => {
             course = courses[courseId];
             if (!!course) {
                 course[field] = value;
-                // newCourses = update(newCourses, {[id]: {[field]: {$set: value}}});
             }
-
-            var newCreditFor;
             if (field === 'creditFor') {
                 creditFor = update(creditFor, {[value]: {$set: courseId}});
             }
-
             return { ...state, courses, creditFor };
         case STUDENT_EDIT_TERM:
             const {origTerm} = action.query;
