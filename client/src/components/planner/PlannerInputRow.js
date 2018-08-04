@@ -11,7 +11,7 @@ class PlannerInputRow extends React.Component {
         super();
 
         const {courses, courseId, creditFor} = props;
-        const course = courses[courseId];
+        const course = courses && courses[courseId];
 
         this.state = {
             isEditMode: !courseId || (courseId === ""),
@@ -23,6 +23,7 @@ class PlannerInputRow extends React.Component {
             creditFor: (course && course.creditFor) || "",
             section: (course && course.section) || "",
             grade: (course && course.grade) || "",
+            unassigned: props.unassigned
         }
         //
         // this.state.courseOptions = this.generateCourseOptions(freeCourses, courseId)
@@ -31,14 +32,14 @@ class PlannerInputRow extends React.Component {
     }
 
     componentWillReceiveProps = props => {
-        const {courseId, term, courses, year} = props;
+        const {courseId, term, courses, year, unassigned} = props;
 
         // let creditOptions = this.generateRequirementOptions(props.courseId, props.creditFor);
         // let courseOptions = this.generateCourseOptions(freeCourses, courseId);
 
         const course = courses[courseId];
         this.setState({
-            courseId, term, year,
+            courseId, term, year, unassigned,
             // creditOptions, courseOptions,
             creditFor: (course && course.creditFor) || "",
             section: (course && course.section) || "",
@@ -102,7 +103,7 @@ class PlannerInputRow extends React.Component {
 
         value = value.toUpperCase();
         const {courses} = this.props;
-        if (courses[value]) {
+        if (courses && courses[value]) {
             return Promise.reject('You are taking course ' + (courses[value].year ? ("in " + courses[value].year + courses[value].term) : ""));
         } else
         // TODO validation (check if course exists)
@@ -130,7 +131,7 @@ class PlannerInputRow extends React.Component {
     handleCourseChange = (e, {value, className}) => {
         let courseId = value;
         const {courses, creditFor} = this.props;
-        const course = courses[courseId]
+        const course = courses && courses[courseId]
 
         console.log("handleCourseChange", className, courseId, creditFor, this.state);
         // TODO: API
@@ -139,7 +140,7 @@ class PlannerInputRow extends React.Component {
             [className]: courseId,
             section: (course && course.section) || "",
             grade: (course && course.grade) || "",
-            creditFor: courses[courseId] && courses[courseId].creditFor,
+            creditFor: courses && courses[courseId] && courses[courseId].creditFor,
             creditOptions: this.generateRequirementOptions(courseId, creditFor)
         });
     }
@@ -194,7 +195,7 @@ class PlannerInputRow extends React.Component {
         const {term} = this.props;
         const {courseOptions, courseId, isEditMode, creditOptions, creditFor, section, grade} = this.state;
 
-        const freeCourses = this.props.unassigned || [];
+        const freeCourses = this.state.unassigned || [];
         // console.log('RENDER: ', courseId, creditFor, creditOptions);
 
         if (isEditMode) {

@@ -6,6 +6,7 @@ import {STUDENT_ADD_TERM, STUDENT_EDIT_TERM, UPDATE_COURSE_PLANNER_SUCCESS} from
 import { LOG_IN, LOG_OUT, UPDATE_INFO_SUCCESS } from '../constants/LoginConstants';
 import update from 'react-addons-update';
 import bcs from '../data/bcs.json';
+import {ACCOUNT_CHANGE_PASSWORD, ACCOUNT_DELETE, ACCOUNT_EDIT} from "../constants/AccountConstants";
 
 const initialState = {
     isLoggedIn: false,
@@ -200,7 +201,10 @@ const StudentReducer = (state = initialState, action) => {
         case UPDATE_COURSE_PLANNER_SUCCESS:
             var { courses } = action.data;
 
-            var planner = {};
+            var planner = Object.keys(state.planner).reduce((obj, key) => {
+                obj[key] = {};
+                return obj;
+            }, {});
             var courseKeys = courses? Object.keys(courses) : [];
             var creditFor = {
                 "PADE": null,
