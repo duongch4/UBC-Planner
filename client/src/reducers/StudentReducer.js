@@ -30,7 +30,7 @@ const StudentReducer = (state = initialState, action) => {
                 "CPSC 121": null,
                 "MATH 180": null,
                 "STAT 203": null,
-                "Communication": null,
+                "ENGL 3XX": null,
                 "CPSC 210": null,
                 "CPSC 221": null,
                 "CPSC 213": null,
@@ -202,7 +202,7 @@ const StudentReducer = (state = initialState, action) => {
             var { courses } = action.data;
 
             var planner = Object.keys(state.planner).reduce((obj, key) => {
-                obj[key] = {};
+                obj[key] = [];
                 return obj;
             }, {});
             var courseKeys = courses? Object.keys(courses) : [];
@@ -213,7 +213,7 @@ const StudentReducer = (state = initialState, action) => {
                 "CPSC 121": null,
                 "MATH 180": null,
                 "STAT 203": null,
-                "Communication": null,
+                "ENGL 3XX": null,
                 "CPSC 210": null,
                 "CPSC 221": null,
                 "CPSC 213": null,
@@ -234,7 +234,9 @@ const StudentReducer = (state = initialState, action) => {
                 let { year } = courses[courseCode];
                 let { term } = courses[courseCode];
                 let yearTerm = (year && term && year+term) || null;
-                planner[yearTerm] = planner[yearTerm]? planner[yearTerm] : [];
+                planner[yearTerm] = (planner[yearTerm])? planner[yearTerm] : [];
+
+                console.log("yearTerm", yearTerm, planner[yearTerm]);
                 planner[yearTerm].push(courseCode);
                 creditFor[courses[courseCode].creditFor] = courseCode;
             });

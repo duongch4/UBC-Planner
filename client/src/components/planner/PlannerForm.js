@@ -82,7 +82,7 @@ class PlannerForm extends React.Component {
         const {isEditMode, year, season, term, error, origTerm} = this.state;
         return (
             <div onClick={this.onClick}>
-                {!isEditMode && <h1 class="remark-div">{origTerm}</h1>}
+                {!isEditMode && <h1 className="remark-div">{origTerm}</h1>}
                 {isEditMode && (
                     <Form onSubmit={this.onSubmit}>
                         {error &&
@@ -142,7 +142,7 @@ PlannerForm.propTypes = {
     year: PropTypes.number.isRequired,
     season: PropTypes.string.isRequired,
     term: PropTypes.number.isRequired,
-    isEditMode: PropTypes.bool.isRequired,
+    isEditMode: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired
 };

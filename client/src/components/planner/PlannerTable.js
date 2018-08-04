@@ -48,6 +48,7 @@ class PlannerTable extends React.Component {
                                  inEditMode = { courseId === "" }
                                  onEditMode = { this.handleEdit }
                                  onSubmit   = { this.onSubmit }
+                                 key        = { courseId }
                 />);
         });
 
@@ -95,11 +96,11 @@ class PlannerTable extends React.Component {
         const { term, year, season, courses, inEditMode } = this.state;
 
         return (
-            <div class="planner-table-wrapper">
+            <div className="planner-table-wrapper">
                 <Divider hidden />
                 <PlannerForm onSubmit={this.onTermChange} onClick={this.handleEdit} term={term} year={year} season={season}/>
                 <Divider hidden />
-                <div class="">
+                <div>
                     <Table compact basic='very' selectable color={'blue'} textAlign='center'>
                         <Table.Header>
                             <Table.Row>
@@ -115,14 +116,14 @@ class PlannerTable extends React.Component {
                         </Table.Body>
                     </Table>
                 </div>
-                {(!inEditMode) && (<div class='add-row-button-wrapper'>
+                {(!inEditMode) && (<div className='add-row-button-wrapper'>
                     <Button circular size={'mini'} color='olive' icon='plus' content={'add'} onClick={ this.addRow } />
                 </div>)}
             </div>
     )};
 }
 
-PlannerTable.PropTypes = {
+PlannerTable.propTypes = {
     term: PropTypes.number.isRequired,
     year: PropTypes.number.isRequired,
     season: PropTypes.string.isRequired,

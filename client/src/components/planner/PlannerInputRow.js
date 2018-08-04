@@ -7,40 +7,22 @@ import {doAddCourse} from "../../api/BookmarkApi";
 
 class PlannerInputRow extends React.Component {
 
-    constructor(props) {
-        super();
-
-        const {courses, courseId, creditFor} = props;
-        const course = courses && courses[courseId];
-
-        this.state = {
-            isEditMode: !courseId || (courseId === ""),
-            courseId: courseId,
-            term: props.term,
-            year: props.year,
-            // courseOptions: [],
-            // creditOptions: [],
-            creditFor: (course && course.creditFor) || "",
-            section: (course && course.section) || "",
-            grade: (course && course.grade) || "",
-            unassigned: props.unassigned
-        }
-        //
-        // this.state.courseOptions = this.generateCourseOptions(freeCourses, courseId)
-        //
-        // this.state.creditOptions = this.generateRequirementOptions(courseId, creditFor);
+    state = {
+        isEditMode: !this.props.courseId || (this.props.courseId === ""),
+        courseId: this.props.courseId,
+        term: this.props.term,
+        year: this.props.year,
+        creditFor: (this.props.courses[this.props.courseId] && this.props.courses[this.props.courseId].creditFor) || "",
+        section: (this.props.courses[this.props.courseId] && this.props.courses[this.props.courseId].section) || "",
+        grade: (this.props.courses[this.props.courseId] && this.props.courses[this.props.courseId].grade) || "",
+        unassigned: this.props.unassigned
     }
 
     componentWillReceiveProps = props => {
         const {courseId, term, courses, year, unassigned} = props;
-
-        // let creditOptions = this.generateRequirementOptions(props.courseId, props.creditFor);
-        // let courseOptions = this.generateCourseOptions(freeCourses, courseId);
-
         const course = courses[courseId];
         this.setState({
             courseId, term, year, unassigned,
-            // creditOptions, courseOptions,
             creditFor: (course && course.creditFor) || "",
             section: (course && course.section) || "",
             grade: (course && course.grade) || "",
@@ -57,10 +39,6 @@ class PlannerInputRow extends React.Component {
             })
             return arr;
         }, [{
-            key: null,
-            value: null,
-            text: " "
-        }, {
             key: courseId,
             value: courseId,
             text: courseId
@@ -71,19 +49,24 @@ class PlannerInputRow extends React.Component {
         const {creditFor} = this.props;
         const gradCreditList = creditFor ? Object.keys(creditFor) : [];
 
+
+        console.log(gradCreditList.reduce((arr, creditId) => {
+            if (creditFor[creditId] === null || creditFor[creditId] === courseId) arr.push({
+                key: creditId,
+                value: creditId,
+                text: creditId
+            })
+            return arr;
+        }, []));
+
         return gradCreditList.reduce((arr, creditId) => {
-            // console.log("CREATE_LIST", creditFor[creditId], courseId, (creditFor[creditId] === courseId));
             if (!creditFor[creditId] || creditFor[creditId] === courseId) arr.push({
                 key: creditId,
                 value: creditId,
                 text: creditId
             })
             return arr;
-        }, [{
-            key: null,
-            value: null,
-            text: " "
-        }, {key: this.state.creditFor, value: this.state.creditFor, text: this.state.creditFor || ""}]);
+        }, []);
 
     }
 
@@ -146,14 +129,10 @@ class PlannerInputRow extends React.Component {
     }
 
     onFieldTextChange = (e, {value, className}) => {
-
-        console.log(arguments);
         this.setState({...this.state, [ className ]: value});
     }
 
     handleBCSChange = (e, {value, className}) => {
-        const {creditOptions} = this.state;
-        // TODO: API
         this.setState({...this.state, [className]: value});
     }
 
@@ -247,10 +226,10 @@ class PlannerInputRow extends React.Component {
     };
 }
 
-PlannerInputRow.PropTypes = {
+PlannerInputRow.propTypes = {
     term: PropTypes.number.isRequired,
     year: PropTypes.string.isRequired,
-    courseId: PropTypes.string.isRequired,
+    courseId: PropTypes.string,
     inEditMode: PropTypes.bool.isRequired,
     onEditMode: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired

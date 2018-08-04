@@ -72,7 +72,7 @@ class PlannerPage extends React.Component {
             let el = planner[ix];
             if (el === 'null') continue;
             items.push(
-                <Menu.Item name={el} active={activeItem === el} onClick={this.handleItemClick} />)
+                <Menu.Item key={el} name={el} active={activeItem === el} onClick={this.handleItemClick} />)
         }
 
         return items;
