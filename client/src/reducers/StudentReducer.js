@@ -178,6 +178,8 @@ const StudentReducer = (state = initialState, action) => {
 
             return { ...state, courses, creditFor };
         case STUDENT_EDIT_TERM:
+            const {origTerm} = action.query;
+            delete state.planner[origTerm];
             // var { planner, courses } = state;
             // var { origTerm, newTerm } = action.term;
             // var year = newTerm.substring(0, 5);
