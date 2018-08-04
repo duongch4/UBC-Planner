@@ -5,7 +5,6 @@ const passport = require('passport');
 const config = require('./config');
 var flash = require('express-flash');
 var cors = require('cors');
-const path = require('path');
 const port = process.env.PORT || 5000;
 
 // connect to the database and load models
