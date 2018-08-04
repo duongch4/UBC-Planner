@@ -12,8 +12,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
-<<<<<<< HEAD
-    "express": "^4.16.2",
+<<<<<<< HEA
     "express-flash": "0.0.2",
 =======
     "express": "^4.16.3",

@@ -30,7 +30,8 @@ class Course extends React.Component {
 
     createPrerequisites = () => {
         let { pr } = this.state;
-        return ((!!pr)? <List >{this.createLabels(pr)}</List> : '');
+        return ((!!pr)? <List ><span>
+                &nbsp; <span class="label">pre-req</span>: {this.createLabels(pr)}</span></List> : '');
     }
 
     createConflicts = () => {
@@ -41,10 +42,10 @@ class Course extends React.Component {
     createConflictLabels = (result) => {
       console.log(result)
       if (result.length > 0) {
-        return (<span>
-                &nbsp; conflict: [ {result.map(function(el) {
+        return (<span class="label">
+                &nbsp;conflict:  {result.map(function(el) {
                   return (<CourseConflictLabel courseId={el} />);
-                })}]
+                })}
                 </span>
             )
       }
@@ -84,7 +85,7 @@ class Course extends React.Component {
     }
 
     render() {
-        const { id, name, description, credits } = this.props.course;
+        const { id, name, description, prnote } = this.props.course;
         const { courses } = this.props;
         const color = this.checkIfTaken(id);
         return <Card color={'blue'}>
@@ -95,8 +96,9 @@ class Course extends React.Component {
                 <Card.Description>{description}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <div>{ credits } </div>
-                {this.createPrerequisites()}
+
+            {this.createPrerequisites()}
+              <div>  { prnote } </div>
                 {this.createConflicts()}
             </Card.Content>
         </Card>

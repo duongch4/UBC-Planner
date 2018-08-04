@@ -1,7 +1,7 @@
 .ui.search>.results {
     left: calc(50% - 10em) !important;
     width: 20em !important;
-} 
+}
 
 .ui.search>.results .content {
     text-align: left;
@@ -46,4 +46,8 @@
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     border:none;
+}
+
+.label {
+  color: 	#606060
 }
