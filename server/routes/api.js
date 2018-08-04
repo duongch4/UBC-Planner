@@ -56,6 +56,7 @@ router.post('/courses_delete', (req, res) => {
 router.post('/course_update', (req, res) =>{
     var query = {"info.email": req.body.email};
     try {
+        console.log({email: req.body.email, origId: req.body.origId, courseId: req.body.courseId, field: req.body.field, value: req.body.value})
 
         if (req.body.origId) {
 
@@ -72,6 +73,7 @@ router.post('/course_update', (req, res) =>{
 
             var newData = {};
             newData["courses." + req.body.courseId + "." + req.body.field] = req.body.value;
+            // console.log('/course_update: newData', newData);
 
             User.updateOne(query, newData, {upsert: true}, function (err, doc) {
                 if (err) return res.send(500, {error: err});

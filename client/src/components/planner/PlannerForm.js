@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Form, Divider, Label, Dropdown, Button} from "semantic-ui-react"
 // import {editTerms} from "../../api/WorksheetApi";
 import {editTerm} from "../../actions/CoursePlannerAction";
+import {doUpdateTerm} from "../../api/PlannerApi";
 
 class PlannerForm extends React.Component {
 
@@ -44,16 +45,17 @@ class PlannerForm extends React.Component {
         if (error) return this.setState({error})
 
         //       [2] API call
-        this.props.editTerm({
+        this.props.doUpdateTerm({
             origTerm: this.state.origTerm,
             newTerm: newTerm,
             year: this.state.year + this.state.season,
             term: this.state.term,
-            email: this.props.email
+            email: this.props.email,
+            courses: this.props.planner[this.state.origTerm]
+        }).then(res => {
+            this.setState({isEditMode: false, origTerm: newTerm});
+            this.props.onSubmit({newTerm});
         })
-
-        this.setState({isEditMode: false, origTerm: newTerm});
-        this.props.onSubmit({newTerm});
     }
 
     onCancel = e => {
@@ -149,5 +151,5 @@ PlannerForm.propTypes = {
 
 export default connect (
     mapStateToProps,
-    {editTerm}
+    {doUpdateTerm}
     ) (PlannerForm);

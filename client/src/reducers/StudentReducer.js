@@ -178,26 +178,26 @@ const StudentReducer = (state = initialState, action) => {
 
             return { ...state, courses, creditFor };
         case STUDENT_EDIT_TERM:
-            var { planner, courses } = state;
-            var { origTerm, newTerm } = action.term;
-            var year = newTerm.substring(0, 5);
-            var semester = parseInt(newTerm.charAt(5));
-            var newPlanner = ( planner && JSON.parse(JSON.stringify(planner)) ) || {};
-
-            var courseCodes = (planner && planner[origTerm]) || [];
-            console.log("ACTION", courseCodes, action);
-
-            newPlanner[newTerm] = courseCodes.reduce((arr, courseCode) => {
-                var course = courses[courseCode];
-                course.year = year;
-                course.term = semester;
-                courses[courseCode] = course;
-                arr.push(courseCode);
-                return arr;
-            }, []);
-            delete newPlanner[origTerm];
-
-            return { ...state, planner:newPlanner, courses};
+            // var { planner, courses } = state;
+            // var { origTerm, newTerm } = action.term;
+            // var year = newTerm.substring(0, 5);
+            // var semester = parseInt(newTerm.charAt(5));
+            // var newPlanner = ( planner && JSON.parse(JSON.stringify(planner)) ) || {};
+            //
+            // var courseCodes = (planner && planner[origTerm]) || [];
+            // console.log("ACTION", courseCodes, action);
+            //
+            // newPlanner[newTerm] = courseCodes.reduce((arr, courseCode) => {
+            //     var course = courses[courseCode];
+            //     course.year = year;
+            //     course.term = semester;
+            //     courses[courseCode] = course;
+            //     arr.push(courseCode);
+            //     return arr;
+            // }, []);
+            // delete newPlanner[origTerm];
+            //
+            // return { ...state, planner:newPlanner, courses};
         case UPDATE_COURSE_PLANNER_SUCCESS:
             var { courses } = action.data;
 
