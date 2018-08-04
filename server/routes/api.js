@@ -14,7 +14,6 @@ router.post('/info_update', (req, res) => {
 
     User.findOneAndUpdate(query, newData, {upsert:true}, function(err, doc){
         if (err) return res.send(500, { error: err });
-        console.log("successfully updated");
         return res.send("successfully saved");
     });
 });
@@ -27,7 +26,6 @@ router.post('/remarks_update', (req, res) => {
 
     User.findOneAndUpdate(query, newData, {upsert:true}, function(err, doc){
         if (err) return res.send(500, { error: err });
-        console.log("successfully updated");
         return res.send("successfully saved");
     });
 });
@@ -37,11 +35,8 @@ router.post('/courses_add', (req, res) => {
     var newData = {};
     newData["courses." + req.body.course.id] = req.body.course;
 
-    console.log("new data", newData);
-
     User.findOneAndUpdate(query, newData, {upsert:true}, function(err, doc){
         if (err) return res.send(500, { error: err });
-        console.log("successfully deleted");
         return res.send("successfully deleted");
     });
 });
@@ -50,8 +45,6 @@ router.post('/courses_delete', (req, res) => {
     var query = {"info.email" : req.body.email};
     var newData = {};
     newData["courses." + req.body.course.id] = 1;
-
-    console.log("new data", newData);
 
     User.findOneAndUpdate(query, { $unset : newData }, {upsert:true}, function(err, doc){
         if (err) return res.send(500, { error: err });
@@ -63,28 +56,22 @@ router.post('/courses_delete', (req, res) => {
 router.post('/course_update', (req, res) =>{
     var query = {"info.email": req.body.email};
     try {
-        console.log({email: req.body.email, origId: req.body.origId, courseId: req.body.courseId, field: req.body.field, value: req.body.value})
 
         if (req.body.origId) {
 
-            console.log(req.body.origId, req.body.origId? true:false);
 
             var removeData = {};
             removeData["courses." + req.body.origId + "." + req.body.field] = null;
-            console.log('/course_update: origId', removeData);
 
             User.updateOne(query, removeData, {upsert:true}, function(err, doc){
                 if (err) return res.send(500, { error: err });
-                console.log("origId:", req.body.origId);
             });
         }
 
         if (req.body.courseId) {
 
-            console.log(req.body.courseId, req.body.courseId? true:false);
             var newData = {};
             newData["courses." + req.body.courseId + "." + req.body.field] = req.body.value;
-            console.log('/course_update: newData', newData);
 
             User.updateOne(query, newData, {upsert: true}, function (err, doc) {
                 if (err) return res.send(500, {error: err});
@@ -151,14 +138,12 @@ router.post('/planner_course_update', (req, res) =>{
                 }
             });
         } else if (req.body.courseId) {
-            console.log(req.body.courseId, req.body.courseId? true:false);
             var keys = Object.keys(req.body.course);
 
             var newData = keys.reduce((obj, fieldName)=>{
                 obj["courses."+req.body.courseId +"." + fieldName] = req.body.course[fieldName]
                 return obj;
             }, {});
-            console.log('/course_update: newData', newData);
             User.findOneAndUpdate(query, newData, {upsert: true, new:true}, function (err, doc) {
                 if (err) return res.send(500, {error: err});
 
@@ -178,7 +163,6 @@ router.post('/editaccount', (req, res) => {
     var newData = req.body.data;
     User.findOneAndUpdate(query, { info : newData }, {}, function(err, doc) {
 		if (err) return res.send(500, {error: err});
-		console.log("successfully updated");
 		return res.send("successfully saved");
 	});
 });
@@ -188,7 +172,6 @@ router.post('/editpassword', (req, res) => {
     var newPassword = req.body.newpassword;
     User.findOneAndUpdate(query, {"info.password": newPassword}, {}, function(err, doc) {
 		if (err) return res.send(500, {error: err});
-		console.log("Password successfully updated");
 		return res.send("Password successfully saved");
 	});
 });

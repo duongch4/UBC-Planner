@@ -51,8 +51,6 @@ module.exports = new PassportLocalStrategy({
   newUser.save((err) => {
     if (err) { return done(err); }
 
-      console.log('user saved');
-
     return done(null);
   });
 });

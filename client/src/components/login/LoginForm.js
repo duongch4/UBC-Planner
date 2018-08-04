@@ -29,9 +29,7 @@ class LoginForm extends React.Component {
         const {data} = this.state;
 
         if (Object.keys(error).length === 0 && error.constructor === Object) {
-            console.log(data);
             doLogin(data).catch(function (e) {
-                console.log("errrrrr", e);
                         this.setState({ authError : e && e.error && e.error.message });
                     }.bind(this));
             // LoginApi.doLogin(this.state.data)
