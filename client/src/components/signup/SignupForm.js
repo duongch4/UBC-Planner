@@ -3,7 +3,7 @@ import Validator from "validator";
 import PropTypes from "prop-types";
 import {doSignup} from '../../api/LoginApi';
 import SignupErrorMessage from './SignupErrorMessage';
-import { Form, Button, Message } from "semantic-ui-react";
+import { Form, Button, Input, Message } from "semantic-ui-react";
 
 class SignupForm extends React.Component {
 
@@ -89,7 +89,7 @@ class SignupForm extends React.Component {
                     <Form.Field error={!!error.email}>
                         <label htmlFor='email'>Email</label>
                         {error.email &&  <SignupErrorMessage text={error.email}/>}
-                        <input
+                        <Input
                             type='text'
                             name='email'
                             placeholder='username@ugrad.cs.ubc.ca'
@@ -100,7 +100,7 @@ class SignupForm extends React.Component {
                     <Form.Field error={!!error.password}>
                         <label htmlFor='password'>Password</label>
                         {error.password && <SignupErrorMessage text={error.password}/>}
-                        <input
+                        <Input
                             type='password'
                             name='password'
                             placeholder='Password'
@@ -111,7 +111,7 @@ class SignupForm extends React.Component {
                     <Form.Field error={!!error.name}>
                         <label htmlFor='name'>Name</label>
                         {error.name && <SignupErrorMessage text={ error.name } />}
-                        <input
+                        <Input
                             type='text'
                             name='name'
                             placeholder='Your Name'
@@ -122,7 +122,7 @@ class SignupForm extends React.Component {
                     <Form.Field error={!!error.sid}>
                         <label htmlFor='sid'>Student Number</label>
                         {error.sid && <SignupErrorMessage text={error.sid}/>}
-                        <input
+                        <Input
                             type='number'
                             name='sid'
                             value={ data.sid }
@@ -132,7 +132,7 @@ class SignupForm extends React.Component {
                     <Form.Field error={!!error.bm}>
                         <label htmlFor='bm'>Bridging Module</label>
                         {error.bm && <SignupErrorMessage text={ error.bm } />}
-                        <input
+                        <Input
                             type='text'
                             name='bm'
                             placeholder='TBD'
@@ -143,7 +143,7 @@ class SignupForm extends React.Component {
                     <Form.Field error={!!error.cohort}>
                         <label htmlFor='cohort'>Cohort</label>
                         {error.cohort && <SignupErrorMessage text={ error.cohort } />}
-                        <input
+                        <Input
                             type='number'
                             name='cohort'
                             placeholder='Cohort'

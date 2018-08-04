@@ -128,11 +128,6 @@ const StudentReducer = (state = initialState, action) => {
             var course = courses[id];
             var newCourses  = JSON.parse(JSON.stringify(courses));
             var newPlannerForTerm;
-
-
-            console.log("REMOVE", course);
-
-
             var origPlannerForTerm = planner[course.year + course.term];
             if (origPlannerForTerm) {
                 newPlannerForTerm = origPlannerForTerm.filter(courseCode => (courseCode != id)) ;
@@ -154,7 +149,6 @@ const StudentReducer = (state = initialState, action) => {
             newPlanner[term] = [];
             return { ...state, planner:newPlanner};
         case UPDATE_COURSE_REQUIREMENT_SUCCESS:
-            console.log('ACTION: ', action);
 
             var { courseId, field, value, origId } = action;
             var { courses, creditFor } = state;
@@ -178,14 +172,9 @@ const StudentReducer = (state = initialState, action) => {
 
             var newCreditFor;
             if (field === 'creditFor') {
-
-                // creditFor[value] = courseId;
-                // newCreditFor = update(creditFor, {[value]: {$set: id}});
-                console.log("REDUCER:" , value, courseId);
                 creditFor = update(creditFor, {[value]: {$set: courseId}});
             }
 
-            console.log("REDUCER:", creditFor);
             return { ...state, courses, creditFor };
         case STUDENT_EDIT_TERM:
             var { planner, courses } = state;
@@ -247,6 +236,33 @@ const StudentReducer = (state = initialState, action) => {
             });
 
             return { ...state, courses, planner, creditFor};
+            case ACCOUNT_EDIT:
+                var {info}     = state;
+                var newinfo = {
+    				bm: action.student.data.bm,
+    				cohort: action.student.data.cohort,
+    				email: action.student.data.email,
+    				name: action.student.data.name,
+    				password: info['password'],
+    				sid: action.student.data.sid
+    			}
+                return { ...state, info: newinfo};
+
+            case ACCOUNT_CHANGE_PASSWORD:
+            console.log(action);
+    			var {info} = state;
+    			var newinfo = {
+    				bm: info['bm'],
+    				cohort: info['cohort'],
+    				email: info['email'],
+    				name: info['name'],
+    				password: action.student.newpassword,
+    				sid: info['sid']
+    			}
+    			return { ...state, info: newinfo};
+
+            case ACCOUNT_DELETE:
+    			return { ...state}
         default: return state;
     }
 };

@@ -16,11 +16,21 @@ axios.post("/auth/login", credentials)
 export const doLogout = () => dispatch =>
     dispatch(logoutSuccess());
 
-export const lostPassword = ({ email }) => {
-        return Promise.resolve({
-            message: "Password reset email was sent."
-        });
-    };
+export const lostPassword = ({ email }) =>
+axios.post("/email/forgot_password", {email: email})
+  .then(res => {
+    return Promise.resolve({
+        message: res.data.message
+    });
+  })
+
+export const resetPassword = (password, token) =>
+axios.post("/auth/reset_password", { password: password, token: token})
+  .then(res => {
+    return Promise.resolve({
+      message: res.data.message
+  });
+})
 
 export const updateStudentInfo = info => dispatch =>
 axios.post("/api/info_update", {info:info},  { headers: {'Authorization': "bearer " + localStorage.getItem('token')}})

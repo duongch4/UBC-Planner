@@ -9,6 +9,12 @@ export const updateRemarks = data => dispatch =>
                 dispatch(updateRemarksSuccess(data))
         });
 
+export const emailUserWorksheet = (email, divToPrint) =>
+axios.post("/email/user_worksheet", { email: email, divToPrint: divToPrint.innerHTML })
+
+export const emailDirectorWorksheet = (data, divToPrint) =>
+axios.post("/email/director_worksheet", { data: data, divToPrint: divToPrint.innerHTML })
+
 export const updateRequirementCourse = data => dispatch =>
     // axios.post("/api/requirement_course_update", data, {headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
     //     .then(res => {
@@ -21,8 +27,6 @@ export const updateRequirementCourse = data => dispatch =>
 export const updateCourses = data => dispatch =>
     axios.post("/api/course_update", data, {headers: {'Authorization': "bearer " + localStorage.getItem('token')}})
         .then(res => {
-
-            console.log("will dispatch");
             dispatch(updateRequirementCourseSuccess(data))
         })
         .catch(err=> {

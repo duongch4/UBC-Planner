@@ -12,23 +12,23 @@ class ForgotPasswordForm extends React.Component {
         },
         loading: false,
         error: {},
-        message: ""
+        forgotPasswordSuccess: "",
+        forgotPasswordError: "",
     };
 
     onSubmit = () => {
 
         const error = this.validate(this.state.data);
         this.setState({ error: error });
-        this.setState({ message: "" });
+        this.setState({ forgotPasswordError: "" });
 
         if (Object.keys(error).length === 0 && error.constructor === Object) {
             lostPassword(this.state.data)
                 .then((data) => {
-                    this.setState({ message: data.message});
+                    this.setState({ forgotPasswordSuccess: data.message});
                 })
                 .catch(function (e) {
-                    console.log("failed");
-                    this.setState({ message : e && e.error && e.error.message });
+                    this.setState({ forgotPasswordError :  e.response.data.error });
                 }.bind(this));
         }
     };
@@ -47,11 +47,12 @@ class ForgotPasswordForm extends React.Component {
     onFieldTextChange = e => this.setState({data: {...this.state.data, [ e.target.name ]: e.target.value}});
 
     render() {
-        const {data, error, message} = this.state;
+        const {data, error, forgotPasswordSuccess, forgotPasswordError} = this.state;
         return (
             <div>
 
-                {message && <Message positive>{ message }</Message>}
+                {forgotPasswordSuccess && <Message positive>{ forgotPasswordSuccess }</Message>}
+                {forgotPasswordError && <Message negative>{ forgotPasswordError }</Message>}
 
                 <Form onSubmit={ this.onSubmit }>
                     <Form.Field error = {!!error.email}>

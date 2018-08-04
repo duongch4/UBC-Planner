@@ -1,8 +1,22 @@
 const express = require('express');
 const validator = require('validator');
 const passport = require('passport');
+const async = require('async');
+const nodemailer = require('nodemailer')
+const User = require('mongoose').model('User');
 
 const router = new express.Router();
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // true for 465, false for other ports
+  auth: {
+    user: 'ubc.planner.app@gmail.com',
+    pass: 'upa-admin-MEA3'
+  }
+});
 
 /**
  * Validate the sign up form
@@ -111,6 +125,30 @@ router.post('/signup', (req, res, next) => {
       });
     }
 
+    //TODO: email verification
+    /*
+    var token = new Token({ _userId: user.info._id, token: crypto.randomBytes(16).toString('hex') });
+
+    token.save(function (err) {
+           if (err) { return res.status(500).json({ success: false, message: err.message }); }
+
+           var mailOptions = {
+             to: user.info.email,
+             from: 'ubc.planner.app@gmail.com',
+             subject: 'Account Verification',
+             text: 'Hello,\n\n' +
+               'Please verify your account by clicking the link: ' + 'http://localhost:3000' + '/confirm?token=' + token.token + '.\n'
+           };
+           transporter.sendMail(mailOptions, function (err) {
+               if (err) { return res.status(500).send({ success: false, message: err.message }); }
+               return res.status(200).json({
+                 success: true,
+                 message: 'You have successfully signed up! Now you should be able to log in. A verification email has been sent to ' + user.info.email + '.'
+               });
+           });
+       });
+   });*/
+
     return res.status(200).json({
       success: true,
       message: 'You have successfully signed up! Now you should be able to log in.'
@@ -158,6 +196,100 @@ router.post('/login', (req, res, next) => {
     });
   })(req, res, next);
 });
+
+router.post('/reset_password', (req, res) => {
+  console.log("post reset, passowrd: ", req.body.password, "token: ", req.body.token)
+  async.waterfall([
+    function(done) {
+      User.findOne({ "info.resetPasswordToken": req.body.token, "info.resetPasswordExpires": { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          return res.status(401).send({ error: 'Password reset token is invalid or has expired.' });
+        }
+
+        user.info.password = req.body.password;
+        user.info.resetPasswordToken = undefined;
+        user.info.resetPasswordExpires = undefined;
+
+        user.save(function(err) {
+            done(err, user);
+        });
+      });
+    },
+    function(user, done) {
+      var mailOptions = {
+        to: user.info.email,
+        from: 'ubc.planner.app@gmail.com',
+        subject: 'Your password has been changed',
+        text: 'Hello,\n\n' +
+          'This is a confirmation that the password for your account ' + user.info.email + ' has just been changed.\n'
+      };
+      transporter.sendMail(mailOptions, function(err) {
+        return res.status(200).send({ message: 'Success! Redirecting you to the login page.' });
+        done(err);
+      });
+    }
+  ], function(err) {
+    return res.status(500).send({ error: err });
+  });
+})
+
+// TODO: email verification
+/*
+router.post('/confirmation', (req, res) => {
+  Token.findOne({ token: req.body.token }, function (err, token) {
+        if (!token) return res.status(400).send({ type: 'not-verified', message: 'We were unable to find a valid token. Your token my have expired.' });
+
+        // If we found a token, find a matching user
+        User.findOne({ info._id: token._userId }, function (err, user) {
+            if (!user) return res.status(400).send({ message: 'We were unable to find a user for this token.' });
+            if (user.info.isVerified) return res.status(400).send({ type: 'already-verified', message: 'This user has already been verified.' });
+
+            // Verify and save the user
+            user.info.isVerified = true;
+            user.save(function (err) {
+                if (err) { return res.status(500).send({ message: err.message }); }
+                res.status(200).send("The account has been verified. Please log in.");
+            });
+        });
+    });
+}
+
+router.post('/resend_confirmation', (req, res) => {
+  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('email', 'Email cannot be blank').notEmpty();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
+
+  // Check for validation errors
+  var errors = req.validationErrors();
+  if (errors) return res.status(400).send(errors);
+
+  User.findOne({ email: req.body.email }, function (err, user) {
+        if (!user) return res.status(400).send({ message: 'We were unable to find a user with that email.' });
+        if (user.info.isVerified) return res.status(400).send({ message: 'This account has already been verified. Please log in.' });
+
+        // Create a verification token, save it, and send email
+        var token = new Token({ _userId: user.info._id, token: crypto.randomBytes(16).toString('hex') });
+
+        // Save the token
+        token.save(function (err) {
+            if (err) { return res.status(500).send({ message: err.message }); }
+
+            // Send the email
+            var mailOptions = {
+              to: user.info.email,
+              from: 'ubc.planner.app@gmail.com',
+              subject: 'Account Verification',
+              text: 'Hello,\n\n' +
+                'Please verify your account by clicking the link: ' + 'http://localhost:3000' + '/confirm?token=' + token.token + '.\n'
+            };
+            transporter.sendMail(mailOptions, function (err) {
+                if (err) { return res.status(500).send({ success: false, message: err.message }); }
+                return res.status(200).send({ message: 'A verification email has been sent to ' + user.email + '.'});
+            });
+        });
+
+    });
+})*/
 
 
 

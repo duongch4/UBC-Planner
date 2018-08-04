@@ -5,6 +5,8 @@ import MainHeader from "./components/mainHeader/MainHeader";
 import SignupPage from "./components/signup/SignupPage";
 import ForgotPasswordPage from "./components/password/ForgotPasswordPage";
 import IndexPage from "./components/index/IndexPage";
+import ResetPasswordPage from "./components/reset/ResetPasswordPage";
+import ConfirmEmailPage from "./components/confirm/ConfirmEmailPage";
 
 // let jwt = localStorage.getItem('jwt');
 // if (jwt) {
@@ -55,6 +57,8 @@ class App extends Component {
               <Route path="/" exact component={ IndexPage } />
               <Route path="/signup" exact component={ SignupPage } />
               <Route path="/forgotpassword" exact component={ ForgotPasswordPage } />
+              <Route path="/reset" exact component={ ResetPasswordPage } />
+              <Route path="/confirm" exact component={ ConfirmEmailPage } />
           </div>
       </div>
     );

@@ -4,7 +4,14 @@ import {Header} from "semantic-ui-react"
 import Worksheet from "./Worksheet";
 import WorksheetProgress from "./WorksheetProgress";
 import WorksheetInfo from "./WorksheetInfo";
-
+import { Button, Modal, Image, Form} from 'semantic-ui-react';
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
+import axios from 'axios'
+import {emailUserWorksheet} from '../../api/WorksheetApi';
+import EmailModal from '../modal/EmailModal';
+import ConfirmModal from '../modal/ConfirmModal';
+import domtoimage from 'dom-to-image';
 
 class WorksheetPage extends React.Component {
 
@@ -21,12 +28,24 @@ class WorksheetPage extends React.Component {
     };
 
     render () {
-        const {name, bm, cohort, sid, email} = this.props.student;
+        const {name, bm, cohort, sid} = this.props.student;
         return (
-            <div>
-                <Header className="worksheet-student-name" as='h1' icon textAlign={'left'}>
-                        {name}
+          <div>
+
+                <Header as='h1' icon textAlign={'left'}>
+                <div class="h-left">
+                {name}
+                </div>
+                <div class="button" class="h-right">
+                <ConfirmModal />
+                  <EmailModal />
+
+                </div>
+
                 </Header>
+
+<div id='divToPrint'>
+
                 <div class = "student-info-container">
                     <WorksheetInfo
                         isEditMode = {false}
@@ -34,7 +53,6 @@ class WorksheetPage extends React.Component {
                         fieldName = {'sid'}
                         fieldValue = {sid}
                         fieldType = {'number'}
-                        email = {email}
                     />&nbsp;|&nbsp;
                     <WorksheetInfo
                         isEditMode = {false}
@@ -42,7 +60,6 @@ class WorksheetPage extends React.Component {
                         fieldName = {'bm'}
                         fieldValue = {bm}
                         fieldType = {'string'}
-                        email = {email}
                     />&nbsp;|&nbsp;
                     <WorksheetInfo
                         isEditMode = {false}
@@ -50,12 +67,15 @@ class WorksheetPage extends React.Component {
                         fieldName = {'cohort'}
                         fieldValue = {cohort}
                         fieldType = {'number'}
-                        email = {email}
                     />
                 </div>
                 <WorksheetProgress />
                 <Worksheet {...this.props}/>
+
             </div>
+
+          </div>
+
         );
     }
 }

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import { Label } from 'semantic-ui-react'
 import {doCourseSelect} from "../../api/CourseSearchApi";
 
-class CourseLabel extends React.Component {
+class CourseConflictLabel extends React.Component {
 
     constructor() {
         super();
@@ -25,9 +25,10 @@ class CourseLabel extends React.Component {
         if (!!courses) {
          course = courses[courseId];
         }
+
         if (!course) return '';
-        if (!!course.grade) return 'green';
-        return 'olive';
+        if (!!course.grade) return 'red';
+        return 'google plus red';
     }
 
     onLabelClick=(e, o)=>{
@@ -52,11 +53,11 @@ const mapStateToProps = state => ({
     courses: state.student.courses
 })
 
-CourseLabel.PropTypes = {
+CourseConflictLabel.PropTypes = {
     courseId: PropTypes.string.isRequired,
 }
 
 export default connect (
     mapStateToProps,
     {doCourseSelect}
-) (CourseLabel)
+) (CourseConflictLabel)

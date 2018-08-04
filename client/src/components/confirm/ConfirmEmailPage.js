@@ -1,10 +1,12 @@
-import './ForgotPassword.css';
+import './ConfirmEmail.css';
 import React from "react";
 import PropTypes from "prop-types";
-import ForgotPasswordForm from "./ForgotPasswordForm";
 import GeneralHeader from "../header/GeneralHeader";
+import { Button } from "semantic-ui-react";
+import ConfirmEmailForm from "./ConfirmEmailForm"
 
-export default class ForgotPasswordPage extends React.Component {
+export default class ConfirmEmailPage extends React.Component {
+
     constructor() {
         super();
     }
@@ -13,20 +15,20 @@ export default class ForgotPasswordPage extends React.Component {
 
     render() {
         return (
-            <div className="Forgot-password-page-container">
+            <div className="Confirm-email-page-container">
                 <GeneralHeader
                     iconName="graduation"
                     headerText="BCS Graduation Planner"
-                    subHeaderText="Reset your password" />
-                <div className="Forgot-password-form-container">
-                    <ForgotPasswordForm />
+                    subHeaderText="Confirm your account" />
+                <div className="Confirm-email-form-container">
+                    <ConfirmEmailForm />
                 </div>
             </div>
         );
     }
 }
 
-ForgotPasswordPage.propTypes = {
+ConfirmEmailPage.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired
     }).isRequired

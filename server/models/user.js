@@ -9,12 +9,22 @@ const UserSchema = new mongoose.Schema({
     name: String,
     sid: Number,
     bm: String,
-    cohort: Number
+    cohort: Number,
+    //isVerified: Boolean TODO: email verification
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
   },
   courses: Object,
   remarks: Object
 }, { collection: 'students' });
 
+// TODO: email verification
+/*
+const tokenSchema = new mongoose.Schema({
+    _userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+    token: { type: String, required: true },
+    createdAt: { type: Date, required: true, default: Date.now, expires: 43200 }
+});*/
 
 /**
  * Compare the passed password with the value in the database. A model method.
