@@ -3,8 +3,42 @@
     /*content: '\t';*/
 /*}*/
 
+@media only screen and (min-width: 700px) {
 .ui.pointing.secondary.menu {
     position: sticky;
+    top:0;
+    background-color: white;
+    z-index: 1;
+}
+
+.ui.pointing.secondary.menu img {
+    visibility: hidden;
+    max-height: 25px;
+    margin: 8px 10px 0 20px;
+}
+
+.ui.pointing.secondary.menu.inverted.custom {
+    background-color: #002145;
+}
+
+
+.ui.pointing.secondary.menu.inverted.custom img {
+    visibility: visible;
+}
+
+.ui.secondary.inverted.pointing.menu.custom .active.item.dropdown {
+    border: none;
+}
+}
+
+
+@media only screen and (max-width: 699px) {
+.ui.pointing.secondary.menu {
+    position: sticky;
+    display: flex;
+    max-width: 699px;
+    height: auto;
+    padding: 0px;
     top:0;
     background-color: white;
     z-index: 1;
@@ -28,4 +62,5 @@
 
 .ui.secondary.inverted.pointing.menu.custom .active.item.dropdown {
     border: none;
+}
 }
