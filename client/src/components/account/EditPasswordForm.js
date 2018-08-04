@@ -1,7 +1,7 @@
 import React from "react";
 import Validator from 'validator';
 import { connect } from "react-redux";
-import { Button, Form, Header, Input, Message } from "semantic-ui-react";
+import { Button, Form, Header, Icon, Input, Message } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import EditPasswordErrorMessage from './EditPasswordErrorMessage';
 import { doEditPassword } from '../../api/EditAccountApi';
@@ -18,7 +18,8 @@ class EditPasswordForm extends React.Component {
 		loading: false,
 		error: {},
 		editError: "",
-		editSuccess: ""
+		editSuccess: "",
+		submitted: false
 	};
 
 /*	shouldComponentUpdate = (props) => {
@@ -69,7 +70,8 @@ class EditPasswordForm extends React.Component {
         if (Object.keys(error).length === 0 && error.constructor === Object) {
             this.props.doEditPassword(this.state.data)
 			.then((data) => {
-                    this.setState({ editSuccess : "Password successfully updated." });					
+                    this.setState({ editSuccess : "Password successfully updated." });	
+                    this.setState({ submitted: true});				
 			})
             .catch(function (e) {
                    console.log("Account update failure");
@@ -103,7 +105,7 @@ class EditPasswordForm extends React.Component {
 
 	render() {
 		
-		console.log("RENDER", this.state);
+		if (this.state.submitted === false) {
 		
 		
 		const { confirmnewPassword, newPassword } = this.state.data;
@@ -147,6 +149,18 @@ class EditPasswordForm extends React.Component {
             </div>       
 		);
 	}
+	else {
+		return (
+			<div id = "passwordconfirmmessage">
+			<Message positive icon>
+			<Icon name = 'check'check />
+			<Message.Content>
+			<Message.Header>Password successfully updated.</Message.Header>
+			</Message.Content>
+			</Message>
+			</div>);
+		}
+	};
 }
 
 const mapStateToProps = state => ({
